@@ -34,6 +34,10 @@ namespace RecordKeepingNew
         {
             DataTable dTableInc = new DataTable();
             DataTable dTableOut = new DataTable();
+
+            dTableInc.Columns.AddRange(getColumnList());
+            dTableOut.Columns.AddRange(getColumnList());
+
             String sqlQuery;
 
             try
@@ -41,10 +45,10 @@ namespace RecordKeepingNew
                 sqlQuery = "SELECT * FROM Incoming";
                 SQLiteDataAdapter adapterIncoming = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterIncoming.Fill(dTableInc);
-                dTableInc.DefaultView.Sort = "RegDate ASC";                    
-
-                dgvIncoming.DataSource = dTableInc.DefaultView;
+                dTableInc.DefaultView.Sort = "RegDate ASC";
                 
+                dgvIncoming.DataSource = dTableInc.DefaultView;
+                                
                 sqlQuery = "SELECT * FROM Outgoing";
                 SQLiteDataAdapter adapterOutgoing = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterOutgoing.Fill(dTableOut);
@@ -217,6 +221,57 @@ namespace RecordKeepingNew
             }
             card.ShowDialog();
             this.ReloadData();
+        }
+
+        private DataColumn[] getColumnList()
+        {
+            List<DataColumn> columnList = new List<DataColumn>();
+
+            DataColumn colId = new DataColumn("Id");
+            colId.DataType = System.Type.GetType("System.Int64");
+            columnList.Add(colId);
+
+            DataColumn colMailNumber = new DataColumn("MailNumber");
+            colMailNumber.DataType = System.Type.GetType("System.String");
+            columnList.Add(colMailNumber);
+
+            DataColumn colRegDate = new DataColumn("RegDate");
+            colRegDate.DataType = System.Type.GetType("System.DateTime");
+            columnList.Add(colRegDate);
+
+            DataColumn colTitle = new DataColumn("Title");
+            colTitle.DataType = System.Type.GetType("System.String");
+            columnList.Add(colTitle);
+
+            DataColumn colReplyTo = new DataColumn("ReplyTo");
+            colReplyTo.DataType = System.Type.GetType("System.String");
+            columnList.Add(colReplyTo);
+
+            DataColumn colReply = new DataColumn("Reply");
+            colReply.DataType = System.Type.GetType("System.String");
+            columnList.Add(colReply);
+
+            DataColumn colRecitient = new DataColumn("Recitient");
+            colRecitient.DataType = System.Type.GetType("System.String");
+            columnList.Add(colRecitient);
+
+            DataColumn colMailDate = new DataColumn("MailDate");
+            colMailDate.DataType = System.Type.GetType("System.DateTime");
+            columnList.Add(colMailDate);
+
+            DataColumn colDescription = new DataColumn("Description");
+            colDescription.DataType = System.Type.GetType("System.String");
+            columnList.Add(colDescription);
+
+            DataColumn colFiles = new DataColumn("Files");
+            colFiles.DataType = System.Type.GetType("System.String");
+            columnList.Add(colFiles);
+
+            DataColumn colMark = new DataColumn("Mark");
+            colMark.DataType = System.Type.GetType("System.Int32");
+            columnList.Add(colMark);
+
+            return columnList.ToArray();
         }
     }
 }
