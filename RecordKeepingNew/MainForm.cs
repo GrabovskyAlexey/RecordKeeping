@@ -273,5 +273,16 @@ namespace RecordKeepingNew
 
             return columnList.ToArray();
         }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Settings.Conncetion.Close();
+            if (!Directory.Exists("backup"))
+                Directory.CreateDirectory("backup");
+            String backupFileName = "backup/" + DateTime.Now.ToString("yyMMdd_HHmm_") + "db.sqlite";
+
+            File.Copy("db.sqlite", backupFileName);
+            
+        }
     }
 }

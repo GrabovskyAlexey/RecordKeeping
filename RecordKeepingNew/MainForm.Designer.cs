@@ -474,6 +474,7 @@
             this.MainMenuStrip = this.menuStripMain;
             this.Name = "MainForm";
             this.Text = "Делопроизводитель";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
