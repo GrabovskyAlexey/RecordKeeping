@@ -7,7 +7,7 @@ using System.Data.SQLite;
 using System.Data;
 using Microsoft.SqlServer.Server;
 
-namespace RecordKeepingNew
+namespace RecordKeeping
 {
     public abstract class MailBD
     {

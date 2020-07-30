@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Runtime.InteropServices;
 
-namespace RecordKeepingNew
+namespace RecordKeeping
 {
     public partial class AddEdit : Form
     {
@@ -87,6 +87,7 @@ namespace RecordKeepingNew
             if(result == DialogResult.OK)
             {
                 tbFiles.Text = fbdAttach.SelectedPath;
+                Settings.LastSelectDirectory = fbdAttach.SelectedPath;
             }
         }
 
@@ -157,6 +158,10 @@ namespace RecordKeepingNew
 
             Incoming.AddRange(IncomingString);
             Outgoing.AddRange(OutgoingString);
+            if (Settings.LastSelectDirectory != null)
+                fbdAttach.SelectedPath = Settings.LastSelectDirectory;
+            else
+                fbdAttach.SelectedPath = fbdAttach.RootFolder.ToString();
             if(Edit)
             {
                 this.Text = "Редактирование";
@@ -172,9 +177,7 @@ namespace RecordKeepingNew
                 lbMailDate.Text = "Дата получения";
                 rbIncoming.Checked = true;
                 cbReply.AutoCompleteCustomSource = Outgoing;
-                cbReply.Items.AddRange(OutgoingString);
                 cbReplyTo.AutoCompleteCustomSource = Outgoing;
-                cbReplyTo.Items.AddRange(OutgoingString);
             }
             else if (Direction == Directions.Outgoing)
             {
@@ -183,9 +186,7 @@ namespace RecordKeepingNew
                 lbMailDate.Text = "Дата отправки";
                 rbOutgoing.Checked = true;
                 cbReply.AutoCompleteCustomSource = Incoming;
-                cbReply.Items.AddRange(IncomingString);
                 cbReplyTo.AutoCompleteCustomSource = Incoming;
-                cbReplyTo.Items.AddRange(IncomingString);
             }
         }
         private String[] GetAutocompleteValue(Directions direct)

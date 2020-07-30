@@ -11,7 +11,7 @@ using System.Data.SQLite;
 using System.IO;
 using RecordKeeping;
 
-namespace RecordKeepingNew
+namespace RecordKeeping
 {
     public partial class MainForm : Form
     {
@@ -71,7 +71,7 @@ namespace RecordKeepingNew
                 DataGridViewCellStyle cellStyle = dgvIncoming.Rows[e.RowIndex].DefaultCellStyle;
                 if (dgvIncoming.Rows[e.RowIndex].Cells["dgvcIncMark"].Value.ToString() == "1")
                 {
-                    if (cellStyle.BackColor != Color.DarkSalmon) cellStyle.BackColor = Color.DarkSalmon;
+                    if (cellStyle.BackColor != Color.DarkSalmon) cellStyle.BackColor = Color.MistyRose;
 
                 }
             }
@@ -251,7 +251,7 @@ namespace RecordKeepingNew
             colReply.DataType = System.Type.GetType("System.String");
             columnList.Add(colReply);
 
-            DataColumn colRecitient = new DataColumn("Recitient");
+            DataColumn colRecitient = new DataColumn("Recipient");
             colRecitient.DataType = System.Type.GetType("System.String");
             columnList.Add(colRecitient);
 
@@ -282,6 +282,8 @@ namespace RecordKeepingNew
             String backupFileName = "backup/" + DateTime.Now.ToString("yyMMdd_HHmm_") + "db.sqlite";
 
             File.Copy("db.sqlite", backupFileName);
+
+            Settings.SaveSettings();
             
         }
     }

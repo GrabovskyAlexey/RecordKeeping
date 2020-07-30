@@ -1,4 +1,4 @@
-﻿namespace RecordKeepingNew
+﻿namespace RecordKeeping
 {
     partial class MailCard
     {

@@ -1,4 +1,4 @@
-﻿namespace RecordKeepingNew
+﻿namespace RecordKeeping
 {
     partial class AddEdit
     {
@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEdit));
             this.rbIncoming = new System.Windows.Forms.RadioButton();
             this.rbOutgoing = new System.Windows.Forms.RadioButton();
-            this.tbMailNumber = new RecordKeepingNew.MyTextBox();
+            this.tbMailNumber = new RecordKeeping.MyTextBox();
             this.lbMailNumber = new System.Windows.Forms.Label();
             this.dtRegDate = new System.Windows.Forms.DateTimePicker();
             this.lbRegDate = new System.Windows.Forms.Label();
@@ -39,7 +39,7 @@
             this.lbReplyTo = new System.Windows.Forms.Label();
             this.cbReply = new System.Windows.Forms.ComboBox();
             this.lbReply = new System.Windows.Forms.Label();
-            this.tbSenderReciever = new RecordKeepingNew.MyTextBox();
+            this.tbSenderReciever = new RecordKeeping.MyTextBox();
             this.lbSenderRediever = new System.Windows.Forms.Label();
             this.dtMailDate = new System.Windows.Forms.DateTimePicker();
             this.lbMailDate = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.chkEdit = new System.Windows.Forms.CheckBox();
             this.fbdAttach = new System.Windows.Forms.FolderBrowserDialog();
             this.lbTitle = new System.Windows.Forms.Label();
-            this.tbTitle = new RecordKeepingNew.MyTextBox();
+            this.tbTitle = new RecordKeeping.MyTextBox();
             this.btnClearFormat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
