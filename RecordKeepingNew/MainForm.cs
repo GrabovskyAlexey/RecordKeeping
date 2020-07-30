@@ -145,6 +145,7 @@ namespace RecordKeeping
             edit.Edit = true;
             edit.LoadData(Record, direction);
             edit.ShowDialog();
+            this.ReloadData();
         }
 
         private void tmsDelete_Click(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using System.Data;
 using Microsoft.SqlServer.Server;
 
@@ -31,6 +32,7 @@ namespace RecordKeeping
     class IncomingBD : MailBD
     {
         private String Command;
+        public bool Single = true;
         
         public override bool Add()
         {
@@ -45,6 +47,8 @@ namespace RecordKeeping
 
 
             Settings.SqlCommand.CommandText = Command;
+            if(this.Single)
+                BeforeSave();
             int result = Settings.SqlCommand.ExecuteNonQuery();
             if (result > 0)
                 return true;
@@ -99,6 +103,8 @@ namespace RecordKeeping
                 MailDate, Description, Files, Mark, Id);
 
             Settings.SqlCommand.CommandText = Command;
+            if(this.Single)
+                BeforeSave();
             int result = Settings.SqlCommand.ExecuteNonQuery();
             if (result > 0)
                 return true;
@@ -106,6 +112,56 @@ namespace RecordKeeping
                 return false;
         }
 
+        private void BeforeSave()
+        {
+            if (this.Reply != "")
+            {
+                SQLiteCommand reader = new SQLiteCommand();
+                reader.Connection = Settings.Conncetion;
+                Command = "SELECT * FROM Outgoing WHERE MailNumber LIKE '{0}'";
+                Command = String.Format(Command, this.Reply);
+                reader.CommandText = Command;
+                SQLiteDataReader rec = reader.ExecuteReader();
+                rec.Read();
+                OutgoingBD Reply = new OutgoingBD();
+                try
+                {
+                    Id = (long)rec["Id"];
+                    Reply.Load(Id);
+                    Reply.Single = false;
+                    Reply.ReplyTo = this.MailNumber;
+                    Reply.Update();
+                }
+                catch
+                {
+                    MessageBox.Show("Не найдено связанное ответное сообщение");
+                }
+            }
+
+            if (this.ReplyTo != "")
+            {
+                SQLiteCommand reader = new SQLiteCommand();
+                reader.Connection = Settings.Conncetion;
+                Command = "SELECT * FROM Outgoing WHERE MailNumber LIKE '{0}'";
+                Command = String.Format(Command, this.ReplyTo);
+                reader.CommandText = Command;
+                SQLiteDataReader rec = reader.ExecuteReader();
+                rec.Read();
+                OutgoingBD ReplyTo = new OutgoingBD();
+                try
+                {
+                    Id = (long)rec["Id"];
+                    ReplyTo.Load(Id);
+                    ReplyTo.Single = false;
+                    ReplyTo.Reply = this.MailNumber;
+                    ReplyTo.Update();
+                }
+                catch
+                {
+                    MessageBox.Show("Не найдено связанное сообщение на которое данное является ответом.");
+                }
+            }
+        }
         public override bool CheckData()
         {
             if (MailNumber == "" || RegDate == "" || SenderReciever == "" || MailDate == "")
@@ -122,6 +178,7 @@ namespace RecordKeeping
     class OutgoingBD : MailBD
     {
         private String Command;
+        public bool Single = true;
         public override bool Add()
         {
             if (!CheckData())
@@ -135,6 +192,8 @@ namespace RecordKeeping
 
 
             Settings.SqlCommand.CommandText = Command;
+            if (this.Single)
+                BeforeSave();
             int result = Settings.SqlCommand.ExecuteNonQuery();
             if (result > 0)
                 return true;
@@ -189,11 +248,63 @@ namespace RecordKeeping
                 MailDate, Description, Files, Mark, Id);
 
             Settings.SqlCommand.CommandText = Command;
+            if (this.Single)
+                BeforeSave();
             int result = Settings.SqlCommand.ExecuteNonQuery();
             if (result > 0)
                 return true;
             else
                 return false;
+        }
+        private void BeforeSave()
+        {
+            if (this.Reply != "")
+            {
+                SQLiteCommand reader = new SQLiteCommand();
+                reader.Connection = Settings.Conncetion;
+                Command = "SELECT * FROM Incoming WHERE MailNumber LIKE '{0}'";
+                Command = String.Format(Command, this.Reply);
+                reader.CommandText = Command;
+                SQLiteDataReader rec = reader.ExecuteReader();
+                rec.Read();
+                IncomingBD Reply = new IncomingBD();
+                try
+                {
+                    Id = (long)rec["Id"];
+                    Reply.Load(Id);
+                    Reply.Single = false;
+                    Reply.ReplyTo = this.MailNumber;
+                    Reply.Update();
+                }
+                catch
+                {
+                    MessageBox.Show("Не найдено связанное ответное сообщение");
+                }
+            }
+
+            if (this.ReplyTo != "")
+            {
+                SQLiteCommand reader = new SQLiteCommand();
+                reader.Connection = Settings.Conncetion;
+                Command = "SELECT * FROM Incoming WHERE MailNumber LIKE '{0}'";
+                Command = String.Format(Command, this.ReplyTo);
+                reader.CommandText = Command;
+                SQLiteDataReader rec = reader.ExecuteReader();
+                rec.Read();
+                IncomingBD ReplyTo = new IncomingBD();
+                try
+                {
+                    Id = (long)rec["Id"];
+                    ReplyTo.Load(Id);
+                    ReplyTo.Single = false;
+                    ReplyTo.Reply = this.MailNumber;
+                    ReplyTo.Update();
+                }
+                catch
+                {
+                    MessageBox.Show("Не найдено связанное сообщение на которое данное является ответом.");
+                }
+            }
         }
         public override bool CheckData()
         {
