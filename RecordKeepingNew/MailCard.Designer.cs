@@ -183,6 +183,7 @@
             this.Controls.Add(this.lbRegDate);
             this.Controls.Add(this.lbMailNumber);
             this.Controls.Add(this.lbDirection);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

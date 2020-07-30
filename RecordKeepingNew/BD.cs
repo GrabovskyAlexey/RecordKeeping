@@ -42,7 +42,7 @@ namespace RecordKeeping
             }
             Command = "INSERT INTO Incoming (MailNumber, RegDate, Title, ReplyTo, Reply, Recipient, " +
                         "MailDate, Description, Files, Mark) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')";
-            Command = String.Format(Command, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReciever,
+            Command = String.Format(Command, MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
                 MailDate, Description, Files, Mark);
 
 
@@ -99,7 +99,7 @@ namespace RecordKeeping
 
             Command = "UPDATE Incoming SET MailNumber = '{0}', RegDate = '{1}', Title = '{2}', ReplyTo = '{3}', Reply = '{4}', Recipient = '{5}', " +
                         "MailDate = '{6}', Description = '{7}', Files = '{8}', Mark = '{9}' WHERE Id = '{10}'";
-            Command = String.Format(Command,  MailNumber, RegDate, Title, ReplyTo, Reply, SenderReciever,
+            Command = String.Format(Command,  MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
                 MailDate, Description, Files, Mark, Id);
 
             Settings.SqlCommand.CommandText = Command;
@@ -187,7 +187,7 @@ namespace RecordKeeping
             }
             Command = "INSERT INTO Outgoing (MailNumber, RegDate, Title, ReplyTo, Reply, Recipient, " +
                         "MailDate, Description, Files, Mark) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')";
-            Command = String.Format(Command, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReciever,
+            Command = String.Format(Command, MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
                 MailDate, Description, Files, Mark);
 
 
@@ -244,7 +244,7 @@ namespace RecordKeeping
 
             Command = "UPDATE Outgoing SET MailNumber = '{0}', RegDate = '{1}', Title = '{2}', ReplyTo = '{3}', Reply = '{4}', Recipient = '{5}', " +
                         "MailDate = '{6}', Description = '{7}', Files = '{8}', Mark = '{9}' WHERE Id = '{10}'";
-            Command = String.Format(Command, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReciever,
+            Command = String.Format(Command, MailNumber.Trim(), RegDate, Title, ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
                 MailDate, Description, Files, Mark, Id);
 
             Settings.SqlCommand.CommandText = Command;
