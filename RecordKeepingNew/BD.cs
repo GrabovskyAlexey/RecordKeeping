@@ -30,7 +30,9 @@ namespace RecordKeeping
         
         public override bool Add()
         {
-            if(!CheckData())
+            SQLiteCommand sqlc = new SQLiteCommand();
+            sqlc.Connection = Settings.Conncetion;
+            if (!CheckData())
             {
                 return false;
             }
@@ -40,10 +42,10 @@ namespace RecordKeeping
                 MailDate, Description, Files, Mark);
 
 
-            Settings.SqlCommand.CommandText = Command;
+            sqlc.CommandText = Command;
             if(this.Single)
                 BeforeSave();
-            int result = Settings.SqlCommand.ExecuteNonQuery();
+            int result = sqlc.ExecuteNonQuery();
             if (result > 0)
                 return true;
             else
@@ -90,16 +92,17 @@ namespace RecordKeeping
             {
                 return false;
             }
-
+            SQLiteCommand sqlc = new SQLiteCommand();
+            sqlc.Connection = Settings.Conncetion;
             Command = "UPDATE Incoming SET MailNumber = '{0}', RegDate = '{1}', Title = '{2}', ReplyTo = '{3}', Reply = '{4}', Recipient = '{5}', " +
                         "MailDate = '{6}', Description = '{7}', Files = '{8}', Mark = '{9}' WHERE Id = '{10}'";
             Command = String.Format(Command,  MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
                 MailDate, Description, Files, Mark, Id);
 
-            Settings.SqlCommand.CommandText = Command;
+            sqlc.CommandText = Command;
             if(this.Single)
                 BeforeSave();
-            int result = Settings.SqlCommand.ExecuteNonQuery();
+            int result = sqlc.ExecuteNonQuery();
             if (result > 0)
                 return true;
             else
@@ -175,6 +178,8 @@ namespace RecordKeeping
         public bool Single = true;
         public override bool Add()
         {
+            SQLiteCommand sqlc = new SQLiteCommand();
+            sqlc.Connection = Settings.Conncetion;
             if (!CheckData())
             {
                 return false;
@@ -185,10 +190,10 @@ namespace RecordKeeping
                 MailDate, Description, Files, Mark);
 
 
-            Settings.SqlCommand.CommandText = Command;
+            sqlc.CommandText = Command;
             if (this.Single)
                 BeforeSave();
-            int result = Settings.SqlCommand.ExecuteNonQuery();
+            int result = sqlc.ExecuteNonQuery();
             if (result > 0)
                 return true;
             else
@@ -231,6 +236,8 @@ namespace RecordKeeping
 
         public override bool Update()
         {
+            SQLiteCommand sqlc = new SQLiteCommand();
+            sqlc.Connection = Settings.Conncetion;
             if (!CheckData())
             {
                 return false;
@@ -241,10 +248,10 @@ namespace RecordKeeping
             Command = String.Format(Command, MailNumber.Trim(), RegDate, Title, ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
                 MailDate, Description, Files, Mark, Id);
 
-            Settings.SqlCommand.CommandText = Command;
+            sqlc.CommandText = Command;
             if (this.Single)
                 BeforeSave();
-            int result = Settings.SqlCommand.ExecuteNonQuery();
+            int result = sqlc.ExecuteNonQuery();
             if (result > 0)
                 return true;
             else
