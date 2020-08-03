@@ -302,5 +302,38 @@ namespace RecordKeeping
             Settings.SaveSettings();
             
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            bool find = false;
+            frmSearch search = new frmSearch();
+            search.ShowDialog();
+            DataGridView dgv = new DataGridView();
+            if (tcMain.SelectedTab == tabIncoming)
+            {
+                dgv = dgvIncoming;
+            }
+            else if (tcMain.SelectedTab == tabOutgoing)
+            {
+                dgv = dgvOutgoing;
+            }
+            if (search.SearchText != "" && search.SearchText != null)
+            {
+                for (int i = 0; i < dgv.RowCount; i++)
+                {
+                    dgv.Rows[i].Selected = false;
+                    if (dgv.Rows[i].Cells[1].Value.ToString().Contains(search.SearchText) || dgv.Rows[i].Cells[3].Value.ToString().Contains(search.SearchText))
+                    {
+                        find = true;
+                        dgv.Rows[i].Selected = true;
+                        break;
+                    }
+                }
+            }
+            if (!find)
+            {
+                MessageBox.Show("Данные по запросу " + search.SearchText + " не найдены", "Результат поиска");
+            }
+        }
     }
 }
