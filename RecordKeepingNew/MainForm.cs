@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -10,6 +11,8 @@ namespace RecordKeeping
 {
     public partial class MainForm : Form
     {
+        int IncomingSelected = 0;
+        int OutgoingSelected = 0;
         public MainForm()
         {
             InitializeComponent();
@@ -32,6 +35,19 @@ namespace RecordKeeping
 
             dTableInc.Columns.AddRange(getColumnList());
             dTableOut.Columns.AddRange(getColumnList());
+
+            if (dgvIncoming.Rows.Count > 0)
+            {
+                for (int i = 0; i < dgvIncoming.Rows.Count; i++)
+                    if (dgvIncoming.Rows[i].Selected == true)
+                        IncomingSelected = i;
+            }
+            if (dgvOutgoing.Rows.Count > 0)
+            {
+                for (int i = 0; i < dgvOutgoing.Rows.Count; i++)
+                    if (dgvOutgoing.Rows[i].Selected == true)
+                        OutgoingSelected = i;
+            }
 
             String sqlQuery;
 
@@ -57,6 +73,9 @@ namespace RecordKeeping
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+            dgvIncoming.Rows[IncomingSelected].Selected = true;
+            dgvOutgoing.Rows[OutgoingSelected].Selected = true;
+            
         }
 
         void dgvInc_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -66,7 +85,7 @@ namespace RecordKeeping
                 DataGridViewCellStyle cellStyle = dgvIncoming.Rows[e.RowIndex].DefaultCellStyle;
                 if (dgvIncoming.Rows[e.RowIndex].Cells["dgvcIncMark"].Value.ToString() == "1")
                 {
-                    if (cellStyle.BackColor != Color.DarkSalmon) cellStyle.BackColor = Color.MistyRose;
+                    if (cellStyle.BackColor != Color.MistyRose) cellStyle.BackColor = Color.MistyRose;
 
                 }
             }
@@ -87,6 +106,7 @@ namespace RecordKeeping
         private void btnReloadRecords_Click(object sender, EventArgs e)
         {
             this.ReloadData();
+
         }
 
         private void btnAddRecord_Click(object sender, EventArgs e)
