@@ -121,7 +121,7 @@
             this.gbDesc.Controls.Add(this.tbDescription);
             this.gbDesc.Location = new System.Drawing.Point(13, 125);
             this.gbDesc.Name = "gbDesc";
-            this.gbDesc.Size = new System.Drawing.Size(624, 379);
+            this.gbDesc.Size = new System.Drawing.Size(685, 379);
             this.gbDesc.TabIndex = 7;
             this.gbDesc.TabStop = false;
             this.gbDesc.Text = "Описание";
@@ -133,7 +133,7 @@
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
             this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbDescription.Size = new System.Drawing.Size(612, 353);
+            this.tbDescription.Size = new System.Drawing.Size(673, 353);
             this.tbDescription.TabIndex = 0;
             // 
             // lbSenderReciever
@@ -149,7 +149,7 @@
             // btnEdit
             // 
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Location = new System.Drawing.Point(539, 510);
+            this.btnEdit.Location = new System.Drawing.Point(594, 510);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(98, 23);
             this.btnEdit.TabIndex = 9;
@@ -171,7 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 543);
+            this.ClientSize = new System.Drawing.Size(710, 543);
             this.Controls.Add(this.lbTitle);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.lbSenderReciever);
@@ -183,7 +183,7 @@
             this.Controls.Add(this.lbRegDate);
             this.Controls.Add(this.lbMailNumber);
             this.Controls.Add(this.lbDirection);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

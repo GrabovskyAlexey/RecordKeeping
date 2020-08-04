@@ -230,8 +230,7 @@ namespace RecordKeeping
                 row = dgvOutgoing.CurrentRow;
                 card.LoadData((long)row.Cells[0].Value, Directions.Outgoing);
             }
-            card.ShowDialog();
-            this.ReloadData();
+            card.Show();
         }
 
         private DataColumn[] getColumnList()
