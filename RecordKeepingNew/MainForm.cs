@@ -82,11 +82,25 @@ namespace RecordKeeping
         {
             if ((e.RowIndex > -1) && (e.RowIndex < dgvIncoming.RowCount))
             {
+                string mark = dgvIncoming.Rows[e.RowIndex].Cells["dgvcIncMark"].Value.ToString();
                 DataGridViewCellStyle cellStyle = dgvIncoming.Rows[e.RowIndex].DefaultCellStyle;
-                if (dgvIncoming.Rows[e.RowIndex].Cells["dgvcIncMark"].Value.ToString() == "1")
+                switch (mark)
                 {
-                    if (cellStyle.BackColor != Color.MistyRose) cellStyle.BackColor = Color.MistyRose;
-
+                    case "1":
+                        cellStyle.BackColor = Color.MistyRose;
+                        break;
+                    case "2":
+                        cellStyle.BackColor = Color.LemonChiffon;
+                        break;
+                    case "3":
+                        cellStyle.BackColor = Color.Honeydew;
+                        break;
+                    case "4":
+                        cellStyle.BackColor = Color.LightCyan;
+                        break;
+                    default:
+                        cellStyle.BackColor = Color.Empty;
+                        break;
                 }
             }
         }
@@ -95,11 +109,27 @@ namespace RecordKeeping
         {
             if ((e.RowIndex > -1) && (e.RowIndex < dgvOutgoing.RowCount))
             {
+                string mark = dgvOutgoing.Rows[e.RowIndex].Cells["dgvcOutMark"].Value.ToString();
                 DataGridViewCellStyle cellStyle = dgvOutgoing.Rows[e.RowIndex].DefaultCellStyle;
-                if (dgvOutgoing.Rows[e.RowIndex].Cells["dgvcOutMark"].Value.ToString() == "1")
+                switch(mark)
                 {
-                    if (cellStyle.BackColor != Color.Red) cellStyle.BackColor = Color.Red;
+                    case "1":
+                        cellStyle.BackColor = Color.MistyRose;
+                        break;
+                    case "2":
+                        cellStyle.BackColor = Color.LemonChiffon;
+                        break;
+                    case "3":
+                        cellStyle.BackColor = Color.Honeydew;
+                        break;
+                    case "4":
+                        cellStyle.BackColor = Color.LightCyan;
+                        break;
+                    default:
+                        cellStyle.BackColor = Color.Empty;
+                        break;
                 }
+                
             }
         }
 
@@ -178,34 +208,6 @@ namespace RecordKeeping
                 id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
                 DeleteRecord(Directions.Outgoing, id);
             }
-        }
-
-        private void tsmMark_Click(object sender, EventArgs e)
-        {
-            DataGridViewRow row = new DataGridViewRow();
-            MailBD Record = new IncomingBD();
-            if (tcMain.SelectedTab == tabIncoming)
-            {
-                row = dgvIncoming.CurrentRow;
-                Record = new IncomingBD();
-
-            }
-            else if (tcMain.SelectedTab == tabOutgoing)
-            {
-                row = dgvOutgoing.CurrentRow;
-                Record = new OutgoingBD();
-            }
-            Record.Load((long)row.Cells[0].Value);
-            if(Record.Mark == 1)
-            {
-                Record.Mark = 0;
-            }
-            else
-            {
-                Record.Mark = 1;
-            }
-            Record.Update();
-            this.ReloadData();
         }
 
         private void опрограммеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -346,7 +348,16 @@ namespace RecordKeeping
             ToolTip t = new ToolTip();
             t.SetToolTip(btnSearch, "Поиск");
         }
-
+        private void btnDelete_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(btnDelete, "Удалить");
+        }
+        private void btnEdit_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(btnDelete, "Редактировать");
+        }
         private void btnDelete_Click(object sender, EventArgs e)
         {
             long id;
@@ -363,13 +374,7 @@ namespace RecordKeeping
                 DeleteRecord(Directions.Outgoing, id);
             }
             
-        }
-
-        private void btnDelete_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip t = new ToolTip();
-            t.SetToolTip(btnDelete, "Удалить");
-        }
+        }        
 
         private void DeleteRecord(Directions direction, long id)
         {
@@ -386,6 +391,87 @@ namespace RecordKeeping
                 Record.Delete();
             }
             this.ReloadData();
+        }
+
+        private void SetColorMark(Directions direction, long id, int color)
+        {
+            MailBD Record = new IncomingBD();
+            if(direction == Directions.Incoming)
+                Record = new IncomingBD();
+            else if (direction == Directions.Outgoing)
+                Record = new OutgoingBD();
+
+            Record.Load(id);
+            if(Record.Mark == color)
+                Record.Mark = 0;
+            else
+                Record.Mark = color;
+            Record.Update();
+            this.ReloadData();
+        }
+
+        private void tsmRedMark_Click(object sender, EventArgs e)
+        {
+            long id;
+            if (tcMain.SelectedTab == tabIncoming)
+            {
+                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                SetColorMark(Directions.Incoming, id, 1);
+
+            }
+            else if (tcMain.SelectedTab == tabOutgoing)
+            {
+                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                SetColorMark(Directions.Outgoing, id, 1);
+            }
+        }
+
+        private void tsmYellowMark_Click(object sender, EventArgs e)
+        {
+            long id;
+            if (tcMain.SelectedTab == tabIncoming)
+            {
+                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                SetColorMark(Directions.Incoming, id, 2);
+
+            }
+            else if (tcMain.SelectedTab == tabOutgoing)
+            {
+                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                SetColorMark(Directions.Outgoing, id, 2);
+            }
+        }
+
+        private void tsmGreenMark_Click(object sender, EventArgs e)
+        {
+            long id;
+            if (tcMain.SelectedTab == tabIncoming)
+            {
+                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                SetColorMark(Directions.Incoming, id, 3);
+
+            }
+            else if (tcMain.SelectedTab == tabOutgoing)
+            {
+                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                SetColorMark(Directions.Outgoing, id, 3);
+            }
+        }
+
+        private void tsmBlueMark_Click(object sender, EventArgs e)
+        {
+            long id;
+            if (tcMain.SelectedTab == tabIncoming)
+            {
+                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                SetColorMark(Directions.Incoming, id, 4);
+
+            }
+            else if (tcMain.SelectedTab == tabOutgoing)
+            {
+                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                SetColorMark(Directions.Outgoing, id, 4);
+            }
         }
     }
 }
