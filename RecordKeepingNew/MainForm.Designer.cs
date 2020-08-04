@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.btnAddRecord = new System.Windows.Forms.Button();
-            this.btnReloadRecords = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbStatusText = new System.Windows.Forms.Label();
             this.lbStatusName = new System.Windows.Forms.Label();
@@ -70,9 +68,11 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcOutMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.btnReloadRecords = new System.Windows.Forms.Button();
+            this.btnAddRecord = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.menuStripMain.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tabIncoming.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIncoming)).BeginInit();
@@ -80,30 +80,6 @@
             this.tabOutgoing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutgoing)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnAddRecord
-            // 
-            this.btnAddRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddRecord.Location = new System.Drawing.Point(955, 527);
-            this.btnAddRecord.Name = "btnAddRecord";
-            this.btnAddRecord.Size = new System.Drawing.Size(75, 23);
-            this.btnAddRecord.TabIndex = 0;
-            this.btnAddRecord.Text = "Добавить";
-            this.btnAddRecord.UseVisualStyleBackColor = true;
-            this.btnAddRecord.Click += new System.EventHandler(this.btnAddRecord_Click);
-            // 
-            // btnReloadRecords
-            // 
-            this.btnReloadRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReloadRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReloadRecords.Location = new System.Drawing.Point(874, 527);
-            this.btnReloadRecords.Name = "btnReloadRecords";
-            this.btnReloadRecords.Size = new System.Drawing.Size(75, 23);
-            this.btnReloadRecords.TabIndex = 1;
-            this.btnReloadRecords.Text = "Обновить";
-            this.btnReloadRecords.UseVisualStyleBackColor = true;
-            this.btnReloadRecords.Click += new System.EventHandler(this.btnReloadRecords_Click);
             // 
             // panel1
             // 
@@ -136,8 +112,6 @@
             // 
             // menuStripMain
             // 
-            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.справкаToolStripMenuItem});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Size = new System.Drawing.Size(1042, 24);
@@ -167,10 +141,10 @@
             this.tcMain.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tcMain.Controls.Add(this.tabIncoming);
             this.tcMain.Controls.Add(this.tabOutgoing);
-            this.tcMain.Location = new System.Drawing.Point(3, 28);
+            this.tcMain.Location = new System.Drawing.Point(3, 64);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(1039, 493);
+            this.tcMain.Size = new System.Drawing.Size(1039, 494);
             this.tcMain.TabIndex = 4;
             // 
             // tabIncoming
@@ -179,7 +153,7 @@
             this.tabIncoming.Location = new System.Drawing.Point(4, 25);
             this.tabIncoming.Name = "tabIncoming";
             this.tabIncoming.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIncoming.Size = new System.Drawing.Size(1031, 464);
+            this.tabIncoming.Size = new System.Drawing.Size(1031, 465);
             this.tabIncoming.TabIndex = 0;
             this.tabIncoming.Text = "Входящие";
             this.tabIncoming.UseVisualStyleBackColor = true;
@@ -212,7 +186,7 @@
             this.dgvIncoming.RowHeadersVisible = false;
             this.dgvIncoming.RowTemplate.ContextMenuStrip = this.cmsPKM;
             this.dgvIncoming.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvIncoming.Size = new System.Drawing.Size(1031, 464);
+            this.dgvIncoming.Size = new System.Drawing.Size(1031, 465);
             this.dgvIncoming.TabIndex = 1;
             this.dgvIncoming.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvIncoming_CellDoubleClick);
             // 
@@ -342,7 +316,7 @@
             this.tabOutgoing.Location = new System.Drawing.Point(4, 25);
             this.tabOutgoing.Name = "tabOutgoing";
             this.tabOutgoing.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOutgoing.Size = new System.Drawing.Size(1031, 464);
+            this.tabOutgoing.Size = new System.Drawing.Size(1031, 465);
             this.tabOutgoing.TabIndex = 1;
             this.tabOutgoing.Text = "Исходящие";
             this.tabOutgoing.UseVisualStyleBackColor = true;
@@ -375,7 +349,7 @@
             this.dgvOutgoing.ReadOnly = true;
             this.dgvOutgoing.RowHeadersVisible = false;
             this.dgvOutgoing.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOutgoing.Size = new System.Drawing.Size(1031, 464);
+            this.dgvOutgoing.Size = new System.Drawing.Size(1031, 474);
             this.dgvOutgoing.TabIndex = 2;
             this.dgvOutgoing.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvIncoming_CellDoubleClick);
             // 
@@ -461,22 +435,68 @@
             this.dgvcOutMark.ReadOnly = true;
             this.dgvcOutMark.Visible = false;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::RecordKeeping.Properties.Resources.recycle_bag;
+            this.btnDelete.Location = new System.Drawing.Point(119, 26);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(32, 32);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.MouseHover += new System.EventHandler(this.btnDelete_MouseHover);
+            // 
             // btnSearch
             // 
+            this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(793, 527);
+            this.btnSearch.Image = global::RecordKeeping.Properties.Resources.find;
+            this.btnSearch.Location = new System.Drawing.Point(81, 26);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 5;
-            this.btnSearch.Text = "Поиск";
+            this.btnSearch.Size = new System.Drawing.Size(32, 32);
+            this.btnSearch.TabIndex = 13;
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.MouseHover += new System.EventHandler(this.btnSearch_MouseHover);
+            // 
+            // btnReloadRecords
+            // 
+            this.btnReloadRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReloadRecords.FlatAppearance.BorderSize = 0;
+            this.btnReloadRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReloadRecords.Image = global::RecordKeeping.Properties.Resources.refresh_all;
+            this.btnReloadRecords.Location = new System.Drawing.Point(43, 26);
+            this.btnReloadRecords.Name = "btnReloadRecords";
+            this.btnReloadRecords.Size = new System.Drawing.Size(32, 32);
+            this.btnReloadRecords.TabIndex = 14;
+            this.btnReloadRecords.UseVisualStyleBackColor = true;
+            this.btnReloadRecords.Click += new System.EventHandler(this.btnReloadRecords_Click);
+            this.btnReloadRecords.MouseHover += new System.EventHandler(this.btnReloadRecords_MouseHover);
+            // 
+            // btnAddRecord
+            // 
+            this.btnAddRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddRecord.BackgroundImage = global::RecordKeeping.Properties.Resources.add;
+            this.btnAddRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAddRecord.FlatAppearance.BorderSize = 0;
+            this.btnAddRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddRecord.Location = new System.Drawing.Point(8, 26);
+            this.btnAddRecord.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAddRecord.Name = "btnAddRecord";
+            this.btnAddRecord.Size = new System.Drawing.Size(32, 32);
+            this.btnAddRecord.TabIndex = 15;
+            this.btnAddRecord.UseVisualStyleBackColor = true;
+            this.btnAddRecord.Click += new System.EventHandler(this.btnAddRecord_Click);
+            this.btnAddRecord.MouseHover += new System.EventHandler(this.btnAddRecord_MouseHover);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1042, 583);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.tcMain);
             this.Controls.Add(this.panel1);
@@ -491,8 +511,6 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.menuStripMain.ResumeLayout(false);
-            this.menuStripMain.PerformLayout();
             this.tcMain.ResumeLayout(false);
             this.tabIncoming.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvIncoming)).EndInit();
@@ -547,6 +565,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcOutMark;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 

@@ -165,26 +165,19 @@ namespace RecordKeeping
 
         private void tmsDelete_Click(object sender, EventArgs e)
         {
-            DataGridViewRow row = new DataGridViewRow();
-            MailBD Record = new IncomingBD();
+            long id;
+
             if (tcMain.SelectedTab == tabIncoming)
             {
-                row = dgvIncoming.CurrentRow;
-                Record = new IncomingBD();
+                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                DeleteRecord(Directions.Incoming, id);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
-                row = dgvOutgoing.CurrentRow;
-                Record = new OutgoingBD();
+                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                DeleteRecord(Directions.Outgoing, id);
             }
-            Record.Load((long)row.Cells[0].Value);
-            DialogResult result = MessageBox.Show("Вы уверенны что хотите удалить письмо " + Record.MailNumber + "?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(result == DialogResult.Yes)
-            {
-                Record.Delete();
-            }
-            this.ReloadData();
         }
 
         private void tsmMark_Click(object sender, EventArgs e)
@@ -334,6 +327,65 @@ namespace RecordKeeping
             {
                 MessageBox.Show("Данные по запросу " + search.SearchText + " не найдены", "Результат поиска");
             }
+        }
+
+        private void btnAddRecord_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(btnAddRecord, "Добавить");
+        }
+
+        private void btnReloadRecords_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(btnReloadRecords, "Обновить");
+        }
+
+        private void btnSearch_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(btnSearch, "Поиск");
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            long id;
+            
+            if (tcMain.SelectedTab == tabIncoming)
+            {
+                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                DeleteRecord(Directions.Incoming, id);
+
+            }
+            else if (tcMain.SelectedTab == tabOutgoing)
+            {
+                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                DeleteRecord(Directions.Outgoing, id);
+            }
+            
+        }
+
+        private void btnDelete_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(btnDelete, "Удалить");
+        }
+
+        private void DeleteRecord(Directions direction, long id)
+        {
+            MailBD Record = new IncomingBD();
+            if (direction == Directions.Incoming)                
+                Record = new IncomingBD();
+            else if (direction == Directions.Outgoing)
+                Record = new OutgoingBD();
+            
+            Record.Load(id);
+            DialogResult result = MessageBox.Show("Вы уверенны что хотите удалить письмо " + Record.MailNumber + "?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Record.Delete();
+            }
+            this.ReloadData();
         }
     }
 }
