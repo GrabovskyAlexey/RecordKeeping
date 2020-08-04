@@ -72,7 +72,11 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnReloadRecords = new System.Windows.Forms.Button();
             this.btnAddRecord = new System.Windows.Forms.Button();
+            this.справкаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.menuStripMain.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tabIncoming.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIncoming)).BeginInit();
@@ -491,11 +495,36 @@
             this.btnAddRecord.Click += new System.EventHandler(this.btnAddRecord_Click);
             this.btnAddRecord.MouseHover += new System.EventHandler(this.btnAddRecord_MouseHover);
             // 
+            // справкаToolStripMenuItem1
+            // 
+            this.справкаToolStripMenuItem1.Name = "справкаToolStripMenuItem1";
+            this.справкаToolStripMenuItem1.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem1.Text = "Справка";
+            // 
+            // оПрограммеToolStripMenuItem1
+            // 
+            this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
+            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеToolStripMenuItem1.Text = "О программе";
+            this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.опрограммеToolStripMenuItem_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = global::RecordKeeping.Properties.Resources.edit_button;
+            this.btnEdit.Location = new System.Drawing.Point(157, 27);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(32, 32);
+            this.btnEdit.TabIndex = 17;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1042, 583);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.tcMain);
@@ -511,6 +540,8 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.menuStripMain.ResumeLayout(false);
+            this.menuStripMain.PerformLayout();
             this.tcMain.ResumeLayout(false);
             this.tabIncoming.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvIncoming)).EndInit();
@@ -566,6 +597,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcOutMark;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem1;
+        private System.Windows.Forms.Button btnEdit;
     }
 }
 
