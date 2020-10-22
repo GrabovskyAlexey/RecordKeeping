@@ -25,7 +25,7 @@ namespace RecordKeeping
         private String[] IncomingString { get; set; }
         private String[] OutgoingString { get; set; }
 
-
+        private int project_id { get; set; }
 
         public MailBD Record { get; set; }
 
@@ -48,6 +48,7 @@ namespace RecordKeeping
             dtMailDate.Value = DateTime.Parse(Record.MailDate);
             tbDescription.Text = Record.Description;
             tbFiles.Text = Record.Files;
+            this.project_id = (int)Record.Project;
         }
 
         private void rbIncoming_CheckedChanged(object sender, EventArgs e)
@@ -117,6 +118,7 @@ namespace RecordKeeping
             Record.Description = tbDescription.Text;
             Record.Files = tbFiles.Text;
             Record.Mark = 0;
+            Record.Project = (long)cbProject.SelectedValue;
             if (!Record.CheckData())
             {
                 MessageBox.Show("Заполненны не все обязательные поля", "Проверка данных", MessageBoxButtons.OK);
@@ -151,6 +153,13 @@ namespace RecordKeeping
             IncomingString = GetAutocompleteValue(Directions.Incoming);
             OutgoingString = GetAutocompleteValue(Directions.Outgoing);
 
+            var dataSource = GetAutocompleteProject();
+
+            this.cbProject.DataSource = dataSource;
+            this.cbProject.DisplayMember = "Name";
+            this.cbProject.ValueMember = "Value";
+            this.cbProject.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cbProject.SelectedValue = (long)project_id;
             Incoming.AddRange(IncomingString);
             Outgoing.AddRange(OutgoingString);
             if (Settings.LastSelectDirectory != null)
@@ -202,6 +211,32 @@ namespace RecordKeeping
             return temp_list.ToArray();
         }
 
+        private List<Project> GetAutocompleteProject()
+        {
+            List<Project> temp_list = new List<Project>();
+            SQLiteCommand reader = new SQLiteCommand();
+            reader.Connection = Settings.Conncetion;            
+            reader.CommandText = "SELECT id, project_name FROM projects";
+            SQLiteDataReader rec = reader.ExecuteReader();
+            temp_list.Add(new Project() { Name = "Без проекта", Value = 0 });
+            while (rec.Read())
+            {
+                temp_list.Add(new Project() { Name = (String)rec["project_name"], Value = (long)rec["id"] });
+            }
+            return temp_list;
+        }
+
+        private Project GetProjectById(long id) 
+        {
+            SQLiteCommand reader = new SQLiteCommand();
+            reader.Connection = Settings.Conncetion;
+            String Command = "SELECT id, project_name FROM projects WHERE id='{0}'";
+            Command = String.Format(Command, id);
+            reader.CommandText = Command;
+            SQLiteDataReader rec = reader.ExecuteReader();
+            rec.Read();
+            return new Project() { Name = (String)rec["project_name"], Value = (long)rec["id"] };
+        }
 
         private void btnClearFormat_Click(object sender, EventArgs e)
         {
@@ -216,6 +251,7 @@ namespace RecordKeeping
             else if (direction == Directions.Outgoing)
                 Direction = Directions.Outgoing;
         }
+
     }
 
     public enum Directions

@@ -31,9 +31,11 @@ namespace RecordKeeping
             
             SqlCommand.Connection = Conncetion;
 
-            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Incoming (id INTEGER PRIMARY KEY AUTOINCREMENT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, Recipient TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT )";
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Incoming (id INTEGER PRIMARY KEY AUTOINCREMENT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, Recipient TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL)";
             SqlCommand.ExecuteNonQuery();
-            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Outgoing (id INTEGER PRIMARY KEY AUTOINCREMENT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, Recipient TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT )";
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Outgoing (id INTEGER PRIMARY KEY AUTOINCREMENT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, Recipient TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL)";
+            SqlCommand.ExecuteNonQuery();
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS projects (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, project_name TEXT NOT NULL)";
             SqlCommand.ExecuteNonQuery();
 
         }

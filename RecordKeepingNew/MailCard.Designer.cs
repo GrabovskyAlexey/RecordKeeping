@@ -41,6 +41,7 @@
             this.lbSenderReciever = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             this.lbTitle = new System.Windows.Forms.Label();
+            this.lbProject = new System.Windows.Forms.Label();
             this.gbDesc.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -167,11 +168,22 @@
             this.lbTitle.TabIndex = 10;
             this.lbTitle.Text = "Тема";
             // 
+            // lbProject
+            // 
+            this.lbProject.AutoSize = true;
+            this.lbProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbProject.Location = new System.Drawing.Point(350, 37);
+            this.lbProject.Name = "lbProject";
+            this.lbProject.Size = new System.Drawing.Size(70, 16);
+            this.lbProject.TabIndex = 11;
+            this.lbProject.Text = "Проект: ";
+            // 
             // MailCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(710, 543);
+            this.Controls.Add(this.lbProject);
             this.Controls.Add(this.lbTitle);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.lbSenderReciever);
@@ -211,5 +223,6 @@
         private System.Windows.Forms.Label lbSenderReciever;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label lbTitle;
+        private System.Windows.Forms.Label lbProject;
     }
 }

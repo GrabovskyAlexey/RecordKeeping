@@ -55,6 +55,8 @@
             this.lbTitle = new System.Windows.Forms.Label();
             this.tbTitle = new RecordKeeping.MyTextBox();
             this.btnClearFormat = new System.Windows.Forms.Button();
+            this.cbProject = new System.Windows.Forms.ComboBox();
+            this.lbProject = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // rbIncoming
@@ -193,16 +195,16 @@
             // tbFiles
             // 
             this.tbFiles.Enabled = false;
-            this.tbFiles.Location = new System.Drawing.Point(334, 90);
+            this.tbFiles.Location = new System.Drawing.Point(543, 91);
             this.tbFiles.Multiline = true;
             this.tbFiles.Name = "tbFiles";
-            this.tbFiles.Size = new System.Drawing.Size(302, 20);
+            this.tbFiles.Size = new System.Drawing.Size(127, 20);
             this.tbFiles.TabIndex = 14;
             // 
             // lbFiles
             // 
             this.lbFiles.AutoSize = true;
-            this.lbFiles.Location = new System.Drawing.Point(331, 75);
+            this.lbFiles.Location = new System.Drawing.Point(540, 75);
             this.lbFiles.Name = "lbFiles";
             this.lbFiles.Size = new System.Drawing.Size(71, 13);
             this.lbFiles.TabIndex = 15;
@@ -212,10 +214,10 @@
             // 
             this.btnFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnFiles.Location = new System.Drawing.Point(643, 90);
+            this.btnFiles.Location = new System.Drawing.Point(673, 91);
             this.btnFiles.Margin = new System.Windows.Forms.Padding(0);
             this.btnFiles.Name = "btnFiles";
-            this.btnFiles.Size = new System.Drawing.Size(93, 20);
+            this.btnFiles.Size = new System.Drawing.Size(63, 20);
             this.btnFiles.TabIndex = 16;
             this.btnFiles.Text = "Выбрать";
             this.btnFiles.UseVisualStyleBackColor = true;
@@ -305,11 +307,31 @@
             this.btnClearFormat.UseVisualStyleBackColor = true;
             this.btnClearFormat.Click += new System.EventHandler(this.btnClearFormat_Click);
             // 
+            // cbProject
+            // 
+            this.cbProject.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.cbProject.FormattingEnabled = true;
+            this.cbProject.Location = new System.Drawing.Point(334, 90);
+            this.cbProject.Name = "cbProject";
+            this.cbProject.Size = new System.Drawing.Size(193, 21);
+            this.cbProject.TabIndex = 25;
+            // 
+            // lbProject
+            // 
+            this.lbProject.AutoSize = true;
+            this.lbProject.Location = new System.Drawing.Point(331, 75);
+            this.lbProject.Name = "lbProject";
+            this.lbProject.Size = new System.Drawing.Size(44, 13);
+            this.lbProject.TabIndex = 26;
+            this.lbProject.Text = "Проект";
+            // 
             // AddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(753, 529);
+            this.Controls.Add(this.lbProject);
+            this.Controls.Add(this.cbProject);
             this.Controls.Add(this.btnClearFormat);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.lbTitle);
@@ -374,5 +396,7 @@
         private MyTextBox tbSenderReciever;
         private MyTextBox tbTitle;
         private System.Windows.Forms.Button btnClearFormat;
+        private System.Windows.Forms.ComboBox cbProject;
+        private System.Windows.Forms.Label lbProject;
     }
 }

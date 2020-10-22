@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -7,12 +8,15 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
 
+
 namespace RecordKeeping
 {
     public partial class MainForm : Form
     {
         int IncomingSelected = 0;
         int OutgoingSelected = 0;
+        bool Filtered = false;
+        Project projectSelected = new Project();
         public MainForm()
         {
             InitializeComponent();
@@ -25,7 +29,30 @@ namespace RecordKeeping
                 lbStatusText.Text = "Подключена";
             else
                 lbStatusText.Text = "Отключена";
+
             this.ReloadData();
+        }
+        private void ReloadProjectAutocomplete() 
+        {
+            var dataSource = GetAutocompleteProject();
+
+            if(dataSource.Count < 2)
+            {
+                cbFilter.Visible = false;
+            }
+            else
+            {
+                cbFilter.Visible = true;
+            }
+
+            this.cbFilter.DataSource = dataSource;
+            this.cbFilter.DisplayMember = "Name";
+            this.cbFilter.ValueMember = "Value";
+            this.cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            if(Filtered)
+            {
+                cbFilter.SelectedValue = projectSelected.Value;
+            }
         }
 
         public void ReloadData() 
@@ -50,17 +77,26 @@ namespace RecordKeeping
             }
 
             String sqlQuery;
+            String FilterQuery = "";
 
+            if (Filtered)
+            {                
+                Project project = (Project)cbFilter.SelectedItem;
+                FilterQuery = String.Format(" WHERE p.project={0}", projectSelected.Value);
+            }
+            
+            
             try
             {
-                sqlQuery = "SELECT * FROM Incoming";
+                sqlQuery = "SELECT * FROM Incoming p LEFT JOIN projects pr ON pr.id = p.project" + FilterQuery;
+                
                 SQLiteDataAdapter adapterIncoming = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterIncoming.Fill(dTableInc);
                 dTableInc.DefaultView.Sort = "RegDate ASC";
                 
                 dgvIncoming.DataSource = dTableInc.DefaultView;
                                 
-                sqlQuery = "SELECT * FROM Outgoing";
+                sqlQuery = "SELECT * FROM Outgoing p LEFT JOIN projects pr ON pr.id = p.project" + FilterQuery;
                 SQLiteDataAdapter adapterOutgoing = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterOutgoing.Fill(dTableOut);
                 dTableOut.DefaultView.Sort = "RegDate ASC";
@@ -73,9 +109,32 @@ namespace RecordKeeping
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            dgvIncoming.Rows[IncomingSelected].Selected = true;
-            dgvOutgoing.Rows[OutgoingSelected].Selected = true;
-            
+            if (dgvIncoming.Rows.Count < IncomingSelected)
+            {
+                dgvIncoming.Rows[IncomingSelected].Selected = true;
+                dgvIncoming.FirstDisplayedScrollingRowIndex = IncomingSelected;
+            }
+            if (dgvOutgoing.Rows.Count < OutgoingSelected)
+            {
+                dgvOutgoing.Rows[OutgoingSelected].Selected = true;
+                dgvOutgoing.FirstDisplayedScrollingRowIndex = OutgoingSelected;
+            }
+            ReloadProjectAutocomplete();
+        }
+
+        private List<Project> GetAutocompleteProject()
+        {
+            List<Project> temp_list = new List<Project>();
+            SQLiteCommand reader = new SQLiteCommand();
+            reader.Connection = Settings.Conncetion;
+            reader.CommandText = "SELECT id, project_name FROM projects";
+            SQLiteDataReader rec = reader.ExecuteReader();
+            temp_list.Add(new Project() { Name = "Все проекты", Value = 0 });
+            while (rec.Read())
+            {
+                temp_list.Add(new Project() { Name = (String)rec["project_name"], Value = (long)rec["id"] });
+            }
+            return temp_list;
         }
 
         void dgvInc_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -129,7 +188,6 @@ namespace RecordKeeping
                         cellStyle.BackColor = Color.Empty;
                         break;
                 }
-                
             }
         }
 
@@ -169,6 +227,11 @@ namespace RecordKeeping
         }
 
         private void tsmEdit_Click(object sender, EventArgs e)
+        {
+            Edit();
+        }
+
+        private void Edit()
         {
             DataGridViewRow row = new DataGridViewRow();
             MailBD Record = new IncomingBD();
@@ -280,6 +343,18 @@ namespace RecordKeeping
             DataColumn colMark = new DataColumn("Mark");
             colMark.DataType = System.Type.GetType("System.Int32");
             columnList.Add(colMark);
+            
+            DataColumn projectName = new DataColumn("project_name");
+            colId.DataType = System.Type.GetType("System.String");
+            columnList.Add(projectName);
+            
+            DataColumn Id1 = new DataColumn("Id1");
+            colId.DataType = System.Type.GetType("System.Int64");
+            columnList.Add(Id1);
+
+            DataColumn project = new DataColumn("project");
+            colId.DataType = System.Type.GetType("System.Int64");
+            columnList.Add(project);
 
             return columnList.ToArray();
         }
@@ -355,7 +430,7 @@ namespace RecordKeeping
         private void btnEdit_MouseHover(object sender, EventArgs e)
         {
             ToolTip t = new ToolTip();
-            t.SetToolTip(btnDelete, "Редактировать");
+            t.SetToolTip(btnEdit, "Редактировать");
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -395,16 +470,19 @@ namespace RecordKeeping
         private void SetColorMark(Directions direction, long id, int color)
         {
             MailBD Record = new IncomingBD();
-            if(direction == Directions.Incoming)
+            DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
+            
+            if (direction == Directions.Incoming)
                 Record = new IncomingBD();
             else if (direction == Directions.Outgoing)
+            
                 Record = new OutgoingBD();
-
             Record.Load(id);
-            if(Record.Mark == color)
+            if (Record.Mark == color)            
                 Record.Mark = 0;
             else
                 Record.Mark = color;
+
             Record.Update();
             this.ReloadData();
         }
@@ -471,6 +549,32 @@ namespace RecordKeeping
                 id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Outgoing, id, 4);
             }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            Edit();
+        }
+
+        private void проектыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProjectManager manager = new ProjectManager();
+            manager.ShowDialog();
+        }
+
+        private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbFilter.SelectedIndex > 0)
+            {
+                Filtered = true;
+                projectSelected = (Project)cbFilter.SelectedItem;
+            }
+            else 
+            {
+                Filtered = false;
+            }
+            ReloadData();
+            //Changed = !Changed;
         }
     }
 }
