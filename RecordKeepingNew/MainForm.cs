@@ -206,6 +206,18 @@ namespace RecordKeeping
                 addEdit.SetDirection(Directions.Outgoing);
             addEdit.ShowDialog();
             this.ReloadData();
+            if (tcMain.SelectedTab == tabIncoming)
+            {
+                int lastrow = dgvIncoming.Rows.Count - 1;
+                dgvIncoming.Rows[lastrow].Selected = true;
+                dgvIncoming.FirstDisplayedScrollingRowIndex = lastrow;
+            }
+            else if (tcMain.SelectedTab == tabOutgoing)
+            {
+                int lastrow = dgvOutgoing.Rows.Count - 1;
+                dgvOutgoing.Rows[lastrow].Selected = true;
+                dgvOutgoing.FirstDisplayedScrollingRowIndex = lastrow;
+            }
         }
 
         private void tsmView_Click(object sender, EventArgs e)
@@ -236,15 +248,18 @@ namespace RecordKeeping
             DataGridViewRow row = new DataGridViewRow();
             MailBD Record = new IncomingBD();
             Directions direction = new Directions();
+            int Index = 0;
             if (tcMain.SelectedTab == tabIncoming)
             {
                 row = dgvIncoming.CurrentRow;
+                Index = row.Index;
                 Record = new IncomingBD();
                 direction = Directions.Incoming;
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 row = dgvOutgoing.CurrentRow;
+                Index = row.Index;
                 Record = new OutgoingBD();
                 direction = Directions.Outgoing;
             }
@@ -254,6 +269,17 @@ namespace RecordKeeping
             edit.LoadData(Record, direction);
             edit.ShowDialog();
             this.ReloadData();
+
+            if (tcMain.SelectedTab == tabIncoming)
+            {
+                dgvIncoming.Rows[Index].Selected = true;
+                dgvIncoming.FirstDisplayedScrollingRowIndex = Index;
+            }
+            else if (tcMain.SelectedTab == tabOutgoing)
+            {
+                dgvOutgoing.Rows[Index].Selected = true;
+                dgvOutgoing.FirstDisplayedScrollingRowIndex = Index;
+            }
         }
 
         private void tmsDelete_Click(object sender, EventArgs e)
@@ -467,16 +493,16 @@ namespace RecordKeeping
             this.ReloadData();
         }
 
-        private void SetColorMark(Directions direction, long id, int color)
+        private void SetColorMark(Directions direction, long id, int color, int Index)
         {
             MailBD Record = new IncomingBD();
             DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
             
             if (direction == Directions.Incoming)
                 Record = new IncomingBD();
-            else if (direction == Directions.Outgoing)
-            
+            else if (direction == Directions.Outgoing)            
                 Record = new OutgoingBD();
+
             Record.Load(id);
             if (Record.Mark == color)            
                 Record.Mark = 0;
@@ -485,6 +511,16 @@ namespace RecordKeeping
 
             Record.Update();
             this.ReloadData();
+            if (direction == Directions.Incoming)
+            {
+                dgvIncoming.Rows[Index].Selected = true;
+                dgvIncoming.FirstDisplayedScrollingRowIndex = Index;
+            }
+            else if (direction == Directions.Outgoing)
+            {
+                dgvOutgoing.Rows[Index].Selected = true;
+                dgvOutgoing.FirstDisplayedScrollingRowIndex = Index;
+            }
         }
 
         private void tsmRedMark_Click(object sender, EventArgs e)
@@ -492,14 +528,16 @@ namespace RecordKeeping
             long id;
             if (tcMain.SelectedTab == tabIncoming)
             {
+                int Index = dgvIncoming.CurrentRow.Index;
                 id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
-                SetColorMark(Directions.Incoming, id, 1);
+                SetColorMark(Directions.Incoming, id, 1, Index);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
+                int Index = dgvOutgoing.CurrentRow.Index;
                 id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
-                SetColorMark(Directions.Outgoing, id, 1);
+                SetColorMark(Directions.Outgoing, id, 1, Index);
             }
         }
 
@@ -508,14 +546,16 @@ namespace RecordKeeping
             long id;
             if (tcMain.SelectedTab == tabIncoming)
             {
+                int Index = dgvIncoming.CurrentRow.Index;
                 id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
-                SetColorMark(Directions.Incoming, id, 2);
+                SetColorMark(Directions.Incoming, id, 2, Index);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
+                int Index = dgvOutgoing.CurrentRow.Index;
                 id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
-                SetColorMark(Directions.Outgoing, id, 2);
+                SetColorMark(Directions.Outgoing, id, 2, Index);
             }
         }
 
@@ -524,14 +564,16 @@ namespace RecordKeeping
             long id;
             if (tcMain.SelectedTab == tabIncoming)
             {
+                int Index = dgvIncoming.CurrentRow.Index;
                 id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
-                SetColorMark(Directions.Incoming, id, 3);
+                SetColorMark(Directions.Incoming, id, 3, Index);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
+                int Index = dgvOutgoing.CurrentRow.Index;
                 id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
-                SetColorMark(Directions.Outgoing, id, 3);
+                SetColorMark(Directions.Outgoing, id, 3, Index);
             }
         }
 
@@ -540,14 +582,16 @@ namespace RecordKeeping
             long id;
             if (tcMain.SelectedTab == tabIncoming)
             {
+                int Index = dgvIncoming.CurrentRow.Index;
                 id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
-                SetColorMark(Directions.Incoming, id, 4);
+                SetColorMark(Directions.Incoming, id, 4, Index);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
+                int Index = dgvOutgoing.CurrentRow.Index;
                 id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
-                SetColorMark(Directions.Outgoing, id, 4);
+                SetColorMark(Directions.Outgoing, id, 4, Index);
             }
         }
 
@@ -574,7 +618,6 @@ namespace RecordKeeping
                 Filtered = false;
             }
             ReloadData();
-            //Changed = !Changed;
         }
     }
 }

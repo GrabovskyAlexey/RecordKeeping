@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.1.*")]
 #pragma warning disable CS7035 // Указанная строка версии не соответствует рекомендованному формату — основной номер.дополнительный номер.сборка.редакция
-[assembly: AssemblyFileVersion("1.0.*")]
+[assembly: AssemblyFileVersion("1.1.*")]
 #pragma warning restore CS7035 // Указанная строка версии не соответствует рекомендованному формату — основной номер.дополнительный номер.сборка.редакция

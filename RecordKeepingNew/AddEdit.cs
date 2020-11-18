@@ -107,6 +107,7 @@ namespace RecordKeeping
                     Direction = Directions.Outgoing;
                     Record = new OutgoingBD();
                 }
+                Record.Mark = 0;
             }
             Record.MailNumber = tbMailNumber.Text;
             Record.RegDate = dtRegDate.Value.ToString("dd.MM.yyy");
@@ -117,7 +118,6 @@ namespace RecordKeeping
             Record.MailDate = dtMailDate.Value.ToString("dd.MM.yyy");
             Record.Description = tbDescription.Text;
             Record.Files = tbFiles.Text;
-            Record.Mark = 0;
             Record.Project = (long)cbProject.SelectedValue;
             if (!Record.CheckData())
             {
