@@ -2,8 +2,6 @@
 using System.Data.SQLite;
 using System.IO;
 using System.Xml;
-using System.Windows.Forms;
-using System.Data;
 
 namespace RecordKeeping
 {
