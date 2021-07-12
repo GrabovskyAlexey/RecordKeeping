@@ -42,29 +42,6 @@
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tabIncoming = new System.Windows.Forms.TabPage();
             this.dgvIncoming = new System.Windows.Forms.DataGridView();
-            this.cmsPKM = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tmsDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmView = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmMark = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmRedMark = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmYellowMark = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmGreenMark = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmBlueMark = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabOutgoing = new System.Windows.Forms.TabPage();
-            this.dgvOutgoing = new System.Windows.Forms.DataGridView();
-            this.справкаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.btnReloadRecords = new System.Windows.Forms.Button();
-            this.btnAddRecord = new System.Windows.Forms.Button();
-            this.cbFilter = new System.Windows.Forms.ComboBox();
             this.dgvcIncId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcIncMailNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcIncRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +57,17 @@
             this.id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmsPKM = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmsDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmView = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmMark = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmRedMark = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmYellowMark = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmGreenMark = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBlueMark = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabOutgoing = new System.Windows.Forms.TabPage();
+            this.dgvOutgoing = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +83,18 @@
             this.projectout = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id1out = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DirectionOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.справкаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnReloadRecords = new System.Windows.Forms.Button();
+            this.btnAddRecord = new System.Windows.Forms.Button();
+            this.cbFilter = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -241,7 +241,120 @@
             this.dgvIncoming.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvIncoming.Size = new System.Drawing.Size(1031, 481);
             this.dgvIncoming.TabIndex = 1;
-            this.dgvIncoming.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvIncoming_CellDoubleClick);
+            this.dgvIncoming.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tsmView_Click);
+            // 
+            // dgvcIncId
+            // 
+            this.dgvcIncId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dgvcIncId.DataPropertyName = "Id";
+            this.dgvcIncId.FillWeight = 50F;
+            this.dgvcIncId.HeaderText = "№";
+            this.dgvcIncId.Name = "dgvcIncId";
+            this.dgvcIncId.ReadOnly = true;
+            this.dgvcIncId.Visible = false;
+            this.dgvcIncId.Width = 50;
+            // 
+            // dgvcIncMailNumber
+            // 
+            this.dgvcIncMailNumber.DataPropertyName = "MailNumber";
+            this.dgvcIncMailNumber.HeaderText = "Номер письма";
+            this.dgvcIncMailNumber.Name = "dgvcIncMailNumber";
+            this.dgvcIncMailNumber.ReadOnly = true;
+            // 
+            // dgvcIncRegDate
+            // 
+            this.dgvcIncRegDate.DataPropertyName = "RegDate";
+            this.dgvcIncRegDate.HeaderText = "Дата регистрации";
+            this.dgvcIncRegDate.Name = "dgvcIncRegDate";
+            this.dgvcIncRegDate.ReadOnly = true;
+            // 
+            // dgvcIncTitle
+            // 
+            this.dgvcIncTitle.DataPropertyName = "Title";
+            this.dgvcIncTitle.HeaderText = "Тема";
+            this.dgvcIncTitle.Name = "dgvcIncTitle";
+            this.dgvcIncTitle.ReadOnly = true;
+            // 
+            // dgvcIncReplyTo
+            // 
+            this.dgvcIncReplyTo.DataPropertyName = "ReplyTo";
+            this.dgvcIncReplyTo.HeaderText = "Ответ на письмо";
+            this.dgvcIncReplyTo.Name = "dgvcIncReplyTo";
+            this.dgvcIncReplyTo.ReadOnly = true;
+            // 
+            // dgvcIncReply
+            // 
+            this.dgvcIncReply.DataPropertyName = "Reply";
+            this.dgvcIncReply.HeaderText = "Ответное письмо";
+            this.dgvcIncReply.Name = "dgvcIncReply";
+            this.dgvcIncReply.ReadOnly = true;
+            // 
+            // dgvcIncRecipient
+            // 
+            this.dgvcIncRecipient.DataPropertyName = "SenderReceiver";
+            this.dgvcIncRecipient.HeaderText = "Отправитель";
+            this.dgvcIncRecipient.Name = "dgvcIncRecipient";
+            this.dgvcIncRecipient.ReadOnly = true;
+            // 
+            // dgvcIncMailDate
+            // 
+            this.dgvcIncMailDate.DataPropertyName = "MailDate";
+            this.dgvcIncMailDate.HeaderText = "Дата получения";
+            this.dgvcIncMailDate.Name = "dgvcIncMailDate";
+            this.dgvcIncMailDate.ReadOnly = true;
+            // 
+            // dgvcIncDesc
+            // 
+            this.dgvcIncDesc.DataPropertyName = "Description";
+            this.dgvcIncDesc.HeaderText = "Описание";
+            this.dgvcIncDesc.Name = "dgvcIncDesc";
+            this.dgvcIncDesc.ReadOnly = true;
+            // 
+            // dgvcIncAttach
+            // 
+            this.dgvcIncAttach.DataPropertyName = "Files";
+            this.dgvcIncAttach.HeaderText = "Файлы";
+            this.dgvcIncAttach.Name = "dgvcIncAttach";
+            this.dgvcIncAttach.ReadOnly = true;
+            // 
+            // dgvcIncMark
+            // 
+            this.dgvcIncMark.DataPropertyName = "Mark";
+            this.dgvcIncMark.HeaderText = "mark";
+            this.dgvcIncMark.Name = "dgvcIncMark";
+            this.dgvcIncMark.ReadOnly = true;
+            this.dgvcIncMark.Visible = false;
+            // 
+            // dgvIncProject
+            // 
+            this.dgvIncProject.DataPropertyName = "project_name";
+            this.dgvIncProject.HeaderText = "Проект";
+            this.dgvIncProject.Name = "dgvIncProject";
+            this.dgvIncProject.ReadOnly = true;
+            // 
+            // id1
+            // 
+            this.id1.DataPropertyName = "id1";
+            this.id1.HeaderText = "Column1";
+            this.id1.Name = "id1";
+            this.id1.ReadOnly = true;
+            this.id1.Visible = false;
+            // 
+            // project
+            // 
+            this.project.DataPropertyName = "project";
+            this.project.HeaderText = "Column1";
+            this.project.Name = "project";
+            this.project.ReadOnly = true;
+            this.project.Visible = false;
+            // 
+            // Direction
+            // 
+            this.Direction.DataPropertyName = "Direction";
+            this.Direction.HeaderText = "Direction";
+            this.Direction.Name = "Direction";
+            this.Direction.ReadOnly = true;
+            this.Direction.Visible = false;
             // 
             // cmsPKM
             // 
@@ -362,7 +475,120 @@
             this.dgvOutgoing.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOutgoing.Size = new System.Drawing.Size(1031, 474);
             this.dgvOutgoing.TabIndex = 2;
-            this.dgvOutgoing.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvIncoming_CellDoubleClick);
+            this.dgvOutgoing.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tsmView_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "№";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "MailNumber";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Номер письма";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "RegDate";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Дата регистрации";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dgvcOutTitle
+            // 
+            this.dgvcOutTitle.DataPropertyName = "Title";
+            this.dgvcOutTitle.HeaderText = "Тема";
+            this.dgvcOutTitle.Name = "dgvcOutTitle";
+            this.dgvcOutTitle.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "ReplyTo";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ответ на письмо";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Reply";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Ответное письмо";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "SenderReceiver";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Получатель";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "MailDate";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Дата получения";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Описание";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "Files";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Файлы";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dgvcOutMark
+            // 
+            this.dgvcOutMark.DataPropertyName = "Mark";
+            this.dgvcOutMark.HeaderText = "mark";
+            this.dgvcOutMark.Name = "dgvcOutMark";
+            this.dgvcOutMark.ReadOnly = true;
+            this.dgvcOutMark.Visible = false;
+            // 
+            // dgvOutProject
+            // 
+            this.dgvOutProject.DataPropertyName = "project_name";
+            this.dgvOutProject.HeaderText = "Проект";
+            this.dgvOutProject.Name = "dgvOutProject";
+            this.dgvOutProject.ReadOnly = true;
+            // 
+            // projectout
+            // 
+            this.projectout.DataPropertyName = "project";
+            this.projectout.HeaderText = "Column1";
+            this.projectout.Name = "projectout";
+            this.projectout.ReadOnly = true;
+            this.projectout.Visible = false;
+            // 
+            // id1out
+            // 
+            this.id1out.DataPropertyName = "id1";
+            this.id1out.HeaderText = "Column1";
+            this.id1out.Name = "id1out";
+            this.id1out.ReadOnly = true;
+            this.id1out.Visible = false;
+            // 
+            // DirectionOut
+            // 
+            this.DirectionOut.DataPropertyName = "Direction";
+            this.DirectionOut.HeaderText = "Direction";
+            this.DirectionOut.Name = "DirectionOut";
+            this.DirectionOut.ReadOnly = true;
+            this.DirectionOut.Visible = false;
             // 
             // справкаToolStripMenuItem1
             // 
@@ -481,232 +707,6 @@
             this.cbFilter.Size = new System.Drawing.Size(210, 21);
             this.cbFilter.TabIndex = 18;
             this.cbFilter.SelectionChangeCommitted += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
-            // 
-            // dgvcIncId
-            // 
-            this.dgvcIncId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dgvcIncId.DataPropertyName = "Id";
-            this.dgvcIncId.FillWeight = 50F;
-            this.dgvcIncId.HeaderText = "№";
-            this.dgvcIncId.Name = "dgvcIncId";
-            this.dgvcIncId.ReadOnly = true;
-            this.dgvcIncId.Visible = false;
-            this.dgvcIncId.Width = 50;
-            // 
-            // dgvcIncMailNumber
-            // 
-            this.dgvcIncMailNumber.DataPropertyName = "MailNumber";
-            this.dgvcIncMailNumber.HeaderText = "Номер письма";
-            this.dgvcIncMailNumber.Name = "dgvcIncMailNumber";
-            this.dgvcIncMailNumber.ReadOnly = true;
-            // 
-            // dgvcIncRegDate
-            // 
-            this.dgvcIncRegDate.DataPropertyName = "RegDate";
-            this.dgvcIncRegDate.HeaderText = "Дата регистрации";
-            this.dgvcIncRegDate.Name = "dgvcIncRegDate";
-            this.dgvcIncRegDate.ReadOnly = true;
-            // 
-            // dgvcIncTitle
-            // 
-            this.dgvcIncTitle.DataPropertyName = "Title";
-            this.dgvcIncTitle.HeaderText = "Тема";
-            this.dgvcIncTitle.Name = "dgvcIncTitle";
-            this.dgvcIncTitle.ReadOnly = true;
-            // 
-            // dgvcIncReplyTo
-            // 
-            this.dgvcIncReplyTo.DataPropertyName = "ReplyTo";
-            this.dgvcIncReplyTo.HeaderText = "Ответ на письмо";
-            this.dgvcIncReplyTo.Name = "dgvcIncReplyTo";
-            this.dgvcIncReplyTo.ReadOnly = true;
-            // 
-            // dgvcIncReply
-            // 
-            this.dgvcIncReply.DataPropertyName = "Reply";
-            this.dgvcIncReply.HeaderText = "Ответное письмо";
-            this.dgvcIncReply.Name = "dgvcIncReply";
-            this.dgvcIncReply.ReadOnly = true;
-            // 
-            // dgvcIncRecipient
-            // 
-            this.dgvcIncRecipient.DataPropertyName = "SenderReceiver";
-            this.dgvcIncRecipient.HeaderText = "Отправитель";
-            this.dgvcIncRecipient.Name = "dgvcIncRecipient";
-            this.dgvcIncRecipient.ReadOnly = true;
-            // 
-            // dgvcIncMailDate
-            // 
-            this.dgvcIncMailDate.DataPropertyName = "MailDate";
-            this.dgvcIncMailDate.HeaderText = "Дата получения";
-            this.dgvcIncMailDate.Name = "dgvcIncMailDate";
-            this.dgvcIncMailDate.ReadOnly = true;
-            // 
-            // dgvcIncDesc
-            // 
-            this.dgvcIncDesc.DataPropertyName = "Description";
-            this.dgvcIncDesc.HeaderText = "Описание";
-            this.dgvcIncDesc.Name = "dgvcIncDesc";
-            this.dgvcIncDesc.ReadOnly = true;
-            // 
-            // dgvcIncAttach
-            // 
-            this.dgvcIncAttach.DataPropertyName = "Files";
-            this.dgvcIncAttach.HeaderText = "Файлы";
-            this.dgvcIncAttach.Name = "dgvcIncAttach";
-            this.dgvcIncAttach.ReadOnly = true;
-            // 
-            // dgvcIncMark
-            // 
-            this.dgvcIncMark.DataPropertyName = "Mark";
-            this.dgvcIncMark.HeaderText = "mark";
-            this.dgvcIncMark.Name = "dgvcIncMark";
-            this.dgvcIncMark.ReadOnly = true;
-            this.dgvcIncMark.Visible = false;
-            // 
-            // dgvIncProject
-            // 
-            this.dgvIncProject.DataPropertyName = "project_name";
-            this.dgvIncProject.HeaderText = "Проект";
-            this.dgvIncProject.Name = "dgvIncProject";
-            this.dgvIncProject.ReadOnly = true;
-            // 
-            // id1
-            // 
-            this.id1.DataPropertyName = "id1";
-            this.id1.HeaderText = "Column1";
-            this.id1.Name = "id1";
-            this.id1.ReadOnly = true;
-            this.id1.Visible = false;
-            // 
-            // project
-            // 
-            this.project.DataPropertyName = "project";
-            this.project.HeaderText = "Column1";
-            this.project.Name = "project";
-            this.project.ReadOnly = true;
-            this.project.Visible = false;
-            // 
-            // Direction
-            // 
-            this.Direction.DataPropertyName = "Direction";
-            this.Direction.HeaderText = "Direction";
-            this.Direction.Name = "Direction";
-            this.Direction.ReadOnly = true;
-            this.Direction.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "№";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            this.dataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "MailNumber";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Номер письма";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "RegDate";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Дата регистрации";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dgvcOutTitle
-            // 
-            this.dgvcOutTitle.DataPropertyName = "Title";
-            this.dgvcOutTitle.HeaderText = "Тема";
-            this.dgvcOutTitle.Name = "dgvcOutTitle";
-            this.dgvcOutTitle.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "ReplyTo";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Ответ на письмо";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Reply";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Ответное письмо";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "SenderReceiver";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Получатель";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "MailDate";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Дата получения";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Description";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Описание";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "Files";
-            this.dataGridViewTextBoxColumn9.HeaderText = "Файлы";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dgvcOutMark
-            // 
-            this.dgvcOutMark.DataPropertyName = "Mark";
-            this.dgvcOutMark.HeaderText = "mark";
-            this.dgvcOutMark.Name = "dgvcOutMark";
-            this.dgvcOutMark.ReadOnly = true;
-            this.dgvcOutMark.Visible = false;
-            // 
-            // dgvOutProject
-            // 
-            this.dgvOutProject.DataPropertyName = "project_name";
-            this.dgvOutProject.HeaderText = "Проект";
-            this.dgvOutProject.Name = "dgvOutProject";
-            this.dgvOutProject.ReadOnly = true;
-            // 
-            // projectout
-            // 
-            this.projectout.DataPropertyName = "project";
-            this.projectout.HeaderText = "Column1";
-            this.projectout.Name = "projectout";
-            this.projectout.ReadOnly = true;
-            this.projectout.Visible = false;
-            // 
-            // id1out
-            // 
-            this.id1out.DataPropertyName = "id1";
-            this.id1out.HeaderText = "Column1";
-            this.id1out.Name = "id1out";
-            this.id1out.ReadOnly = true;
-            this.id1out.Visible = false;
-            // 
-            // DirectionOut
-            // 
-            this.DirectionOut.DataPropertyName = "Direction";
-            this.DirectionOut.HeaderText = "Direction";
-            this.DirectionOut.Name = "DirectionOut";
-            this.DirectionOut.ReadOnly = true;
-            this.DirectionOut.Visible = false;
             // 
             // MainForm
             // 

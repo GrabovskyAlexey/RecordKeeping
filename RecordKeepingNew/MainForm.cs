@@ -238,7 +238,7 @@ namespace RecordKeeping
                 row = dgvOutgoing.CurrentRow;
                 card.LoadData((long)row.Cells[0].Value, Directions.Outgoing);
             }
-            card.ShowDialog();            
+            card.ShowDialog();
             this.ReloadData();
         }
 
@@ -276,15 +276,22 @@ namespace RecordKeeping
             {
                 if (dgvIncoming.Rows.Count - 1 < Index)
                     Index = dgvIncoming.Rows.Count - 1;
-                dgvIncoming.Rows[Index].Selected = true;
-                dgvIncoming.FirstDisplayedScrollingRowIndex = Index;
+                if (Index >= 0)
+                {
+                    dgvIncoming.Rows[Index].Selected = true;
+                    dgvIncoming.FirstDisplayedScrollingRowIndex = Index;
+                }
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 if (dgvOutgoing.Rows.Count - 1 < Index)
                     Index = dgvOutgoing.Rows.Count - 1;
-                dgvOutgoing.Rows[Index].Selected = true;
-                dgvOutgoing.FirstDisplayedScrollingRowIndex = Index;
+
+                if (Index >= 0)
+                {
+                    dgvOutgoing.Rows[Index].Selected = true;
+                    dgvOutgoing.FirstDisplayedScrollingRowIndex = Index;
+                }
             }
         }
 
@@ -309,23 +316,6 @@ namespace RecordKeeping
         {
             About about = new About();
             about.ShowDialog();
-        }
-
-        private void dgvIncoming_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DataGridViewRow row = new DataGridViewRow();
-            MailCard card = new MailCard();
-            if (tcMain.SelectedTab == tabIncoming)
-            {
-                row = dgvIncoming.CurrentRow;
-                card.LoadData((long)row.Cells[0].Value, Directions.Incoming);
-            }
-            else if (tcMain.SelectedTab == tabOutgoing)
-            {
-                row = dgvOutgoing.CurrentRow;
-                card.LoadData((long)row.Cells[0].Value, Directions.Outgoing);
-            }
-            card.Show();
         }
 
         private DataColumn[] getColumnList()

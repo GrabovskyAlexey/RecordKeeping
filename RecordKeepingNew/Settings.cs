@@ -66,6 +66,8 @@ namespace RecordKeeping
                 Conncetion.Open();
 
             SqlCommand.Connection = Conncetion;
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS settings(name TEXT, value TEXT)";
+            SqlCommand.ExecuteNonQuery();
             SqlCommand.CommandText = "SELECT * FROM settings WHERE name LIKE 'version'";
             SQLiteDataReader rec = SqlCommand.ExecuteReader();
             if (!rec.HasRows)

@@ -97,20 +97,6 @@ namespace RecordKeeping
             tbDescription.Text = Description;
         }
 
-        private void llbFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (Directory.Exists(Files))
-            {
-                System.Diagnostics.Process.Start(Files);
-            }
-            else
-            {
-                ErrorPath error = new ErrorPath();
-                error.Path = Files;
-                error.ShowDialog();
-            }
-        }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             AddEdit edit = new AddEdit();
