@@ -34,6 +34,7 @@
             this.lbStatusText = new System.Windows.Forms.Label();
             this.lbStatusName = new System.Windows.Forms.Label();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
+            this.проектыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,12 +59,12 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.проектыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnReloadRecords = new System.Windows.Forms.Button();
             this.btnAddRecord = new System.Windows.Forms.Button();
+            this.cbFilter = new System.Windows.Forms.ComboBox();
             this.dgvcIncId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcIncMailNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcIncRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,6 +79,7 @@
             this.dgvIncProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,7 +94,7 @@
             this.dgvOutProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.projectout = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id1out = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbFilter = new System.Windows.Forms.ComboBox();
+            this.DirectionOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -142,6 +144,13 @@
             this.menuStripMain.Size = new System.Drawing.Size(1042, 24);
             this.menuStripMain.TabIndex = 3;
             this.menuStripMain.Text = "menuStrip1";
+            // 
+            // проектыToolStripMenuItem
+            // 
+            this.проектыToolStripMenuItem.Name = "проектыToolStripMenuItem";
+            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.проектыToolStripMenuItem.Text = "Проекты";
+            this.проектыToolStripMenuItem.Click += new System.EventHandler(this.проектыToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem2
             // 
@@ -221,7 +230,8 @@
             this.dgvcIncMark,
             this.dgvIncProject,
             this.id1,
-            this.project});
+            this.project,
+            this.Direction});
             this.dgvIncoming.ContextMenuStrip = this.cmsPKM;
             this.dgvIncoming.Location = new System.Drawing.Point(0, 0);
             this.dgvIncoming.MultiSelect = false;
@@ -341,7 +351,8 @@
             this.dgvcOutMark,
             this.dgvOutProject,
             this.projectout,
-            this.id1out});
+            this.id1out,
+            this.DirectionOut});
             this.dgvOutgoing.ContextMenuStrip = this.cmsPKM;
             this.dgvOutgoing.Location = new System.Drawing.Point(0, 0);
             this.dgvOutgoing.MultiSelect = false;
@@ -394,13 +405,6 @@
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem5.Text = " ";
-            // 
-            // проектыToolStripMenuItem
-            // 
-            this.проектыToolStripMenuItem.Name = "проектыToolStripMenuItem";
-            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.проектыToolStripMenuItem.Text = "Проекты";
-            this.проектыToolStripMenuItem.Click += new System.EventHandler(this.проектыToolStripMenuItem_Click);
             // 
             // btnEdit
             // 
@@ -469,6 +473,15 @@
             this.btnAddRecord.Click += new System.EventHandler(this.btnAddRecord_Click);
             this.btnAddRecord.MouseHover += new System.EventHandler(this.btnAddRecord_MouseHover);
             // 
+            // cbFilter
+            // 
+            this.cbFilter.FormattingEnabled = true;
+            this.cbFilter.Location = new System.Drawing.Point(328, 33);
+            this.cbFilter.Name = "cbFilter";
+            this.cbFilter.Size = new System.Drawing.Size(210, 21);
+            this.cbFilter.TabIndex = 18;
+            this.cbFilter.SelectionChangeCommitted += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
+            // 
             // dgvcIncId
             // 
             this.dgvcIncId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -517,7 +530,7 @@
             // 
             // dgvcIncRecipient
             // 
-            this.dgvcIncRecipient.DataPropertyName = "Recipient";
+            this.dgvcIncRecipient.DataPropertyName = "SenderReceiver";
             this.dgvcIncRecipient.HeaderText = "Отправитель";
             this.dgvcIncRecipient.Name = "dgvcIncRecipient";
             this.dgvcIncRecipient.ReadOnly = true;
@@ -574,6 +587,14 @@
             this.project.ReadOnly = true;
             this.project.Visible = false;
             // 
+            // Direction
+            // 
+            this.Direction.DataPropertyName = "Direction";
+            this.Direction.HeaderText = "Direction";
+            this.Direction.Name = "Direction";
+            this.Direction.ReadOnly = true;
+            this.Direction.Visible = false;
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -622,7 +643,7 @@
             // 
             // dataGridViewTextBoxColumn6
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Recipient";
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "SenderReceiver";
             this.dataGridViewTextBoxColumn6.HeaderText = "Получатель";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -679,14 +700,13 @@
             this.id1out.ReadOnly = true;
             this.id1out.Visible = false;
             // 
-            // cbFilter
+            // DirectionOut
             // 
-            this.cbFilter.FormattingEnabled = true;
-            this.cbFilter.Location = new System.Drawing.Point(328, 33);
-            this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(210, 21);
-            this.cbFilter.TabIndex = 18;
-            this.cbFilter.SelectionChangeCommitted += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
+            this.DirectionOut.DataPropertyName = "Direction";
+            this.DirectionOut.HeaderText = "Direction";
+            this.DirectionOut.Name = "DirectionOut";
+            this.DirectionOut.ReadOnly = true;
+            this.DirectionOut.Visible = false;
             // 
             // MainForm
             // 
@@ -759,6 +779,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmGreenMark;
         private System.Windows.Forms.ToolStripMenuItem tsmBlueMark;
         private System.Windows.Forms.ToolStripMenuItem проектыToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cbFilter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcIncId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcIncMailNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcIncRegDate;
@@ -773,6 +794,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvIncProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn id1;
         private System.Windows.Forms.DataGridViewTextBoxColumn project;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direction;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -787,7 +809,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvOutProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn projectout;
         private System.Windows.Forms.DataGridViewTextBoxColumn id1out;
-        private System.Windows.Forms.ComboBox cbFilter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DirectionOut;
     }
 }
 

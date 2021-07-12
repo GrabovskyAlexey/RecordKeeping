@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.IO;
 
 namespace RecordKeeping
 {
@@ -26,17 +27,17 @@ namespace RecordKeeping
         public void LoadData(Int64 RecordId, Directions direct)
         {
             ProjectName = "";
+            Record = new RecordBD();
+            Record.Load(RecordId);
             if (direct == Directions.Incoming)
             {
-                Record = new IncomingBD();
                 this.Text = "Входящее";
             }
             else if(direct == Directions.Outgoing)
             {
-                Record = new OutgoingBD();
                 this.Text = "Исходящее";
             }
-            Record.Load(RecordId);
+            
             MailNumber = Record.MailNumber;
             RegDate = Record.RegDate;
             Title = Record.Title;
@@ -83,7 +84,10 @@ namespace RecordKeeping
                 lbReply.Visible = false;
 
             if (Files == "")
-                llbFiles.Visible = false;
+            {
+
+                btnAttach.Visible = false;
+            }
 
             if (ProjectName != "")
                 lbProject.Text += ProjectName;
@@ -95,7 +99,16 @@ namespace RecordKeeping
 
         private void llbFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Files);
+            if (Directory.Exists(Files))
+            {
+                System.Diagnostics.Process.Start(Files);
+            }
+            else
+            {
+                ErrorPath error = new ErrorPath();
+                error.Path = Files;
+                error.ShowDialog();
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -105,6 +118,20 @@ namespace RecordKeeping
             edit.LoadData(Record, Direction);
             edit.ShowDialog();
             this.Close();
+        }
+
+        private void btnAttach_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Files))
+            {
+                System.Diagnostics.Process.Start(Files);
+            }
+            else
+            {
+                ErrorPath error = new ErrorPath();
+                error.Path = Files;
+                error.ShowDialog();
+            }
         }
     }
 }

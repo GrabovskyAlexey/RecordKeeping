@@ -117,23 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="edit_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edit_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="recycle_bag" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\recycle_bag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="refresh_all" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\refresh_all.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="find" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\find.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="attach" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\attach.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAX19fZEJCQv9BQUH/QkJC/0JCQv9CQkL/QkJC/0JCQv9CQkL/QkJC/0JCQv9fX19kAAAAAAAA
+        AAAAAAAAX19fZENDQ/+3t7f/0NDQ/9DQ0P/Q0ND/0NDQ/9DQ0P/Q0ND/0NDQ/9DQ0P+3t7f/Q0ND/19f
+        X2QAAAAAAAAAAEVFRf/Jycn/5+fn/+fn5//n5+f/5+fn/+fn5//n5+f/5+fn/+fn5//n5+f/RUVF/7e3
+        t/9ERET/AAAAAAAAAABGRkb//////////////////////////////////////////////////////0ZG
+        Rv/Q0ND/RkZG/wAAAAAAAAAASUlJ/0lJSf9JSUn/SUlJ/0lJSf9JSUn/SUlJ/0lJSf9JSUn/SUlJ/0lJ
+        Sf+5ubn/1NTU/0lJSf8AAAAAAAAAAAAAAAAAAAAAS0tL/9fX1//X19f/2NjY/9fX1//X19f/19fX/9jY
+        2P/Y2Nj/2NjY/9fX1/9LS0v/AAAAAAAAAAAAAAAAAAAAAE1NTf/d3d3/3Nzc/9zc3P/c3Nz/3Nzc/9zc
+        3P/c3Nz/3Nzc/93d3f/c3Nz/TU1N/wAAAAAAAAAAAAAAAAAAAABQUFD/4uLi/+Hh4f/i4uL/4eHh/+Li
+        4v/i4uL/4uLi/+Li4v/i4uL/4eHh/1FRUf8AAAAAAAAAAAAAAAAAAAAAU1NT/+fn5//n5+f/5+fn/+fn
+        5//n5+f/5+fn/+fn5//n5+f/5+fn/+fn5/9SUlL/AAAAAAAAAAAAAAAAAAAAAFVVVf/t7e3/7e3t/+3t
+        7f/t7e3/7e3t/+3t7f/t7e3/7e3t/+3t7f/t7e3/VVVV/wAAAAAAAAAAAAAAAAAAAABXV1f/8/Pz//Ly
+        8v/z8/P/8vLy//Ly8v/z8/P/8/Pz//Ly8v/y8vL/8/Pz/1hYWP8AAAAAAAAAAAAAAAAAAAAAWlpa//j4
+        +P/39/f/+Pj4//j4+P/4+Pj/+Pj4//j4+P/39/f/+Pj4//j4+P9aWlr/AAAAAAAAAAAAAAAAAAAAAFxc
+        XP/7+/v//Pz8//v7+//8/Pz/+/v7//v7+//7+/v/+/v7//z8/P/8/Pz/XFxc/1xcXP9cXFz/AAAAAAAA
+        AABdXV3/29vb///////////////////////////////////////////////////////b29v/XV1d/wAA
+        AAAAAAAAX19fZF9fX//b29v////////////////////////////////////////////b29v/X19f/19f
+        X2QAAAAAAAAAAAAAAABfX19kX19f/19fX/9fX1//X19f/19fX/9fX1//X19f/19fX/9fX1//X19f/19f
+        X2QAAAAAwA8AAIAHAAAAAwAAAAMAAAADAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAAAAMAA
+        AADgAQAA8AMAAA==
+</value>
   </data>
 </root>

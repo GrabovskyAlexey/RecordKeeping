@@ -96,19 +96,13 @@ namespace RecordKeeping
         {
             bool result = false;
             if (!Edit)
-            {
-                if (rbIncoming.Checked)
-                {
-                    Direction = Directions.Incoming;
-                    Record = new IncomingBD();
-                }
-                else if (rbOutgoing.Checked)
-                {
-                    Direction = Directions.Outgoing;
-                    Record = new OutgoingBD();
-                }
                 Record.Mark = 0;
-            }
+
+            if (rbIncoming.Checked)
+                Record.Direction = 1;
+            else if (rbOutgoing.Checked)
+                Record.Direction = 2;
+
             Record.MailNumber = tbMailNumber.Text;
             Record.RegDate = dtRegDate.Value.ToString("dd.MM.yyy");
             Record.Title = tbTitle.Text;
@@ -200,9 +194,9 @@ namespace RecordKeeping
             reader.Connection = Settings.Conncetion;
             
             if (direct == Directions.Incoming)
-                reader.CommandText = "SELECT MailNumber FROM Incoming";
+                reader.CommandText = "SELECT MailNumber FROM Records WHERE Direction = '1'";
             else if (direct == Directions.Outgoing)
-                reader.CommandText = "SELECT MailNumber FROM Outgoing";
+                reader.CommandText = "SELECT MailNumber FROM Records WHERE Direction = '2'";
             SQLiteDataReader rec = reader.ExecuteReader();
             while(rec.Read())
             {
@@ -256,8 +250,8 @@ namespace RecordKeeping
 
     public enum Directions
     {
-        Incoming,
-        Outgoing        
+        Incoming = 1,
+        Outgoing = 2        
     }
 
     public class MyTextBox : TextBox

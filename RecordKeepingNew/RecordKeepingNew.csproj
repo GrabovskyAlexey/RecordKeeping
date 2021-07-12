@@ -108,6 +108,12 @@
       <DependentUpon>AddEditProject.cs</DependentUpon>
     </Compile>
     <Compile Include="BD.cs" />
+    <Compile Include="ErrorPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorPath.Designer.cs">
+      <DependentUpon>ErrorPath.cs</DependentUpon>
+    </Compile>
     <Compile Include="MailCard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     <EmbeddedResource Include="AddEditProject.resx">
       <DependentUpon>AddEditProject.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ErrorPath.resx">
+      <DependentUpon>ErrorPath.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MailCard.resx">
       <DependentUpon>MailCard.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="62.ico" />
+    <None Include="Resources\attach.png" />
     <None Include="Resources\edit_button.png" />
     <None Include="Resources\recycle_bag.png" />
     <None Include="Resources\find.png" />

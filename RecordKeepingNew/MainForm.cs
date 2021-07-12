@@ -25,6 +25,7 @@ namespace RecordKeeping
         private void MainForm_Load(object sender, EventArgs e)
         {
             Settings.Load();
+
             if(Settings.Conncetion.State == ConnectionState.Open)
                 lbStatusText.Text = "Подключена";
             else
@@ -78,17 +79,20 @@ namespace RecordKeeping
 
             String sqlQuery;
             String FilterQuery = "";
+            String FilterQueryInc = " WHERE p.Direction=1";
+            String FilterQueryOut = " WHERE p.Direction=2";
 
             if (Filtered)
             {                
                 Project project = (Project)cbFilter.SelectedItem;
-                FilterQuery = String.Format(" WHERE p.project={0}", projectSelected.Value);
-            }
-            
+                FilterQuery = String.Format(" AND p.project={0}", projectSelected.Value);
+                FilterQueryInc += FilterQuery;
+                FilterQueryOut += FilterQuery;
+            }          
             
             try
             {
-                sqlQuery = "SELECT * FROM Incoming p LEFT JOIN projects pr ON pr.id = p.project" + FilterQuery;
+                sqlQuery = "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project" + FilterQueryInc;
                 
                 SQLiteDataAdapter adapterIncoming = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterIncoming.Fill(dTableInc);
@@ -96,7 +100,7 @@ namespace RecordKeeping
                 
                 dgvIncoming.DataSource = dTableInc.DefaultView;
                                 
-                sqlQuery = "SELECT * FROM Outgoing p LEFT JOIN projects pr ON pr.id = p.project" + FilterQuery;
+                sqlQuery = "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project" + FilterQueryOut;
                 SQLiteDataAdapter adapterOutgoing = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterOutgoing.Fill(dTableOut);
                 dTableOut.DefaultView.Sort = "RegDate ASC";
@@ -246,21 +250,19 @@ namespace RecordKeeping
         private void Edit()
         {
             DataGridViewRow row = new DataGridViewRow();
-            MailBD Record = new IncomingBD();
+            MailBD Record = new RecordBD();
             Directions direction = new Directions();
             int Index = 0;
             if (tcMain.SelectedTab == tabIncoming)
             {
                 row = dgvIncoming.CurrentRow;
                 Index = row.Index;
-                Record = new IncomingBD();
                 direction = Directions.Incoming;
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 row = dgvOutgoing.CurrentRow;
                 Index = row.Index;
-                Record = new OutgoingBD();
                 direction = Directions.Outgoing;
             }
             Record.Load((long)row.Cells[0].Value);
@@ -272,11 +274,15 @@ namespace RecordKeeping
 
             if (tcMain.SelectedTab == tabIncoming)
             {
+                if (dgvIncoming.Rows.Count - 1 < Index)
+                    Index = dgvIncoming.Rows.Count - 1;
                 dgvIncoming.Rows[Index].Selected = true;
                 dgvIncoming.FirstDisplayedScrollingRowIndex = Index;
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
+                if (dgvOutgoing.Rows.Count - 1 < Index)
+                    Index = dgvOutgoing.Rows.Count - 1;
                 dgvOutgoing.Rows[Index].Selected = true;
                 dgvOutgoing.FirstDisplayedScrollingRowIndex = Index;
             }
@@ -350,7 +356,7 @@ namespace RecordKeeping
             colReply.DataType = System.Type.GetType("System.String");
             columnList.Add(colReply);
 
-            DataColumn colRecitient = new DataColumn("Recipient");
+            DataColumn colRecitient = new DataColumn("SenderReceiver");
             colRecitient.DataType = System.Type.GetType("System.String");
             columnList.Add(colRecitient);
 
@@ -400,7 +406,6 @@ namespace RecordKeeping
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            bool find = false;
             frmSearch search = new frmSearch();
             search.ShowDialog();
             DataGridView dgv = new DataGridView();
@@ -410,24 +415,19 @@ namespace RecordKeeping
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
-                dgv = dgvOutgoing;
+                dgv = dgvOutgoing;                
             }
+
             if (search.SearchText != "" && search.SearchText != null)
             {
-                for (int i = 0; i < dgv.RowCount; i++)
-                {
-                    dgv.Rows[i].Selected = false;
-                    if (dgv.Rows[i].Cells[1].Value.ToString().Contains(search.SearchText) || dgv.Rows[i].Cells[3].Value.ToString().Contains(search.SearchText))
-                    {
-                        find = true;
-                        dgv.Rows[i].Selected = true;
-                        break;
-                    }
-                }
-            }
-            if (!find)
-            {
-                MessageBox.Show("Данные по запросу " + search.SearchText + " не найдены", "Результат поиска");
+                BindingSource bs = new BindingSource();
+                bs.DataSource = dgv.DataSource;
+                bs.Filter = String.Format("MailNumber like '%{0}%' OR Title like '%{0}%' OR Description like '%{0}%'", search.SearchText);
+
+                if(bs.Count > 0)
+                    dgv.DataSource = bs;
+                else
+                    MessageBox.Show("Данные по запросу " + search.SearchText + " не найдены", "Результат поиска");
             }
         }
 
@@ -478,11 +478,7 @@ namespace RecordKeeping
 
         private void DeleteRecord(Directions direction, long id)
         {
-            MailBD Record = new IncomingBD();
-            if (direction == Directions.Incoming)                
-                Record = new IncomingBD();
-            else if (direction == Directions.Outgoing)
-                Record = new OutgoingBD();
+            MailBD Record = new RecordBD();
             
             Record.Load(id);
             DialogResult result = MessageBox.Show("Вы уверенны что хотите удалить письмо " + Record.MailNumber + "?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -495,13 +491,8 @@ namespace RecordKeeping
 
         private void SetColorMark(Directions direction, long id, int color, int Index)
         {
-            MailBD Record = new IncomingBD();
+            MailBD Record = new RecordBD();
             DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
-            
-            if (direction == Directions.Incoming)
-                Record = new IncomingBD();
-            else if (direction == Directions.Outgoing)            
-                Record = new OutgoingBD();
 
             Record.Load(id);
             if (Record.Mark == color)            
