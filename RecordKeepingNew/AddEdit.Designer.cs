@@ -57,6 +57,8 @@
             this.btnClearFormat = new System.Windows.Forms.Button();
             this.cbProject = new System.Windows.Forms.ComboBox();
             this.lbProject = new System.Windows.Forms.Label();
+            this.cbEmployee = new System.Windows.Forms.ComboBox();
+            this.lbEmployee = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // rbIncoming
@@ -325,11 +327,30 @@
             this.lbProject.TabIndex = 26;
             this.lbProject.Text = "Проект";
             // 
+            // cbEmployee
+            // 
+            this.cbEmployee.FormattingEnabled = true;
+            this.cbEmployee.Location = new System.Drawing.Point(471, 9);
+            this.cbEmployee.Name = "cbEmployee";
+            this.cbEmployee.Size = new System.Drawing.Size(265, 21);
+            this.cbEmployee.TabIndex = 27;
+            // 
+            // lbEmployee
+            // 
+            this.lbEmployee.AutoSize = true;
+            this.lbEmployee.Location = new System.Drawing.Point(391, 12);
+            this.lbEmployee.Name = "lbEmployee";
+            this.lbEmployee.Size = new System.Drawing.Size(74, 13);
+            this.lbEmployee.TabIndex = 28;
+            this.lbEmployee.Text = "Исполнитель";
+            // 
             // AddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(753, 529);
+            this.Controls.Add(this.lbEmployee);
+            this.Controls.Add(this.cbEmployee);
             this.Controls.Add(this.lbProject);
             this.Controls.Add(this.cbProject);
             this.Controls.Add(this.btnClearFormat);
@@ -361,6 +382,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddEdit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавить\\Изменить";
             this.Load += new System.EventHandler(this.AddEdit_Load);
             this.ResumeLayout(false);
@@ -398,5 +420,7 @@
         private System.Windows.Forms.Button btnClearFormat;
         private System.Windows.Forms.ComboBox cbProject;
         private System.Windows.Forms.Label lbProject;
+        private System.Windows.Forms.ComboBox cbEmployee;
+        private System.Windows.Forms.Label lbEmployee;
     }
 }

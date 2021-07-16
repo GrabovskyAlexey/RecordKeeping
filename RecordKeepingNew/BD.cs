@@ -32,6 +32,7 @@ namespace RecordKeeping
     {
         private String Command;
         public bool Single = true;
+        //public Int32 Employee = null;
 
         public override bool Add()
         {
@@ -41,7 +42,7 @@ namespace RecordKeeping
             {
                 return false;
             }
-            Command = "INSERT INTO Records (Direction, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReciever, " +
+            Command = "INSERT INTO Records (Direction, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReceiver, " +
                         "MailDate, Description, Files, Mark, project) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')";
             Command = String.Format(Command, Direction, MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
                 MailDate, Description, Files, Mark, Project);
@@ -189,6 +190,11 @@ namespace RecordKeeping
                 {
                     MessageBox.Show("Не найдено связанное сообщение на которое данное является ответом.");
                 }
+            }
+
+            if(this.Direction == 2)
+            {
+
             }
         }
         public override bool CheckData()

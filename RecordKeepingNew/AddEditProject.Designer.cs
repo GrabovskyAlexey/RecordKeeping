@@ -63,6 +63,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddEditProject";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Проект";
             this.Load += new System.EventHandler(this.AddEditProject_Load);
             this.ResumeLayout(false);

@@ -62,6 +62,8 @@ namespace RecordKeeping
             cbReplyTo.Items.Clear();
             cbReply.Items.AddRange(OutgoingString);
             cbReplyTo.Items.AddRange(OutgoingString);
+            lbEmployee.Visible = false;
+            cbEmployee.Visible = false;
         }
 
         private void rbOutgoing_CheckedChanged(object sender, EventArgs e)
@@ -75,6 +77,8 @@ namespace RecordKeeping
             cbReplyTo.Items.Clear();
             cbReply.Items.AddRange(IncomingString);
             cbReplyTo.Items.AddRange(IncomingString);
+            lbEmployee.Visible = true;
+            cbEmployee.Visible = true;
         }
 
         private void btnFiles_Click(object sender, EventArgs e)
@@ -96,6 +100,7 @@ namespace RecordKeeping
         {
             bool result = false;
             if (!Edit)
+                Record = new RecordBD();
                 Record.Mark = 0;
 
             if (rbIncoming.Checked)
@@ -176,6 +181,8 @@ namespace RecordKeeping
                 rbIncoming.Checked = true;
                 cbReply.AutoCompleteCustomSource = Outgoing;
                 cbReplyTo.AutoCompleteCustomSource = Outgoing;
+                lbEmployee.Visible = false;
+                cbEmployee.Visible = false;
             }
             else if (Direction == Directions.Outgoing)
             {
@@ -185,6 +192,8 @@ namespace RecordKeeping
                 rbOutgoing.Checked = true;
                 cbReply.AutoCompleteCustomSource = Incoming;
                 cbReplyTo.AutoCompleteCustomSource = Incoming;
+                lbEmployee.Visible = true;
+                cbEmployee.Visible = true;
             }
         }
         private String[] GetAutocompleteValue(Directions direct)

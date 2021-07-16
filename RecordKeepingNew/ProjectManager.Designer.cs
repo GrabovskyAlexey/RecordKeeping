@@ -123,6 +123,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ProjectManager";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Управление проектами";
             this.Load += new System.EventHandler(this.ProjectManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProject)).EndInit();

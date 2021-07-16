@@ -65,6 +65,7 @@
             this.MinimizeBox = false;
             this.Name = "frmSearch";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Поиск";
             this.ResumeLayout(false);
             this.PerformLayout();

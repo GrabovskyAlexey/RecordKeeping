@@ -25,6 +25,8 @@ namespace RecordKeeping
             {
                 if (GetDBVersion() == 1)
                     UpdateDB_1_to_2();
+                if (GetDBVersion() == 2)
+                    UpdateDB_2_to_3();
             }
         }
 
@@ -46,9 +48,11 @@ namespace RecordKeeping
 
         private static void CreateTables()
         {
-            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Records (id INTEGER PRIMARY KEY AUTOINCREMENT, Direction INT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, SenderReceiver TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL)";
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXIST Records (id INTEGER, Direction INT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, SenderReceiver TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, Employee INTEGER, PRIMARY KEY(id AUTOINCREMENT), FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL, FOREIGN KEY(Employee) REFERENCES Employee(id) ON DELETE SET NULL)";
             SqlCommand.ExecuteNonQuery();
             SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS projects (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, project_name TEXT NOT NULL)";
+            SqlCommand.ExecuteNonQuery();
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Employee (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Employee TEXT NOT NULL)";
             SqlCommand.ExecuteNonQuery();
             SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS settings(name TEXT, value TEXT)";
             SqlCommand.ExecuteNonQuery();
@@ -173,6 +177,56 @@ namespace RecordKeeping
 
         }
 
+        private static void UpdateDB_2_to_3()
+        {
+            SqlCommand = new SQLiteCommand();
+
+            if (Conncetion.State != System.Data.ConnectionState.Open)
+                Conncetion.Open();
+
+            SqlCommand.Connection = Conncetion;
+
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Employee (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Employee TEXT NOT NULL)";
+            SqlCommand.ExecuteNonQuery();
+
+            SqlCommand.CommandText = "ALTER TABLE Records RENAME TO RecordsOld";
+            SqlCommand.ExecuteNonQuery();
+
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXIST Records (id INTEGER, Direction INT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, SenderReceiver TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, Employee INTEGER, PRIMARY KEY(id AUTOINCREMENT), FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL, FOREIGN KEY(Employee) REFERENCES Employee(id) ON DELETE SET NULL)";
+            SqlCommand.ExecuteNonQuery();
+
+            SQLiteDataReader dr;
+
+            SqlCommand.CommandText = "SELECT * FROM RecordsOld";
+            dr = SqlCommand.ExecuteReader();
+
+            while (dr.Read())
+            {
+                RecordBD record = new RecordBD();
+                record.Direction = 1;
+                record.MailNumber = (string)dr["MailNumber"];
+                record.RegDate = (string)dr["RegDate"];
+                record.Title = (string)dr["Title"];
+                record.ReplyTo = (string)dr["ReplyTo"];
+                record.Reply = (string)dr["Reply"];
+                record.SenderReciever = (string)dr["Recipient"];
+                record.MailDate = (string)dr["MailDate"];
+                record.Description = (string)dr["Description"];
+                record.Files = (string)dr["Files"];
+                record.Mark = (Int32)dr["Mark"];
+                record.Project = (Int64)dr["project"];
+
+                if (!record.Add(true))
+                    break;
+            }
+            dr.Close();
+
+
+            //"ALTER TABLE Records ADD COLUMN employee_id INT"
+            //"CREATE TABLE IF NOT EXISTS Employee (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Employee TEXT NOT NULL)";
+
+
+        }
         private static void DeleteOldTables(String TableName)
         {
             SqlCommand.CommandText = "DROP TABLE IF EXISTS " + TableName;

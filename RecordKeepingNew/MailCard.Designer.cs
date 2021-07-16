@@ -202,6 +202,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MailCard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MailCard";
             this.Load += new System.EventHandler(this.MailCard_Load);
             this.gbDesc.ResumeLayout(false);

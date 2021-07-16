@@ -34,7 +34,6 @@
             this.lbStatusText = new System.Windows.Forms.Label();
             this.lbStatusName = new System.Windows.Forms.Label();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
-            this.проектыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,6 +94,9 @@
             this.btnReloadRecords = new System.Windows.Forms.Button();
             this.btnAddRecord = new System.Windows.Forms.Button();
             this.cbFilter = new System.Windows.Forms.ComboBox();
+            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.проектыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сотрудникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -137,20 +139,13 @@
             // menuStripMain
             // 
             this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.проектыToolStripMenuItem,
+            this.настройкиToolStripMenuItem,
             this.справкаToolStripMenuItem2});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Size = new System.Drawing.Size(1042, 24);
             this.menuStripMain.TabIndex = 3;
             this.menuStripMain.Text = "menuStrip1";
-            // 
-            // проектыToolStripMenuItem
-            // 
-            this.проектыToolStripMenuItem.Name = "проектыToolStripMenuItem";
-            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.проектыToolStripMenuItem.Text = "Проекты";
-            this.проектыToolStripMenuItem.Click += new System.EventHandler(this.проектыToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem2
             // 
@@ -708,6 +703,28 @@
             this.cbFilter.TabIndex = 18;
             this.cbFilter.SelectionChangeCommitted += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
             // 
+            // настройкиToolStripMenuItem
+            // 
+            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.проектыToolStripMenuItem,
+            this.сотрудникиToolStripMenuItem});
+            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.настройкиToolStripMenuItem.Text = "Настройки";
+            // 
+            // проектыToolStripMenuItem
+            // 
+            this.проектыToolStripMenuItem.Name = "проектыToolStripMenuItem";
+            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.проектыToolStripMenuItem.Text = "Проекты";
+            this.проектыToolStripMenuItem.Click += new System.EventHandler(this.проектыToolStripMenuItem_Click);
+            // 
+            // сотрудникиToolStripMenuItem
+            // 
+            this.сотрудникиToolStripMenuItem.Name = "сотрудникиToolStripMenuItem";
+            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сотрудникиToolStripMenuItem.Text = "Сотрудники";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -778,7 +795,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmYellowMark;
         private System.Windows.Forms.ToolStripMenuItem tsmGreenMark;
         private System.Windows.Forms.ToolStripMenuItem tsmBlueMark;
-        private System.Windows.Forms.ToolStripMenuItem проектыToolStripMenuItem;
         private System.Windows.Forms.ComboBox cbFilter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcIncId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcIncMailNumber;
@@ -810,6 +826,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn projectout;
         private System.Windows.Forms.DataGridViewTextBoxColumn id1out;
         private System.Windows.Forms.DataGridViewTextBoxColumn DirectionOut;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem проектыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сотрудникиToolStripMenuItem;
     }
 }
 

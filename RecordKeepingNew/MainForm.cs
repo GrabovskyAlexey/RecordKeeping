@@ -111,12 +111,12 @@ namespace RecordKeeping
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            if (dgvIncoming.Rows.Count < IncomingSelected)
+            if (dgvIncoming.Rows.Count > IncomingSelected)
             {
                 dgvIncoming.Rows[IncomingSelected].Selected = true;
                 dgvIncoming.FirstDisplayedScrollingRowIndex = IncomingSelected;
             }
-            if (dgvOutgoing.Rows.Count < OutgoingSelected)
+            if (dgvOutgoing.Rows.Count > OutgoingSelected)
             {
                 dgvOutgoing.Rows[OutgoingSelected].Selected = true;
                 dgvOutgoing.FirstDisplayedScrollingRowIndex = OutgoingSelected;

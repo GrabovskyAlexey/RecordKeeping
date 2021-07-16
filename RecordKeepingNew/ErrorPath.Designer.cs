@@ -76,6 +76,7 @@ namespace RecordKeeping
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ErrorPath";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ошибка пути";
             this.Load += new System.EventHandler(this.ErrorPath_Load);
             this.ResumeLayout(false);
