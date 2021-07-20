@@ -66,7 +66,12 @@ namespace RecordKeeping
 
         private void MailCard_Load(object sender, EventArgs e)
         {
-            if (Direction == Directions.Incoming) 
+            this.RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            if (Direction == Directions.Incoming)
             {
                 lbDirection.Text = "Входящее";
                 lbSenderReciever.Text = "Отправитель: " + SenderReciever;
@@ -76,34 +81,45 @@ namespace RecordKeeping
                 lbDirection.Text = "Исходящее";
                 lbSenderReciever.Text = "Получатель: " + SenderReciever;
             }
-            lbMailNumber.Text += MailNumber;
-            lbRegDate.Text += RegDate;
-            lbMailDate.Text += MailDate;
+            lbMailNumber.Text = "Номер письма: " + MailNumber;
+            lbRegDate.Text = "Дата регистрации: " + RegDate;
+            lbMailDate.Text = "Дата получения: " + MailDate;
             lbTitle.Text = Title;
 
-            if (ReplyTo != "") 
-                lbReplyTo.Text += ReplyTo;
+            if (ReplyTo != "")
+            {
+                lbReplyTo.Text = "Ответ на письмо: " + ReplyTo;
+                lbReplyTo.Visible = true;
+            }
             else
                 lbReplyTo.Visible = false;
 
             if (Reply != "")
-                lbReply.Text += Reply;
+            {
+                lbReply.Text = "Ответное письмо: " + Reply;
+                lbReply.Visible = true;
+            }
             else
                 lbReply.Visible = false;
 
             if (Files == "")
-            {
-
                 btnAttach.Visible = false;
-            }
+            else
+                btnAttach.Visible = true;
 
             if (ProjectName != "")
-                lbProject.Text += ProjectName;
+            {
+                lbProject.Text = "Проект: " + ProjectName;
+                lbProject.Visible = true;
+            }
             else
                 lbProject.Visible = false;
 
             if (EmployeeName != "")
-                lbEmployee.Text += EmployeeName;
+            {
+                lbEmployee.Text = "Исполнитель: " + EmployeeName;
+                lbEmployee.Visible = true;
+            }
             else
                 lbEmployee.Visible = false;
 
@@ -131,6 +147,48 @@ namespace RecordKeeping
                 error.Path = Files;
                 error.ShowDialog();
             }
+        }
+
+        private void lbReply_Click(object sender, EventArgs e)
+        {
+            long id = RecordBD.GetIdByMailNumber(Reply);
+
+            if(Form.ModifierKeys == Keys.Control)
+            {
+                MailCard newCard = new MailCard();
+                newCard.LoadData(id, ChangeDirection());
+                newCard.Show();
+            }
+            else
+            {
+                this.LoadData(id, ChangeDirection());
+                this.RefreshData();
+            }
+        }        
+
+        private void lbReplyTo_Click(object sender, EventArgs e)
+        {
+            long id = RecordBD.GetIdByMailNumber(ReplyTo);
+
+            if (Form.ModifierKeys == Keys.Control)
+            {
+                MailCard newCard = new MailCard();
+                newCard.LoadData(id, ChangeDirection());
+                newCard.Show();
+            }
+            else
+            {
+                this.LoadData(id, ChangeDirection());
+                this.RefreshData();
+            }
+        }
+        private Directions ChangeDirection()
+        {
+            if (Direction == Directions.Incoming)
+                return Directions.Outgoing;
+            else
+                return Directions.Incoming;
+
         }
     }
 }

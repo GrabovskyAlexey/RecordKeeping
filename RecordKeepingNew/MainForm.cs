@@ -295,17 +295,17 @@ namespace RecordKeeping
 
         private void tmsDelete_Click(object sender, EventArgs e)
         {
-            long id;
+            int id;
 
             if (tcMain.SelectedTab == tabIncoming)
             {
-                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 DeleteRecord(Directions.Incoming, id);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
-                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                id = (int)dgvOutgoing.CurrentRow.Cells[0].Value;
                 DeleteRecord(Directions.Outgoing, id);
             }
         }

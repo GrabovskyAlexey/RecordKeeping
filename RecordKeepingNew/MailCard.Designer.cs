@@ -95,6 +95,7 @@
             this.lbReplyTo.Size = new System.Drawing.Size(113, 15);
             this.lbReplyTo.TabIndex = 4;
             this.lbReplyTo.Text = "Ответ на письмо: ";
+            this.lbReplyTo.Click += new System.EventHandler(this.lbReplyTo_Click);
             // 
             // lbReply
             // 
@@ -105,6 +106,7 @@
             this.lbReply.Size = new System.Drawing.Size(117, 15);
             this.lbReply.TabIndex = 5;
             this.lbReply.Text = "Ответное письмо: ";
+            this.lbReply.Click += new System.EventHandler(this.lbReply_Click);
             // 
             // gbDesc
             // 

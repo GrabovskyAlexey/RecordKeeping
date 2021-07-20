@@ -54,7 +54,7 @@ namespace RecordKeeping
 
         private static void CreateTables()
         {
-            SqlCommand.CommandText = "CREATE TABLE IF NOT EXIST Records (id INTEGER, Direction INT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, SenderReceiver TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, Employee INTEGER, PRIMARY KEY(id AUTOINCREMENT), FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL, FOREIGN KEY(Employee) REFERENCES Employee(id) ON DELETE SET NULL)";
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Records (id INTEGER, Direction INT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, SenderReceiver TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, Employee INTEGER, PRIMARY KEY(id AUTOINCREMENT), FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL, FOREIGN KEY(Employee) REFERENCES Employee(id) ON DELETE SET NULL)";
             SqlCommand.ExecuteNonQuery();
             SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS projects (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, project_name TEXT NOT NULL)";
             SqlCommand.ExecuteNonQuery();

@@ -99,9 +99,25 @@ namespace RecordKeeping
             Settings.SqlCommand.CommandText = Command;
             int result = Settings.SqlCommand.ExecuteNonQuery();
             if (result > 0)
+            {
+                ClearCoonectionMail();
                 return true;
+            }
             else
                 return false;
+        }
+
+        private void ClearCoonectionMail()
+        {
+            Command = "UPDATE Records SET Reply='' WHERE Reply like '{0}'";
+            Command = String.Format(Command, MailNumber);
+            Settings.SqlCommand.CommandText = Command;
+            Settings.SqlCommand.ExecuteNonQuery();
+
+            Command = "UPDATE Records SET ReplyTo='' WHERE ReplyTo like '{0}'";
+            Command = String.Format(Command, MailNumber);
+            Settings.SqlCommand.CommandText = Command;
+            Settings.SqlCommand.ExecuteNonQuery();
         }
 
         public override void Load(long Id)
@@ -223,6 +239,18 @@ namespace RecordKeeping
             {
                 return true;
             }
+        }
+
+        public static long GetIdByMailNumber(String MailNumber)
+        {
+            SQLiteCommand reader = new SQLiteCommand();
+            reader.Connection = Settings.Conncetion;
+            String Command = "SELECT * FROM Records WHERE MailNumber LIKE '{0}'";
+            Command = String.Format(Command, MailNumber);
+            reader.CommandText = Command;
+            SQLiteDataReader rec = reader.ExecuteReader();
+            rec.Read();
+            return (long)rec["Id"];
         }
     }
 
