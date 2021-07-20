@@ -90,7 +90,7 @@ namespace RecordKeeping
             
             try
             {
-                sqlQuery = "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project" + FilterQueryInc;
+                sqlQuery = "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project " + FilterQueryInc;
                 
                 SQLiteDataAdapter adapterIncoming = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterIncoming.Fill(dTableInc);
@@ -98,7 +98,7 @@ namespace RecordKeeping
                 
                 dgvIncoming.DataSource = dTableInc.DefaultView;
                                 
-                sqlQuery = "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project" + FilterQueryOut;
+                sqlQuery = "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project LEFT JOIN Employee em ON em.id = p.Employee" + FilterQueryOut;
                 SQLiteDataAdapter adapterOutgoing = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterOutgoing.Fill(dTableOut);
                 dTableOut.DefaultView.Sort = "RegDate ASC";
@@ -229,12 +229,12 @@ namespace RecordKeeping
             if (tcMain.SelectedTab == tabIncoming)
             {
                 row = dgvIncoming.CurrentRow;
-                card.LoadData((long)row.Cells[0].Value, Directions.Incoming);
+                card.LoadData((Int32)row.Cells[0].Value, Directions.Incoming);
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 row = dgvOutgoing.CurrentRow;
-                card.LoadData((long)row.Cells[0].Value, Directions.Outgoing);
+                card.LoadData((Int32)row.Cells[0].Value, Directions.Outgoing);
             }
             card.ShowDialog();
             this.ReloadData();
@@ -263,7 +263,7 @@ namespace RecordKeeping
                 Index = row.Index;
                 direction = Directions.Outgoing;
             }
-            Record.Load((long)row.Cells[0].Value);
+            Record.Load((int)row.Cells[0].Value);
             AddEdit edit = new AddEdit();
             edit.Edit = true;
             edit.LoadData(Record, direction);
@@ -376,6 +376,10 @@ namespace RecordKeeping
             colId.DataType = System.Type.GetType("System.Int64");
             columnList.Add(project);
 
+            DataColumn Employee = new DataColumn("Employee");
+            colId.DataType = System.Type.GetType("System.Int32");
+            columnList.Add(Employee);
+
             return columnList.ToArray();
         }
 
@@ -388,8 +392,7 @@ namespace RecordKeeping
 
             File.Copy("db.sqlite", backupFileName);
 
-            Settings.SaveSettings();
-            
+            Settings.SaveSettings();            
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -597,6 +600,12 @@ namespace RecordKeeping
                 Filtered = false;
             }
             ReloadData();
+        }
+
+        private void сотрудникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmployeeManager manager = new EmployeeManager();
+            manager.ShowDialog();
         }
     }
 }

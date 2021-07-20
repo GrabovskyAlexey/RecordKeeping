@@ -17,6 +17,7 @@ namespace RecordKeeping
         public String Description { get; set; }
         public String Files { get; set; }
         public String ProjectName { get; set; }
+        public String EmployeeName { get; set; }
         public Directions Direction { get; set; }
         private MailBD Record { get; set; }
         public MailCard()
@@ -27,6 +28,7 @@ namespace RecordKeeping
         public void LoadData(Int64 RecordId, Directions direct)
         {
             ProjectName = "";
+            EmployeeName = "";
             Record = new RecordBD();
             Record.Load(RecordId);
             if (direct == Directions.Incoming)
@@ -52,6 +54,12 @@ namespace RecordKeeping
                 ProjectBD project = new ProjectBD();
                 project.Load(Record.Project);
                 ProjectName = project.project_name;
+            }
+            if (Record.Employee != 0)
+            {
+                EmployeeBD employee = new EmployeeBD();
+                employee.Load(Record.Project);
+                EmployeeName = employee.employee_name;
             }
             Direction = direct;
         }
@@ -93,6 +101,11 @@ namespace RecordKeeping
                 lbProject.Text += ProjectName;
             else
                 lbProject.Visible = false;
+
+            if (EmployeeName != "")
+                lbEmployee.Text += EmployeeName;
+            else
+                lbEmployee.Visible = false;
 
             tbDescription.Text = Description;
         }

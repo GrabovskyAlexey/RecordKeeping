@@ -42,6 +42,7 @@
             this.lbTitle = new System.Windows.Forms.Label();
             this.lbProject = new System.Windows.Forms.Label();
             this.btnAttach = new System.Windows.Forms.Button();
+            this.lbEmployee = new System.Windows.Forms.Label();
             this.gbDesc.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -180,11 +181,21 @@
             this.btnAttach.UseVisualStyleBackColor = true;
             this.btnAttach.Click += new System.EventHandler(this.btnAttach_Click);
             // 
+            // lbEmployee
+            // 
+            this.lbEmployee.AutoSize = true;
+            this.lbEmployee.Location = new System.Drawing.Point(270, 143);
+            this.lbEmployee.Name = "lbEmployee";
+            this.lbEmployee.Size = new System.Drawing.Size(80, 13);
+            this.lbEmployee.TabIndex = 13;
+            this.lbEmployee.Text = "Исполнитель: ";
+            // 
             // MailCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(710, 543);
+            this.Controls.Add(this.lbEmployee);
             this.Controls.Add(this.btnAttach);
             this.Controls.Add(this.lbProject);
             this.Controls.Add(this.lbTitle);
@@ -227,5 +238,6 @@
         private System.Windows.Forms.Label lbTitle;
         private System.Windows.Forms.Label lbProject;
         private System.Windows.Forms.Button btnAttach;
+        private System.Windows.Forms.Label lbEmployee;
     }
 }

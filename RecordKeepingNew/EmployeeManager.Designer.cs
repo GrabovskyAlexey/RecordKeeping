@@ -72,6 +72,7 @@ namespace RecordKeeping
             this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -82,6 +83,7 @@ namespace RecordKeeping
             this.btnEdit.TabIndex = 5;
             this.btnEdit.Text = "Изменить";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -92,10 +94,11 @@ namespace RecordKeeping
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // dgvEmployeeName
             // 
-            this.dgvEmployeeName.DataPropertyName = "Employee";
+            this.dgvEmployeeName.DataPropertyName = "employee_name";
             this.dgvEmployeeName.HeaderText = "Сотрудник";
             this.dgvEmployeeName.Name = "dgvEmployeeName";
             this.dgvEmployeeName.ReadOnly = true;
@@ -123,6 +126,7 @@ namespace RecordKeeping
             this.Name = "EmployeeManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Сотрудники";
+            this.Load += new System.EventHandler(this.EmployeeManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).EndInit();
             this.ResumeLayout(false);
 
@@ -131,10 +135,10 @@ namespace RecordKeeping
         #endregion
 
         private System.Windows.Forms.DataGridView dgvEmployee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvEmployeeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvEmployeeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
     }
 }

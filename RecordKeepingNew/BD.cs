@@ -9,7 +9,7 @@ namespace RecordKeeping
         public abstract bool Update();
         public abstract bool Delete();
         public abstract bool Add();
-        public abstract bool Add(bool UpdateDb);
+        public abstract bool Add(bool UpdateDb, Int32 version);
         public abstract void Load(Int64 Id);
         public abstract bool CheckData();
         public Int64 Id { get; set; }
@@ -25,14 +25,14 @@ namespace RecordKeeping
         public String Files { get; set; }
         public int Mark { get; set; }
         public long Project { get; set; }
+        public Int64 Employee { get; set; }
 
-    }
+}
 
     class RecordBD : MailBD
     {
         private String Command;
         public bool Single = true;
-        //public Int32 Employee = null;
 
         public override bool Add()
         {
@@ -43,9 +43,9 @@ namespace RecordKeeping
                 return false;
             }
             Command = "INSERT INTO Records (Direction, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReceiver, " +
-                        "MailDate, Description, Files, Mark, project) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')";
+                        "MailDate, Description, Files, Mark, project, Employee) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}')";
             Command = String.Format(Command, Direction, MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
-                MailDate, Description, Files, Mark, Project);
+                MailDate, Description, Files, Mark, Project, Employee);
 
 
             sqlc.CommandText = Command;
@@ -58,7 +58,7 @@ namespace RecordKeeping
                 return false;
         }
 
-        public override bool Add(bool UpdateDb)
+        public override bool Add(bool UpdateDb, Int32 version)
         {
             SQLiteCommand sqlc = new SQLiteCommand();
             sqlc.Connection = Settings.Conncetion;
@@ -66,10 +66,22 @@ namespace RecordKeeping
             {
                 return false;
             }
-            Command = "INSERT INTO Records (Direction, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReceiver, " +
-                        "MailDate, Description, Files, Mark, project) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')";
-            Command = String.Format(Command, Direction, MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
-                MailDate, Description, Files, Mark, Project);
+
+            if (version == 2)
+            {
+                Command = "INSERT INTO Records (Direction, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReceiver, " +
+                            "MailDate, Description, Files, Mark, project) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')";
+                Command = String.Format(Command, Direction, MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
+                    MailDate, Description, Files, Mark, Project);
+            } else if (version == 3)
+            {
+                Command = "INSERT INTO Records (Direction, MailNumber, RegDate, Title, ReplyTo, Reply, SenderReceiver, " +
+                            "MailDate, Description, Files, Mark, project, Employee) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', {12})";
+                Command = String.Format(Command, Direction, MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
+                    MailDate, Description, Files, Mark, Project, Employee);
+            }
+            else
+                return false;
 
 
             sqlc.CommandText = Command;
@@ -117,6 +129,10 @@ namespace RecordKeeping
                 Project = (long)rec["project"];
             else
                 Project = 0;
+            if (rec["Employee"].GetType() != typeof(DBNull))
+                Employee = (long)rec["Employee"];
+            else
+                Employee = 0;
         }
 
         public override bool Update()
@@ -128,9 +144,9 @@ namespace RecordKeeping
             SQLiteCommand sqlc = new SQLiteCommand();
             sqlc.Connection = Settings.Conncetion;
             Command = "UPDATE Records SET Direction = '{12}', MailNumber = '{0}', RegDate = '{1}', Title = '{2}', ReplyTo = '{3}', Reply = '{4}', SenderReceiver = '{5}', " +
-                        "MailDate = '{6}', Description = '{7}', Files = '{8}', Mark = '{9}', project = '{10}' WHERE Id = '{11}'";
+                        "MailDate = '{6}', Description = '{7}', Files = '{8}', Mark = '{9}', project = '{10}', Employee ='{13}' WHERE Id = '{11}'";
             Command = String.Format(Command, MailNumber.Trim(), RegDate, Title.Trim(), ReplyTo.Trim(), Reply.Trim(), SenderReciever.Trim(),
-                MailDate, Description, Files, Mark, Project, Id, Direction.ToString());
+                MailDate, Description, Files, Mark, Project, Id, Direction.ToString(), Employee);
 
             sqlc.CommandText = Command;
             if (this.Single)
@@ -260,11 +276,7 @@ namespace RecordKeeping
             int result = Settings.SqlCommand.ExecuteNonQuery();
             if (result > 0)
             {
-                Command = String.Format("UPDATE Outgoing SET project='' WHERE project={0}", Id);
-                Settings.SqlCommand.CommandText = Command;
-                Settings.SqlCommand.ExecuteNonQuery();
-
-                Command = String.Format("UPDATE Incoming SET project='' WHERE project={0}", Id);
+                Command = String.Format("UPDATE Records SET project='' WHERE project={0}", Id);
                 Settings.SqlCommand.CommandText = Command;
                 Settings.SqlCommand.ExecuteNonQuery();
                 return true;
@@ -284,6 +296,79 @@ namespace RecordKeeping
             rec.Read();
             this.Id = (long)rec["Id"];
             project_name = (String)rec["project_name"];
+        }
+    }
+
+    class Employee
+    {
+        public string Name { get; set; }
+        public long Value { get; set; }
+    }
+
+    class EmployeeBD
+    {
+        private String Command;
+        public String employee_name { get; set; }
+        public Int64 Id { get; set; }
+
+        public bool Add()
+        {
+            SQLiteCommand sqlc = new SQLiteCommand();
+            sqlc.Connection = Settings.Conncetion;
+            Command = "INSERT INTO Employee (employee_name) values ('{0}')";
+            Command = String.Format(Command, employee_name.Trim());
+
+            sqlc.CommandText = Command;
+            int result = sqlc.ExecuteNonQuery();
+            if (result > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool Update()
+        {
+            SQLiteCommand sqlc = new SQLiteCommand();
+            sqlc.Connection = Settings.Conncetion;
+            Command = "UPDATE Employee SET employee_name='{0}' WHERE id={1}";
+            Command = String.Format(Command, employee_name.Trim(), Id);
+
+            sqlc.CommandText = Command;
+            int result = sqlc.ExecuteNonQuery();
+            if (result > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool Delete()
+        {
+            Command = "DELETE FROM Employee WHERE Id = {0}";
+            Command = String.Format(Command, Id);
+            Settings.SqlCommand.CommandText = Command;
+            int result = Settings.SqlCommand.ExecuteNonQuery();
+            if (result > 0)
+            {
+                Command = String.Format("UPDATE Records SET Employee='' WHERE project={0}", Id);
+                Settings.SqlCommand.CommandText = Command;
+                Settings.SqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public void Load(Int64 Id)
+        {
+            SQLiteCommand reader = new SQLiteCommand();
+            reader.Connection = Settings.Conncetion;
+            Command = "SELECT * FROM Employee WHERE Id = {0}";
+            Command = String.Format(Command, Id);
+            reader.CommandText = Command;
+            SQLiteDataReader rec = reader.ExecuteReader();
+            rec.Read();
+            this.Id = (long)rec["Id"];
+            employee_name = (String)rec["employee_name"];
         }
     }
 }

@@ -26,6 +26,7 @@ namespace RecordKeeping
         private String[] OutgoingString { get; set; }
 
         private int project_id { get; set; }
+        private int employee_id { get; set; }
 
         public MailBD Record { get; set; }
 
@@ -49,6 +50,7 @@ namespace RecordKeeping
             tbDescription.Text = Record.Description;
             tbFiles.Text = Record.Files;
             this.project_id = (int)Record.Project;
+            this.employee_id = (int)Record.Employee;
         }
 
         private void rbIncoming_CheckedChanged(object sender, EventArgs e)
@@ -118,6 +120,7 @@ namespace RecordKeeping
             Record.Description = tbDescription.Text;
             Record.Files = tbFiles.Text;
             Record.Project = (long)cbProject.SelectedValue;
+            Record.Employee = (long)cbEmployee.SelectedValue;
             if (!Record.CheckData())
             {
                 MessageBox.Show("Заполненны не все обязательные поля", "Проверка данных", MessageBoxButtons.OK);
@@ -152,13 +155,21 @@ namespace RecordKeeping
             IncomingString = GetAutocompleteValue(Directions.Incoming);
             OutgoingString = GetAutocompleteValue(Directions.Outgoing);
 
-            var dataSource = GetAutocompleteProject();
+            var projectSource = GetAutocompleteProject();
+            var employeeSource = GetAutocompleteEmployee();
 
-            this.cbProject.DataSource = dataSource;
+            this.cbProject.DataSource = projectSource;
             this.cbProject.DisplayMember = "Name";
             this.cbProject.ValueMember = "Value";
             this.cbProject.DropDownStyle = ComboBoxStyle.DropDownList;
             this.cbProject.SelectedValue = (long)project_id;
+
+            this.cbEmployee.DataSource = employeeSource;
+            this.cbEmployee.DisplayMember = "Name";
+            this.cbEmployee.ValueMember = "Value";
+            this.cbEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cbEmployee.SelectedValue = (long)employee_id;
+
             Incoming.AddRange(IncomingString);
             Outgoing.AddRange(OutgoingString);
             if (Settings.LastSelectDirectory != null)
@@ -229,6 +240,21 @@ namespace RecordKeeping
             return temp_list;
         }
 
+        private List<Employee> GetAutocompleteEmployee()
+        {
+            List<Employee> temp_list = new List<Employee>();
+            SQLiteCommand reader = new SQLiteCommand();
+            reader.Connection = Settings.Conncetion;
+            reader.CommandText = "SELECT id, employee_name FROM Employee";
+            SQLiteDataReader rec = reader.ExecuteReader();
+            temp_list.Add(new Employee() { Name = "", Value = 0 });
+            while (rec.Read())
+            {
+                temp_list.Add(new Employee() { Name = (String)rec["employee_name"], Value = (long)rec["id"] });
+            }
+            return temp_list;
+        }
+
         private Project GetProjectById(long id) 
         {
             SQLiteCommand reader = new SQLiteCommand();
@@ -239,6 +265,18 @@ namespace RecordKeeping
             SQLiteDataReader rec = reader.ExecuteReader();
             rec.Read();
             return new Project() { Name = (String)rec["project_name"], Value = (long)rec["id"] };
+        }
+
+        private Employee GetEmployeeById(long id)
+        {
+            SQLiteCommand reader = new SQLiteCommand();
+            reader.Connection = Settings.Conncetion;
+            String Command = "SELECT id, employee_name FROM employee WHERE id='{0}'";
+            Command = String.Format(Command, id);
+            reader.CommandText = Command;
+            SQLiteDataReader rec = reader.ExecuteReader();
+            rec.Read();
+            return new Employee() { Name = (String)rec["employee_name"], Value = (long)rec["id"] };
         }
 
         private void btnClearFormat_Click(object sender, EventArgs e)

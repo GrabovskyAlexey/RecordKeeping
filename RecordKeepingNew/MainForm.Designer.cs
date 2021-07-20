@@ -34,6 +34,9 @@
             this.lbStatusText = new System.Windows.Forms.Label();
             this.lbStatusName = new System.Windows.Forms.Label();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
+            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.проектыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сотрудникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +59,7 @@
             this.id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Employee_hide = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmsPKM = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,21 +71,6 @@
             this.tsmBlueMark = new System.Windows.Forms.ToolStripMenuItem();
             this.tabOutgoing = new System.Windows.Forms.TabPage();
             this.dgvOutgoing = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcOutTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcOutMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvOutProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.projectout = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id1out = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DirectionOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.справкаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,9 +83,24 @@
             this.btnReloadRecords = new System.Windows.Forms.Button();
             this.btnAddRecord = new System.Windows.Forms.Button();
             this.cbFilter = new System.Windows.Forms.ComboBox();
-            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.проектыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сотрудникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcOutTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Employee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcOutMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvOutProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DirectionOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projectout = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id1out = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -146,6 +150,29 @@
             this.menuStripMain.Size = new System.Drawing.Size(1042, 24);
             this.menuStripMain.TabIndex = 3;
             this.menuStripMain.Text = "menuStrip1";
+            // 
+            // настройкиToolStripMenuItem
+            // 
+            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.проектыToolStripMenuItem,
+            this.сотрудникиToolStripMenuItem});
+            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.настройкиToolStripMenuItem.Text = "Настройки";
+            // 
+            // проектыToolStripMenuItem
+            // 
+            this.проектыToolStripMenuItem.Name = "проектыToolStripMenuItem";
+            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.проектыToolStripMenuItem.Text = "Проекты";
+            this.проектыToolStripMenuItem.Click += new System.EventHandler(this.проектыToolStripMenuItem_Click);
+            // 
+            // сотрудникиToolStripMenuItem
+            // 
+            this.сотрудникиToolStripMenuItem.Name = "сотрудникиToolStripMenuItem";
+            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.сотрудникиToolStripMenuItem.Text = "Сотрудники";
+            this.сотрудникиToolStripMenuItem.Click += new System.EventHandler(this.сотрудникиToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem2
             // 
@@ -226,7 +253,8 @@
             this.dgvIncProject,
             this.id1,
             this.project,
-            this.Direction});
+            this.Direction,
+            this.Employee_hide});
             this.dgvIncoming.ContextMenuStrip = this.cmsPKM;
             this.dgvIncoming.Location = new System.Drawing.Point(0, 0);
             this.dgvIncoming.MultiSelect = false;
@@ -351,6 +379,14 @@
             this.Direction.ReadOnly = true;
             this.Direction.Visible = false;
             // 
+            // Employee_hide
+            // 
+            this.Employee_hide.DataPropertyName = "Employee";
+            this.Employee_hide.HeaderText = "Employee";
+            this.Employee_hide.Name = "Employee_hide";
+            this.Employee_hide.ReadOnly = true;
+            this.Employee_hide.Visible = false;
+            // 
             // cmsPKM
             // 
             this.cmsPKM.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -453,14 +489,17 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
+            this.Employee,
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9,
             this.dgvcOutMark,
             this.dgvOutProject,
+            this.DirectionOut,
             this.projectout,
             this.id1out,
-            this.DirectionOut});
+            this.Column1,
+            this.Column2});
             this.dgvOutgoing.ContextMenuStrip = this.cmsPKM;
             this.dgvOutgoing.Location = new System.Drawing.Point(0, 0);
             this.dgvOutgoing.MultiSelect = false;
@@ -471,119 +510,6 @@
             this.dgvOutgoing.Size = new System.Drawing.Size(1031, 474);
             this.dgvOutgoing.TabIndex = 2;
             this.dgvOutgoing.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tsmView_Click);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "№";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            this.dataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "MailNumber";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Номер письма";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "RegDate";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Дата регистрации";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dgvcOutTitle
-            // 
-            this.dgvcOutTitle.DataPropertyName = "Title";
-            this.dgvcOutTitle.HeaderText = "Тема";
-            this.dgvcOutTitle.Name = "dgvcOutTitle";
-            this.dgvcOutTitle.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "ReplyTo";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Ответ на письмо";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Reply";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Ответное письмо";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "SenderReceiver";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Получатель";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "MailDate";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Дата получения";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Description";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Описание";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "Files";
-            this.dataGridViewTextBoxColumn9.HeaderText = "Файлы";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dgvcOutMark
-            // 
-            this.dgvcOutMark.DataPropertyName = "Mark";
-            this.dgvcOutMark.HeaderText = "mark";
-            this.dgvcOutMark.Name = "dgvcOutMark";
-            this.dgvcOutMark.ReadOnly = true;
-            this.dgvcOutMark.Visible = false;
-            // 
-            // dgvOutProject
-            // 
-            this.dgvOutProject.DataPropertyName = "project_name";
-            this.dgvOutProject.HeaderText = "Проект";
-            this.dgvOutProject.Name = "dgvOutProject";
-            this.dgvOutProject.ReadOnly = true;
-            // 
-            // projectout
-            // 
-            this.projectout.DataPropertyName = "project";
-            this.projectout.HeaderText = "Column1";
-            this.projectout.Name = "projectout";
-            this.projectout.ReadOnly = true;
-            this.projectout.Visible = false;
-            // 
-            // id1out
-            // 
-            this.id1out.DataPropertyName = "id1";
-            this.id1out.HeaderText = "Column1";
-            this.id1out.Name = "id1out";
-            this.id1out.ReadOnly = true;
-            this.id1out.Visible = false;
-            // 
-            // DirectionOut
-            // 
-            this.DirectionOut.DataPropertyName = "Direction";
-            this.DirectionOut.HeaderText = "Direction";
-            this.DirectionOut.Name = "DirectionOut";
-            this.DirectionOut.ReadOnly = true;
-            this.DirectionOut.Visible = false;
             // 
             // справкаToolStripMenuItem1
             // 
@@ -703,27 +629,141 @@
             this.cbFilter.TabIndex = 18;
             this.cbFilter.SelectionChangeCommitted += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
             // 
-            // настройкиToolStripMenuItem
+            // dataGridViewTextBoxColumn1
             // 
-            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.проектыToolStripMenuItem,
-            this.сотрудникиToolStripMenuItem});
-            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
-            this.настройкиToolStripMenuItem.Text = "Настройки";
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "№";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 50;
             // 
-            // проектыToolStripMenuItem
+            // dataGridViewTextBoxColumn2
             // 
-            this.проектыToolStripMenuItem.Name = "проектыToolStripMenuItem";
-            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.проектыToolStripMenuItem.Text = "Проекты";
-            this.проектыToolStripMenuItem.Click += new System.EventHandler(this.проектыToolStripMenuItem_Click);
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "MailNumber";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Номер письма";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // сотрудникиToolStripMenuItem
+            // dataGridViewTextBoxColumn3
             // 
-            this.сотрудникиToolStripMenuItem.Name = "сотрудникиToolStripMenuItem";
-            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.сотрудникиToolStripMenuItem.Text = "Сотрудники";
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "RegDate";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Дата регистрации";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dgvcOutTitle
+            // 
+            this.dgvcOutTitle.DataPropertyName = "Title";
+            this.dgvcOutTitle.HeaderText = "Тема";
+            this.dgvcOutTitle.Name = "dgvcOutTitle";
+            this.dgvcOutTitle.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "ReplyTo";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ответ на письмо";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Reply";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Ответное письмо";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "SenderReceiver";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Получатель";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // Employee
+            // 
+            this.Employee.DataPropertyName = "employee_name";
+            this.Employee.HeaderText = "Исполнитель";
+            this.Employee.Name = "Employee";
+            this.Employee.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "MailDate";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Дата получения";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Описание";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "Files";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Файлы";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dgvcOutMark
+            // 
+            this.dgvcOutMark.DataPropertyName = "Mark";
+            this.dgvcOutMark.HeaderText = "mark";
+            this.dgvcOutMark.Name = "dgvcOutMark";
+            this.dgvcOutMark.ReadOnly = true;
+            this.dgvcOutMark.Visible = false;
+            // 
+            // dgvOutProject
+            // 
+            this.dgvOutProject.DataPropertyName = "project_name";
+            this.dgvOutProject.HeaderText = "Проект";
+            this.dgvOutProject.Name = "dgvOutProject";
+            this.dgvOutProject.ReadOnly = true;
+            // 
+            // DirectionOut
+            // 
+            this.DirectionOut.DataPropertyName = "Direction";
+            this.DirectionOut.HeaderText = "Direction";
+            this.DirectionOut.Name = "DirectionOut";
+            this.DirectionOut.ReadOnly = true;
+            this.DirectionOut.Visible = false;
+            // 
+            // projectout
+            // 
+            this.projectout.DataPropertyName = "project";
+            this.projectout.HeaderText = "Column1";
+            this.projectout.Name = "projectout";
+            this.projectout.ReadOnly = true;
+            this.projectout.Visible = false;
+            // 
+            // id1out
+            // 
+            this.id1out.DataPropertyName = "id1";
+            this.id1out.HeaderText = "Column1";
+            this.id1out.Name = "id1out";
+            this.id1out.ReadOnly = true;
+            this.id1out.Visible = false;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "id2";
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Employee";
+            this.Column2.HeaderText = "Column2";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Visible = false;
             // 
             // MainForm
             // 
@@ -796,6 +836,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmGreenMark;
         private System.Windows.Forms.ToolStripMenuItem tsmBlueMark;
         private System.Windows.Forms.ComboBox cbFilter;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem проектыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сотрудникиToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcIncId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcIncMailNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcIncRegDate;
@@ -811,6 +854,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn id1;
         private System.Windows.Forms.DataGridViewTextBoxColumn project;
         private System.Windows.Forms.DataGridViewTextBoxColumn Direction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Employee_hide;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -818,17 +862,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Employee;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcOutMark;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvOutProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DirectionOut;
         private System.Windows.Forms.DataGridViewTextBoxColumn projectout;
         private System.Windows.Forms.DataGridViewTextBoxColumn id1out;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DirectionOut;
-        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem проектыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сотрудникиToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }
 

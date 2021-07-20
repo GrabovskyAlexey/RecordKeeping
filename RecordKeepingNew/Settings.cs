@@ -12,7 +12,7 @@ namespace RecordKeeping
         public static SQLiteCommand SqlCommand { get; set; }
         public static String LastSelectDirectory { get; set; }
         private static String dbFileName = "db.sqlite";
-        private static Int32 CurrentDBVersion = 2;
+        private static Int32 CurrentDBVersion = 3;
         private static bool NewDB = false;
 
         public static void Load()
@@ -21,12 +21,18 @@ namespace RecordKeeping
             CreateConnection();
             if (NewDB)
                 CreateTables();
-            else if (!CheckDBVersion())
+            while(!CheckDBVersion())
             {
                 if (GetDBVersion() == 1)
+                {
                     UpdateDB_1_to_2();
+                    continue;
+                }
                 if (GetDBVersion() == 2)
+                {
                     UpdateDB_2_to_3();
+                    continue;
+                }
             }
         }
 
@@ -52,7 +58,7 @@ namespace RecordKeeping
             SqlCommand.ExecuteNonQuery();
             SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS projects (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, project_name TEXT NOT NULL)";
             SqlCommand.ExecuteNonQuery();
-            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Employee (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Employee TEXT NOT NULL)";
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Employee (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, employee_name TEXT NOT NULL)";
             SqlCommand.ExecuteNonQuery();
             SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS settings(name TEXT, value TEXT)";
             SqlCommand.ExecuteNonQuery();
@@ -141,7 +147,7 @@ namespace RecordKeeping
                 record.Mark = (Int32)dr["Mark"];
                 record.Project = (Int64)dr["project"];
 
-                if (!record.Add(true))
+                if (!record.Add(true, 2))
                     break;
             }
             dr.Close();
@@ -165,7 +171,7 @@ namespace RecordKeeping
                 record.Mark = (Int32)dr["Mark"];
                 record.Project = (Int64)dr["project"];
 
-                if (!record.Add(true))
+                if (!record.Add(true, 2))
                     break;
             }
             dr.Close();
@@ -186,13 +192,13 @@ namespace RecordKeeping
 
             SqlCommand.Connection = Conncetion;
 
-            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Employee (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Employee TEXT NOT NULL)";
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Employee (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, employee_name TEXT NOT NULL)";
             SqlCommand.ExecuteNonQuery();
 
             SqlCommand.CommandText = "ALTER TABLE Records RENAME TO RecordsOld";
             SqlCommand.ExecuteNonQuery();
 
-            SqlCommand.CommandText = "CREATE TABLE IF NOT EXIST Records (id INTEGER, Direction INT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, SenderReceiver TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, Employee INTEGER, PRIMARY KEY(id AUTOINCREMENT), FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL, FOREIGN KEY(Employee) REFERENCES Employee(id) ON DELETE SET NULL)";
+            SqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS Records (id INTEGER, Direction INT, MailNumber TEXT, RegDate TEXT, Title TEXT, ReplyTo TEXT, Reply TEXT, SenderReceiver TEXT, MailDate TEXT, Description TEXT, Files TEXT, Mark INT, project INTEGER, Employee INTEGER, PRIMARY KEY(id AUTOINCREMENT), FOREIGN KEY(project) REFERENCES projects(id) ON DELETE SET NULL, FOREIGN KEY(Employee) REFERENCES Employee(id) ON DELETE SET NULL)";
             SqlCommand.ExecuteNonQuery();
 
             SQLiteDataReader dr;
@@ -203,30 +209,29 @@ namespace RecordKeeping
             while (dr.Read())
             {
                 RecordBD record = new RecordBD();
-                record.Direction = 1;
+                record.Direction = (Int32)dr["Direction"];
                 record.MailNumber = (string)dr["MailNumber"];
                 record.RegDate = (string)dr["RegDate"];
                 record.Title = (string)dr["Title"];
                 record.ReplyTo = (string)dr["ReplyTo"];
                 record.Reply = (string)dr["Reply"];
-                record.SenderReciever = (string)dr["Recipient"];
+                record.SenderReciever = (string)dr["SenderReceiver"];
                 record.MailDate = (string)dr["MailDate"];
                 record.Description = (string)dr["Description"];
                 record.Files = (string)dr["Files"];
                 record.Mark = (Int32)dr["Mark"];
                 record.Project = (Int64)dr["project"];
 
-                if (!record.Add(true))
+                if (!record.Add(true, 3))
                     break;
             }
             dr.Close();
 
+            DeleteOldTables("RecordsOld");
 
-            //"ALTER TABLE Records ADD COLUMN employee_id INT"
-            //"CREATE TABLE IF NOT EXISTS Employee (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Employee TEXT NOT NULL)";
-
-
+            SetDBVersion(3);
         }
+
         private static void DeleteOldTables(String TableName)
         {
             SqlCommand.CommandText = "DROP TABLE IF EXISTS " + TableName;
