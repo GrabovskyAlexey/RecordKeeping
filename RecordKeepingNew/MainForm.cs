@@ -247,23 +247,23 @@ namespace RecordKeeping
 
         private void Edit()
         {
-            DataGridViewRow row = new DataGridViewRow();
+            DataGridViewSelectedRowCollection rows = dgvIncoming.SelectedRows;
             MailBD Record = new RecordBD();
             Directions direction = new Directions();
             int Index = 0;
             if (tcMain.SelectedTab == tabIncoming)
             {
-                row = dgvIncoming.CurrentRow;
-                Index = row.Index;
+                rows = dgvIncoming.SelectedRows;
+                Index = rows[0].Index;
                 direction = Directions.Incoming;
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
-                row = dgvOutgoing.CurrentRow;
-                Index = row.Index;
+                rows = dgvOutgoing.SelectedRows;
+                Index = rows[0].Index;
                 direction = Directions.Outgoing;
             }
-            Record.Load((int)row.Cells[0].Value);
+            Record.Load((int)rows[0].Cells[0].Value);
             AddEdit edit = new AddEdit();
             edit.Edit = true;
             edit.LoadData(Record, direction);
