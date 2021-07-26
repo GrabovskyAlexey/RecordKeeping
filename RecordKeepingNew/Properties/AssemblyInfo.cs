@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("RecordKeeping")]
-[assembly: AssemblyCopyright("Copyright ©CrazyEzh  2020")]
+[assembly: AssemblyCopyright("Copyright ©CrazyEzh 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.*")]
+[assembly: AssemblyVersion("2.0.*")]
 #pragma warning disable CS7035 // Указанная строка версии не соответствует рекомендованному формату — основной номер.дополнительный номер.сборка.редакция
-[assembly: AssemblyFileVersion("1.1.*")]
+[assembly: AssemblyFileVersion("2.0.*")]
 #pragma warning restore CS7035 // Указанная строка версии не соответствует рекомендованному формату — основной номер.дополнительный номер.сборка.редакция

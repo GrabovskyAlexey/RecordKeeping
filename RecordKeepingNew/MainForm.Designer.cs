@@ -71,18 +71,6 @@
             this.tsmBlueMark = new System.Windows.Forms.ToolStripMenuItem();
             this.tabOutgoing = new System.Windows.Forms.TabPage();
             this.dgvOutgoing = new System.Windows.Forms.DataGridView();
-            this.справкаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.btnReloadRecords = new System.Windows.Forms.Button();
-            this.btnAddRecord = new System.Windows.Forms.Button();
-            this.cbFilter = new System.Windows.Forms.ComboBox();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,6 +89,21 @@
             this.id1out = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.справкаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnReloadRecords = new System.Windows.Forms.Button();
+            this.btnAddRecord = new System.Windows.Forms.Button();
+            this.cbFilter = new System.Windows.Forms.ComboBox();
+            this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -144,7 +147,8 @@
             // 
             this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.настройкиToolStripMenuItem,
-            this.справкаToolStripMenuItem2});
+            this.справкаToolStripMenuItem2,
+            this.systemToolStripMenuItem});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Size = new System.Drawing.Size(1042, 24);
@@ -163,14 +167,14 @@
             // проектыToolStripMenuItem
             // 
             this.проектыToolStripMenuItem.Name = "проектыToolStripMenuItem";
-            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.проектыToolStripMenuItem.Text = "Проекты";
             this.проектыToolStripMenuItem.Click += new System.EventHandler(this.проектыToolStripMenuItem_Click);
             // 
             // сотрудникиToolStripMenuItem
             // 
             this.сотрудникиToolStripMenuItem.Name = "сотрудникиToolStripMenuItem";
-            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сотрудникиToolStripMenuItem.Text = "Сотрудники";
             this.сотрудникиToolStripMenuItem.Click += new System.EventHandler(this.сотрудникиToolStripMenuItem_Click);
             // 
@@ -511,124 +515,6 @@
             this.dgvOutgoing.TabIndex = 2;
             this.dgvOutgoing.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tsmView_Click);
             // 
-            // справкаToolStripMenuItem1
-            // 
-            this.справкаToolStripMenuItem1.Name = "справкаToolStripMenuItem1";
-            this.справкаToolStripMenuItem1.Size = new System.Drawing.Size(65, 20);
-            this.справкаToolStripMenuItem1.Text = "Справка";
-            // 
-            // оПрограммеToolStripMenuItem1
-            // 
-            this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
-            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.оПрограммеToolStripMenuItem1.Text = "О программе";
-            this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.опрограммеToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.BackColor = System.Drawing.Color.MistyRose;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem2.Text = " ";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.tsmRedMark_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.BackColor = System.Drawing.Color.LemonChiffon;
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem3.Text = " ";
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.BackColor = System.Drawing.Color.Honeydew;
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem4.Text = " ";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.BackColor = System.Drawing.Color.LightCyan;
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem5.Text = " ";
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = global::RecordKeeping.Properties.Resources.edit_button;
-            this.btnEdit.Location = new System.Drawing.Point(157, 27);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(32, 32);
-            this.btnEdit.TabIndex = 17;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            this.btnEdit.MouseHover += new System.EventHandler(this.btnEdit_MouseHover);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::RecordKeeping.Properties.Resources.recycle_bag;
-            this.btnDelete.Location = new System.Drawing.Point(119, 26);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(32, 32);
-            this.btnDelete.TabIndex = 16;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            this.btnDelete.MouseHover += new System.EventHandler(this.btnDelete_MouseHover);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Image = global::RecordKeeping.Properties.Resources.find;
-            this.btnSearch.Location = new System.Drawing.Point(81, 26);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(32, 32);
-            this.btnSearch.TabIndex = 13;
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            this.btnSearch.MouseHover += new System.EventHandler(this.btnSearch_MouseHover);
-            // 
-            // btnReloadRecords
-            // 
-            this.btnReloadRecords.FlatAppearance.BorderSize = 0;
-            this.btnReloadRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReloadRecords.Image = global::RecordKeeping.Properties.Resources.refresh_all;
-            this.btnReloadRecords.Location = new System.Drawing.Point(44, 27);
-            this.btnReloadRecords.Name = "btnReloadRecords";
-            this.btnReloadRecords.Size = new System.Drawing.Size(32, 32);
-            this.btnReloadRecords.TabIndex = 14;
-            this.btnReloadRecords.UseVisualStyleBackColor = true;
-            this.btnReloadRecords.Click += new System.EventHandler(this.btnReloadRecords_Click);
-            this.btnReloadRecords.MouseHover += new System.EventHandler(this.btnReloadRecords_MouseHover);
-            // 
-            // btnAddRecord
-            // 
-            this.btnAddRecord.BackgroundImage = global::RecordKeeping.Properties.Resources.add;
-            this.btnAddRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnAddRecord.FlatAppearance.BorderSize = 0;
-            this.btnAddRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddRecord.Location = new System.Drawing.Point(9, 27);
-            this.btnAddRecord.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAddRecord.Name = "btnAddRecord";
-            this.btnAddRecord.Size = new System.Drawing.Size(32, 32);
-            this.btnAddRecord.TabIndex = 15;
-            this.btnAddRecord.UseVisualStyleBackColor = true;
-            this.btnAddRecord.Click += new System.EventHandler(this.btnAddRecord_Click);
-            this.btnAddRecord.MouseHover += new System.EventHandler(this.btnAddRecord_MouseHover);
-            // 
-            // cbFilter
-            // 
-            this.cbFilter.FormattingEnabled = true;
-            this.cbFilter.Location = new System.Drawing.Point(328, 33);
-            this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(210, 21);
-            this.cbFilter.TabIndex = 18;
-            this.cbFilter.SelectionChangeCommitted += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -765,6 +651,150 @@
             this.Column2.ReadOnly = true;
             this.Column2.Visible = false;
             // 
+            // справкаToolStripMenuItem1
+            // 
+            this.справкаToolStripMenuItem1.Name = "справкаToolStripMenuItem1";
+            this.справкаToolStripMenuItem1.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem1.Text = "Справка";
+            // 
+            // оПрограммеToolStripMenuItem1
+            // 
+            this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
+            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеToolStripMenuItem1.Text = "О программе";
+            this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.опрограммеToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.BackColor = System.Drawing.Color.MistyRose;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = " ";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.tsmRedMark_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.BackColor = System.Drawing.Color.LemonChiffon;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = " ";
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.BackColor = System.Drawing.Color.Honeydew;
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem4.Text = " ";
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.BackColor = System.Drawing.Color.LightCyan;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem5.Text = " ";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = global::RecordKeeping.Properties.Resources.edit_button;
+            this.btnEdit.Location = new System.Drawing.Point(157, 27);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(32, 32);
+            this.btnEdit.TabIndex = 17;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.MouseHover += new System.EventHandler(this.btnEdit_MouseHover);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::RecordKeeping.Properties.Resources.recycle_bag;
+            this.btnDelete.Location = new System.Drawing.Point(119, 26);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(32, 32);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.MouseHover += new System.EventHandler(this.btnDelete_MouseHover);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Image = global::RecordKeeping.Properties.Resources.find;
+            this.btnSearch.Location = new System.Drawing.Point(81, 26);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(32, 32);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.MouseHover += new System.EventHandler(this.btnSearch_MouseHover);
+            // 
+            // btnReloadRecords
+            // 
+            this.btnReloadRecords.FlatAppearance.BorderSize = 0;
+            this.btnReloadRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReloadRecords.Image = global::RecordKeeping.Properties.Resources.refresh_all;
+            this.btnReloadRecords.Location = new System.Drawing.Point(44, 27);
+            this.btnReloadRecords.Name = "btnReloadRecords";
+            this.btnReloadRecords.Size = new System.Drawing.Size(32, 32);
+            this.btnReloadRecords.TabIndex = 14;
+            this.btnReloadRecords.UseVisualStyleBackColor = true;
+            this.btnReloadRecords.Click += new System.EventHandler(this.btnReloadRecords_Click);
+            this.btnReloadRecords.MouseHover += new System.EventHandler(this.btnReloadRecords_MouseHover);
+            // 
+            // btnAddRecord
+            // 
+            this.btnAddRecord.BackgroundImage = global::RecordKeeping.Properties.Resources.add;
+            this.btnAddRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAddRecord.FlatAppearance.BorderSize = 0;
+            this.btnAddRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddRecord.Location = new System.Drawing.Point(9, 27);
+            this.btnAddRecord.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAddRecord.Name = "btnAddRecord";
+            this.btnAddRecord.Size = new System.Drawing.Size(32, 32);
+            this.btnAddRecord.TabIndex = 15;
+            this.btnAddRecord.UseVisualStyleBackColor = true;
+            this.btnAddRecord.Click += new System.EventHandler(this.btnAddRecord_Click);
+            this.btnAddRecord.MouseHover += new System.EventHandler(this.btnAddRecord_MouseHover);
+            // 
+            // cbFilter
+            // 
+            this.cbFilter.FormattingEnabled = true;
+            this.cbFilter.Location = new System.Drawing.Point(328, 33);
+            this.cbFilter.Name = "cbFilter";
+            this.cbFilter.Size = new System.Drawing.Size(210, 21);
+            this.cbFilter.TabIndex = 18;
+            this.cbFilter.SelectionChangeCommitted += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
+            // 
+            // systemToolStripMenuItem
+            // 
+            this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findToolStripMenuItem,
+            this.reloadToolStripMenuItem});
+            this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
+            this.systemToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.systemToolStripMenuItem.Text = "system";
+            this.systemToolStripMenuItem.Visible = false;
+            // 
+            // findToolStripMenuItem
+            // 
+            this.findToolStripMenuItem.Name = "findToolStripMenuItem";
+            this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.findToolStripMenuItem.Text = "find";
+            this.findToolStripMenuItem.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // reloadToolStripMenuItem
+            // 
+            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
+            this.reloadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reloadToolStripMenuItem.Text = "reload";
+            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.btnReloadRecords_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -873,6 +903,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn id1out;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
     }
 }
 
