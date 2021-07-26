@@ -144,8 +144,14 @@ namespace RecordKeeping
                 else
                     result = Record.Add();
             }
-            if(result)
+            if (result)
+            {   
+                if (Record.Direction == 1)
+                    this.DialogResult = DialogResult.OK;
+                else if (Record.Direction == 2)
+                    this.DialogResult = DialogResult.Yes;
                 this.Close();
+            }
         }
 
         private void AddEdit_Load(object sender, EventArgs e)

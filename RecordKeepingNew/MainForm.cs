@@ -206,19 +206,24 @@ namespace RecordKeeping
                 addEdit.SetDirection(Directions.Incoming);
             else if (tcMain.SelectedTab == tabOutgoing)
                 addEdit.SetDirection(Directions.Outgoing);
-            addEdit.ShowDialog();
+            DialogResult result = addEdit.ShowDialog();
             this.ReloadData();
-            if (tcMain.SelectedTab == tabIncoming)
+            if (result != DialogResult.Cancel)
             {
-                int lastrow = dgvIncoming.Rows.Count - 1;
-                dgvIncoming.Rows[lastrow].Selected = true;
-                dgvIncoming.FirstDisplayedScrollingRowIndex = lastrow;
-            }
-            else if (tcMain.SelectedTab == tabOutgoing)
-            {
-                int lastrow = dgvOutgoing.Rows.Count - 1;
-                dgvOutgoing.Rows[lastrow].Selected = true;
-                dgvOutgoing.FirstDisplayedScrollingRowIndex = lastrow;
+                if (result == DialogResult.OK)
+                {
+                    tcMain.SelectedTab = tabIncoming;
+                    int lastrow = dgvIncoming.Rows.Count - 1;
+                    dgvIncoming.Rows[lastrow].Selected = true;
+                    dgvIncoming.FirstDisplayedScrollingRowIndex = lastrow;
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    tcMain.SelectedTab = tabOutgoing;
+                    int lastrow = dgvOutgoing.Rows.Count - 1;
+                    dgvOutgoing.Rows[lastrow].Selected = true;
+                    dgvOutgoing.FirstDisplayedScrollingRowIndex = lastrow;
+                }
             }
         }
 
@@ -454,13 +459,13 @@ namespace RecordKeeping
             
             if (tcMain.SelectedTab == tabIncoming)
             {
-                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 DeleteRecord(Directions.Incoming, id);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
-                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                id = (int)dgvOutgoing.CurrentRow.Cells[0].Value;
                 DeleteRecord(Directions.Outgoing, id);
             }
             

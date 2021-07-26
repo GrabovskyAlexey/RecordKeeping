@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEdit));
             this.rbIncoming = new System.Windows.Forms.RadioButton();
             this.rbOutgoing = new System.Windows.Forms.RadioButton();
-            this.tbMailNumber = new RecordKeeping.MyTextBox();
             this.lbMailNumber = new System.Windows.Forms.Label();
             this.dtRegDate = new System.Windows.Forms.DateTimePicker();
             this.lbRegDate = new System.Windows.Forms.Label();
@@ -39,7 +38,6 @@
             this.lbReplyTo = new System.Windows.Forms.Label();
             this.cbReply = new System.Windows.Forms.ComboBox();
             this.lbReply = new System.Windows.Forms.Label();
-            this.tbSenderReciever = new RecordKeeping.MyTextBox();
             this.lbSenderRediever = new System.Windows.Forms.Label();
             this.dtMailDate = new System.Windows.Forms.DateTimePicker();
             this.lbMailDate = new System.Windows.Forms.Label();
@@ -53,12 +51,14 @@
             this.chkEdit = new System.Windows.Forms.CheckBox();
             this.fbdAttach = new System.Windows.Forms.FolderBrowserDialog();
             this.lbTitle = new System.Windows.Forms.Label();
-            this.tbTitle = new RecordKeeping.MyTextBox();
             this.btnClearFormat = new System.Windows.Forms.Button();
             this.cbProject = new System.Windows.Forms.ComboBox();
             this.lbProject = new System.Windows.Forms.Label();
             this.cbEmployee = new System.Windows.Forms.ComboBox();
             this.lbEmployee = new System.Windows.Forms.Label();
+            this.tbTitle = new RecordKeeping.MyTextBox();
+            this.tbSenderReciever = new RecordKeeping.MyTextBox();
+            this.tbMailNumber = new RecordKeeping.MyTextBox();
             this.SuspendLayout();
             // 
             // rbIncoming
@@ -82,14 +82,6 @@
             this.rbOutgoing.Text = "Исходящее";
             this.rbOutgoing.UseVisualStyleBackColor = true;
             this.rbOutgoing.CheckedChanged += new System.EventHandler(this.rbOutgoing_CheckedChanged);
-            // 
-            // tbMailNumber
-            // 
-            this.tbMailNumber.BorderColor = System.Drawing.Color.Gray;
-            this.tbMailNumber.Location = new System.Drawing.Point(12, 49);
-            this.tbMailNumber.Name = "tbMailNumber";
-            this.tbMailNumber.Size = new System.Drawing.Size(193, 20);
-            this.tbMailNumber.TabIndex = 2;
             // 
             // lbMailNumber
             // 
@@ -157,14 +149,6 @@
             this.lbReply.Size = new System.Drawing.Size(96, 13);
             this.lbReply.TabIndex = 9;
             this.lbReply.Text = "Ответное письмо";
-            // 
-            // tbSenderReciever
-            // 
-            this.tbSenderReciever.BorderColor = System.Drawing.Color.Gray;
-            this.tbSenderReciever.Location = new System.Drawing.Point(12, 91);
-            this.tbSenderReciever.Name = "tbSenderReciever";
-            this.tbSenderReciever.Size = new System.Drawing.Size(193, 20);
-            this.tbSenderReciever.TabIndex = 10;
             // 
             // lbSenderRediever
             // 
@@ -257,6 +241,7 @@
             // 
             // btnOk
             // 
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Location = new System.Drawing.Point(580, 494);
             this.btnOk.Name = "btnOk";
@@ -289,14 +274,6 @@
             this.lbTitle.Size = new System.Drawing.Size(34, 13);
             this.lbTitle.TabIndex = 22;
             this.lbTitle.Text = "Тема";
-            // 
-            // tbTitle
-            // 
-            this.tbTitle.BorderColor = System.Drawing.Color.Gray;
-            this.tbTitle.Location = new System.Drawing.Point(12, 131);
-            this.tbTitle.Name = "tbTitle";
-            this.tbTitle.Size = new System.Drawing.Size(724, 20);
-            this.tbTitle.TabIndex = 23;
             // 
             // btnClearFormat
             // 
@@ -343,6 +320,30 @@
             this.lbEmployee.Size = new System.Drawing.Size(74, 13);
             this.lbEmployee.TabIndex = 28;
             this.lbEmployee.Text = "Исполнитель";
+            // 
+            // tbTitle
+            // 
+            this.tbTitle.BorderColor = System.Drawing.Color.Gray;
+            this.tbTitle.Location = new System.Drawing.Point(12, 131);
+            this.tbTitle.Name = "tbTitle";
+            this.tbTitle.Size = new System.Drawing.Size(724, 20);
+            this.tbTitle.TabIndex = 23;
+            // 
+            // tbSenderReciever
+            // 
+            this.tbSenderReciever.BorderColor = System.Drawing.Color.Gray;
+            this.tbSenderReciever.Location = new System.Drawing.Point(12, 91);
+            this.tbSenderReciever.Name = "tbSenderReciever";
+            this.tbSenderReciever.Size = new System.Drawing.Size(193, 20);
+            this.tbSenderReciever.TabIndex = 10;
+            // 
+            // tbMailNumber
+            // 
+            this.tbMailNumber.BorderColor = System.Drawing.Color.Gray;
+            this.tbMailNumber.Location = new System.Drawing.Point(12, 49);
+            this.tbMailNumber.Name = "tbMailNumber";
+            this.tbMailNumber.Size = new System.Drawing.Size(193, 20);
+            this.tbMailNumber.TabIndex = 2;
             // 
             // AddEdit
             // 
