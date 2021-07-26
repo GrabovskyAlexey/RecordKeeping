@@ -237,7 +237,6 @@ namespace RecordKeeping
                 card.LoadData((Int32)row.Cells[0].Value, Directions.Outgoing);
             }
             card.ShowDialog();
-            this.ReloadData();
         }
 
         private void tsmEdit_Click(object sender, EventArgs e)
