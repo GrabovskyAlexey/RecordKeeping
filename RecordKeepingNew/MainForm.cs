@@ -515,14 +515,14 @@ namespace RecordKeeping
             if (tcMain.SelectedTab == tabIncoming)
             {
                 int Index = dgvIncoming.CurrentRow.Index;
-                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Incoming, id, 1, Index);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 int Index = dgvOutgoing.CurrentRow.Index;
-                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                id = (int)dgvOutgoing.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Outgoing, id, 1, Index);
             }
         }
@@ -533,14 +533,14 @@ namespace RecordKeeping
             if (tcMain.SelectedTab == tabIncoming)
             {
                 int Index = dgvIncoming.CurrentRow.Index;
-                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Incoming, id, 2, Index);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 int Index = dgvOutgoing.CurrentRow.Index;
-                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                id = (int)dgvOutgoing.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Outgoing, id, 2, Index);
             }
         }
@@ -551,14 +551,14 @@ namespace RecordKeeping
             if (tcMain.SelectedTab == tabIncoming)
             {
                 int Index = dgvIncoming.CurrentRow.Index;
-                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Incoming, id, 3, Index);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 int Index = dgvOutgoing.CurrentRow.Index;
-                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                id = (int)dgvOutgoing.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Outgoing, id, 3, Index);
             }
         }
@@ -569,14 +569,14 @@ namespace RecordKeeping
             if (tcMain.SelectedTab == tabIncoming)
             {
                 int Index = dgvIncoming.CurrentRow.Index;
-                id = (long)dgvIncoming.CurrentRow.Cells[0].Value;
+                id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Incoming, id, 4, Index);
 
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 int Index = dgvOutgoing.CurrentRow.Index;
-                id = (long)dgvOutgoing.CurrentRow.Cells[0].Value;
+                id = (int)dgvOutgoing.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Outgoing, id, 4, Index);
             }
         }
