@@ -23,8 +23,8 @@
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -39,6 +39,11 @@
             this.сотрудникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.опрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tcMain = new System.Windows.Forms.TabControl();
@@ -101,11 +106,8 @@
             this.btnReloadRecords = new System.Windows.Forms.Button();
             this.btnAddRecord = new System.Windows.Forms.Button();
             this.cbFilter = new System.Windows.Forms.ComboBox();
-            this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExcelExport = new System.Windows.Forms.Button();
+            this.saveExcelDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -147,10 +149,7 @@
             // 
             // menuStripMain
             // 
-            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.настройкиToolStripMenuItem,
-            this.справкаToolStripMenuItem2,
-            this.systemToolStripMenuItem});
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.настройкиToolStripMenuItem, this.справкаToolStripMenuItem2, this.systemToolStripMenuItem });
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Size = new System.Drawing.Size(1042, 24);
@@ -159,9 +158,7 @@
             // 
             // настройкиToolStripMenuItem
             // 
-            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.проектыToolStripMenuItem,
-            this.сотрудникиToolStripMenuItem});
+            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.проектыToolStripMenuItem, this.сотрудникиToolStripMenuItem });
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.настройкиToolStripMenuItem.Text = "Настройки";
@@ -169,21 +166,20 @@
             // проектыToolStripMenuItem
             // 
             this.проектыToolStripMenuItem.Name = "проектыToolStripMenuItem";
-            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.проектыToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.проектыToolStripMenuItem.Text = "Проекты";
             this.проектыToolStripMenuItem.Click += new System.EventHandler(this.проектыToolStripMenuItem_Click);
             // 
             // сотрудникиToolStripMenuItem
             // 
             this.сотрудникиToolStripMenuItem.Name = "сотрудникиToolStripMenuItem";
-            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.сотрудникиToolStripMenuItem.Text = "Сотрудники";
             this.сотрудникиToolStripMenuItem.Click += new System.EventHandler(this.сотрудникиToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem2
             // 
-            this.справкаToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.оПрограммеToolStripMenuItem2});
+            this.справкаToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.оПрограммеToolStripMenuItem2 });
             this.справкаToolStripMenuItem2.Name = "справкаToolStripMenuItem2";
             this.справкаToolStripMenuItem2.Size = new System.Drawing.Size(65, 20);
             this.справкаToolStripMenuItem2.Text = "Справка";
@@ -195,10 +191,49 @@
             this.оПрограммеToolStripMenuItem2.Text = "О программе";
             this.оПрограммеToolStripMenuItem2.Click += new System.EventHandler(this.опрограммеToolStripMenuItem_Click);
             // 
+            // systemToolStripMenuItem
+            // 
+            this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.findToolStripMenuItem, this.reloadToolStripMenuItem, this.addToolStripMenuItem, this.deleteToolStripMenuItem });
+            this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
+            this.systemToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.systemToolStripMenuItem.Text = "system";
+            this.systemToolStripMenuItem.Visible = false;
+            // 
+            // findToolStripMenuItem
+            // 
+            this.findToolStripMenuItem.Name = "findToolStripMenuItem";
+            this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.findToolStripMenuItem.Text = "find";
+            this.findToolStripMenuItem.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // reloadToolStripMenuItem
+            // 
+            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
+            this.reloadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.reloadToolStripMenuItem.Text = "reload";
+            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.btnReloadRecords_Click);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert;
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.addToolStripMenuItem.Text = "add";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.btnAddRecord_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.deleteToolStripMenuItem.Text = "delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // справкаToolStripMenuItem
             // 
-            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.опрограммеToolStripMenuItem});
+            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.опрограммеToolStripMenuItem });
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
             this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.справкаToolStripMenuItem.Text = "Спра&вка";
@@ -212,9 +247,7 @@
             // 
             // tcMain
             // 
-            this.tcMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tcMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.tcMain.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tcMain.Controls.Add(this.tabIncoming);
             this.tcMain.Controls.Add(this.tabOutgoing);
@@ -239,28 +272,10 @@
             // 
             this.dgvIncoming.AllowUserToAddRows = false;
             this.dgvIncoming.AllowUserToDeleteRows = false;
-            this.dgvIncoming.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvIncoming.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvIncoming.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvIncoming.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvIncoming.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvcIncId,
-            this.dgvcIncMailNumber,
-            this.dgvcIncRegDate,
-            this.dgvcIncTitle,
-            this.dgvcIncReplyTo,
-            this.dgvcIncReply,
-            this.dgvcIncRecipient,
-            this.dgvcIncMailDate,
-            this.dgvcIncDesc,
-            this.dgvcIncAttach,
-            this.dgvcIncMark,
-            this.dgvIncProject,
-            this.id1,
-            this.project,
-            this.Direction,
-            this.Employee_hide});
+            this.dgvIncoming.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.dgvcIncId, this.dgvcIncMailNumber, this.dgvcIncRegDate, this.dgvcIncTitle, this.dgvcIncReplyTo, this.dgvcIncReply, this.dgvcIncRecipient, this.dgvcIncMailDate, this.dgvcIncDesc, this.dgvcIncAttach, this.dgvcIncMark, this.dgvIncProject, this.id1, this.project, this.Direction, this.Employee_hide });
             this.dgvIncoming.ContextMenuStrip = this.cmsPKM;
             this.dgvIncoming.Location = new System.Drawing.Point(0, 0);
             this.dgvIncoming.MultiSelect = false;
@@ -395,11 +410,7 @@
             // 
             // cmsPKM
             // 
-            this.cmsPKM.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmEdit,
-            this.tmsDelete,
-            this.tsmView,
-            this.tsmMark});
+            this.cmsPKM.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.tsmEdit, this.tmsDelete, this.tsmView, this.tsmMark });
             this.cmsPKM.Name = "cmsPKM";
             this.cmsPKM.Size = new System.Drawing.Size(155, 92);
             // 
@@ -426,11 +437,7 @@
             // 
             // tsmMark
             // 
-            this.tsmMark.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmRedMark,
-            this.tsmYellowMark,
-            this.tsmGreenMark,
-            this.tsmBlueMark});
+            this.tsmMark.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.tsmRedMark, this.tsmYellowMark, this.tsmGreenMark, this.tsmBlueMark });
             this.tsmMark.Name = "tsmMark";
             this.tsmMark.Size = new System.Drawing.Size(154, 22);
             this.tsmMark.Text = "Отметить";
@@ -482,30 +489,10 @@
             // 
             this.dgvOutgoing.AllowUserToAddRows = false;
             this.dgvOutgoing.AllowUserToDeleteRows = false;
-            this.dgvOutgoing.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvOutgoing.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOutgoing.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOutgoing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOutgoing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dgvcOutTitle,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.Employee,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dgvcOutMark,
-            this.dgvOutProject,
-            this.DirectionOut,
-            this.projectout,
-            this.id1out,
-            this.Column1,
-            this.Column2});
+            this.dgvOutgoing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.dataGridViewTextBoxColumn1, this.dataGridViewTextBoxColumn2, this.dataGridViewTextBoxColumn3, this.dgvcOutTitle, this.dataGridViewTextBoxColumn4, this.dataGridViewTextBoxColumn5, this.dataGridViewTextBoxColumn6, this.Employee, this.dataGridViewTextBoxColumn7, this.dataGridViewTextBoxColumn8, this.dataGridViewTextBoxColumn9, this.dgvcOutMark, this.dgvOutProject, this.DirectionOut, this.projectout, this.id1out, this.Column1, this.Column2 });
             this.dgvOutgoing.ContextMenuStrip = this.cmsPKM;
             this.dgvOutgoing.Location = new System.Drawing.Point(0, 0);
             this.dgvOutgoing.MultiSelect = false;
@@ -771,55 +758,28 @@
             this.cbFilter.TabIndex = 18;
             this.cbFilter.SelectionChangeCommitted += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
             // 
-            // systemToolStripMenuItem
+            // btnExcelExport
             // 
-            this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findToolStripMenuItem,
-            this.reloadToolStripMenuItem,
-            this.addToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            this.systemToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.systemToolStripMenuItem.Text = "system";
-            this.systemToolStripMenuItem.Visible = false;
+            this.btnExcelExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcelExport.Location = new System.Drawing.Point(960, 36);
+            this.btnExcelExport.Name = "btnExcelExport";
+            this.btnExcelExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExcelExport.TabIndex = 19;
+            this.btnExcelExport.Text = "Excel";
+            this.btnExcelExport.UseVisualStyleBackColor = true;
+            this.btnExcelExport.Click += new System.EventHandler(this.btnExcelExport_Click);
             // 
-            // findToolStripMenuItem
+            // saveExcelDialog
             // 
-            this.findToolStripMenuItem.Name = "findToolStripMenuItem";
-            this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.findToolStripMenuItem.Text = "find";
-            this.findToolStripMenuItem.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // reloadToolStripMenuItem
-            // 
-            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.reloadToolStripMenuItem.Text = "reload";
-            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.btnReloadRecords_Click);
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addToolStripMenuItem.Text = "add";
-            this.addToolStripMenuItem.Click += new System.EventHandler(this.btnAddRecord_Click);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.deleteToolStripMenuItem.Text = "delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.btnDelete_Click);
+            this.saveExcelDialog.DefaultExt = "xlsx";
+            this.saveExcelDialog.Filter = "Excel files (*.xlsx) | *.*";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1042, 599);
+            this.Controls.Add(this.btnExcelExport);
             this.Controls.Add(this.cbFilter);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
@@ -847,8 +807,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutgoing)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.SaveFileDialog saveExcelDialog;
+
+        private System.Windows.Forms.Button btnExcelExport;
 
         #endregion
 
