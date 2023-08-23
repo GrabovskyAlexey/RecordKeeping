@@ -5,6 +5,7 @@ using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 
 
 namespace RecordKeeping
@@ -15,6 +16,7 @@ namespace RecordKeeping
         int OutgoingSelected = 0;
         bool Filtered = false;
         Project projectSelected = new Project();
+
         public MainForm()
         {
             InitializeComponent();
@@ -24,18 +26,19 @@ namespace RecordKeeping
         {
             Settings.Load();
 
-            if(Settings.Conncetion.State == ConnectionState.Open)
+            if (Settings.Conncetion.State == ConnectionState.Open)
                 lbStatusText.Text = "Подключена";
             else
                 lbStatusText.Text = "Отключена";
 
             this.ReloadData();
         }
-        private void ReloadProjectAutocomplete() 
+
+        private void ReloadProjectAutocomplete()
         {
             var dataSource = GetAutocompleteProject();
 
-            if(dataSource.Count < 2)
+            if (dataSource.Count < 2)
             {
                 cbFilter.Visible = false;
             }
@@ -48,13 +51,13 @@ namespace RecordKeeping
             this.cbFilter.DisplayMember = "Name";
             this.cbFilter.ValueMember = "Value";
             this.cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
-            if(Filtered)
+            if (Filtered)
             {
                 cbFilter.SelectedValue = projectSelected.Value;
             }
         }
 
-        public void ReloadData() 
+        public void ReloadData()
         {
             DataTable dTableInc = new DataTable();
             DataTable dTableOut = new DataTable();
@@ -68,6 +71,7 @@ namespace RecordKeeping
                     if (dgvIncoming.Rows[i].Selected == true)
                         IncomingSelected = i;
             }
+
             if (dgvOutgoing.Rows.Count > 0)
             {
                 for (int i = 0; i < dgvOutgoing.Rows.Count; i++)
@@ -81,24 +85,26 @@ namespace RecordKeeping
             String FilterQueryOut = " WHERE p.Direction=2";
 
             if (Filtered)
-            {                
+            {
                 Project project = (Project)cbFilter.SelectedItem;
                 FilterQuery = String.Format(" AND p.project={0}", projectSelected.Value);
                 FilterQueryInc += FilterQuery;
                 FilterQueryOut += FilterQuery;
-            }          
-            
+            }
+
             try
             {
                 sqlQuery = "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project " + FilterQueryInc;
-                
+
                 SQLiteDataAdapter adapterIncoming = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterIncoming.Fill(dTableInc);
                 dTableInc.DefaultView.Sort = "RegDate ASC";
-                
+
                 dgvIncoming.DataSource = dTableInc.DefaultView;
-                                
-                sqlQuery = "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project LEFT JOIN Employee em ON em.id = p.Employee" + FilterQueryOut;
+
+                sqlQuery =
+                    "SELECT * FROM Records p LEFT JOIN projects pr ON pr.id = p.project LEFT JOIN Employee em ON em.id = p.Employee" +
+                    FilterQueryOut;
                 SQLiteDataAdapter adapterOutgoing = new SQLiteDataAdapter(sqlQuery, Settings.Conncetion);
                 adapterOutgoing.Fill(dTableOut);
                 dTableOut.DefaultView.Sort = "RegDate ASC";
@@ -111,16 +117,19 @@ namespace RecordKeeping
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
             if (dgvIncoming.Rows.Count > IncomingSelected)
             {
                 dgvIncoming.Rows[IncomingSelected].Selected = true;
                 dgvIncoming.FirstDisplayedScrollingRowIndex = IncomingSelected;
             }
+
             if (dgvOutgoing.Rows.Count > OutgoingSelected)
             {
                 dgvOutgoing.Rows[OutgoingSelected].Selected = true;
                 dgvOutgoing.FirstDisplayedScrollingRowIndex = OutgoingSelected;
             }
+
             ReloadProjectAutocomplete();
         }
 
@@ -136,6 +145,7 @@ namespace RecordKeeping
             {
                 temp_list.Add(new Project() { Name = (String)rec["project_name"], Value = (long)rec["id"] });
             }
+
             return temp_list;
         }
 
@@ -172,7 +182,7 @@ namespace RecordKeeping
             {
                 string mark = dgvOutgoing.Rows[e.RowIndex].Cells["dgvcOutMark"].Value.ToString();
                 DataGridViewCellStyle cellStyle = dgvOutgoing.Rows[e.RowIndex].DefaultCellStyle;
-                switch(mark)
+                switch (mark)
                 {
                     case "1":
                         cellStyle.BackColor = Color.MistyRose;
@@ -196,7 +206,6 @@ namespace RecordKeeping
         private void btnReloadRecords_Click(object sender, EventArgs e)
         {
             this.ReloadData();
-
         }
 
         private void btnAddRecord_Click(object sender, EventArgs e)
@@ -241,6 +250,7 @@ namespace RecordKeeping
                 row = dgvOutgoing.CurrentRow;
                 card.LoadData((Int32)row.Cells[0].Value, Directions.Outgoing);
             }
+
             card.ShowDialog();
         }
 
@@ -267,6 +277,7 @@ namespace RecordKeeping
                 Index = rows[0].Index;
                 direction = Directions.Outgoing;
             }
+
             Record.Load((int)rows[0].Cells[0].Value);
             AddEdit edit = new AddEdit();
             edit.Edit = true;
@@ -305,7 +316,6 @@ namespace RecordKeeping
             {
                 id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 DeleteRecord(Directions.Incoming, id);
-
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
@@ -367,11 +377,11 @@ namespace RecordKeeping
             DataColumn colMark = new DataColumn("Mark");
             colMark.DataType = System.Type.GetType("System.Int32");
             columnList.Add(colMark);
-            
+
             DataColumn projectName = new DataColumn("project_name");
             colId.DataType = System.Type.GetType("System.String");
             columnList.Add(projectName);
-            
+
             DataColumn Id1 = new DataColumn("Id1");
             colId.DataType = System.Type.GetType("System.Int64");
             columnList.Add(Id1);
@@ -392,11 +402,19 @@ namespace RecordKeeping
             Settings.Conncetion.Close();
             if (!Directory.Exists("backup"))
                 Directory.CreateDirectory("backup");
-            String backupFileName = "backup/" + DateTime.Now.ToString("yyMMdd_HHmm_") + "db.sqlite";
+            String backupFileName = "backup/" + DateTime.Now.ToString("yyMMdd_HH_mm_") + "db.sqlite";
 
-            File.Copy("db.sqlite", backupFileName);
+            File.Copy("db.sqlite", backupFileName, true);
 
-            Settings.SaveSettings();            
+            var strings = Directory.GetFiles("backup");
+            foreach (var file in strings)
+            {
+                if (DateTime.Now - File.GetCreationTime(file) > TimeSpan.FromDays(30d)) {
+                    File.Delete(file);
+                }
+            }
+
+            Settings.SaveSettings();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -410,16 +428,17 @@ namespace RecordKeeping
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
-                dgv = dgvOutgoing;                
+                dgv = dgvOutgoing;
             }
 
             if (search.SearchText != "" && search.SearchText != null)
             {
                 BindingSource bs = new BindingSource();
                 bs.DataSource = dgv.DataSource;
-                bs.Filter = String.Format("MailNumber like '%{0}%' OR Title like '%{0}%' OR Description like '%{0}%'", search.SearchText);
+                bs.Filter = String.Format("MailNumber like '%{0}%' OR Title like '%{0}%' OR Description like '%{0}%'",
+                    search.SearchText);
 
-                if(bs.Count > 0)
+                if (bs.Count > 0)
                     dgv.DataSource = bs;
                 else
                     MessageBox.Show("Данные по запросу " + search.SearchText + " не найдены", "Результат поиска");
@@ -443,44 +462,47 @@ namespace RecordKeeping
             ToolTip t = new ToolTip();
             t.SetToolTip(btnSearch, "Поиск");
         }
+
         private void btnDelete_MouseHover(object sender, EventArgs e)
         {
             ToolTip t = new ToolTip();
             t.SetToolTip(btnDelete, "Удалить");
         }
+
         private void btnEdit_MouseHover(object sender, EventArgs e)
         {
             ToolTip t = new ToolTip();
             t.SetToolTip(btnEdit, "Редактировать");
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             long id;
-            
+
             if (tcMain.SelectedTab == tabIncoming)
             {
                 id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 DeleteRecord(Directions.Incoming, id);
-
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
                 id = (int)dgvOutgoing.CurrentRow.Cells[0].Value;
                 DeleteRecord(Directions.Outgoing, id);
             }
-            
-        }        
+        }
 
         private void DeleteRecord(Directions direction, long id)
         {
             MailBD Record = new RecordBD();
-            
+
             Record.Load(id);
-            DialogResult result = MessageBox.Show("Вы уверенны что хотите удалить письмо " + Record.MailNumber + "?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("Вы уверенны что хотите удалить письмо " + Record.MailNumber + "?",
+                "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Record.Delete();
             }
+
             this.ReloadData();
         }
 
@@ -490,7 +512,7 @@ namespace RecordKeeping
             DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
 
             Record.Load(id);
-            if (Record.Mark == color)            
+            if (Record.Mark == color)
                 Record.Mark = 0;
             else
                 Record.Mark = color;
@@ -517,7 +539,6 @@ namespace RecordKeeping
                 int Index = dgvIncoming.CurrentRow.Index;
                 id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Incoming, id, 1, Index);
-
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
@@ -535,7 +556,6 @@ namespace RecordKeeping
                 int Index = dgvIncoming.CurrentRow.Index;
                 id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Incoming, id, 2, Index);
-
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
@@ -553,7 +573,6 @@ namespace RecordKeeping
                 int Index = dgvIncoming.CurrentRow.Index;
                 id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Incoming, id, 3, Index);
-
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
@@ -571,7 +590,6 @@ namespace RecordKeeping
                 int Index = dgvIncoming.CurrentRow.Index;
                 id = (int)dgvIncoming.CurrentRow.Cells[0].Value;
                 SetColorMark(Directions.Incoming, id, 4, Index);
-
             }
             else if (tcMain.SelectedTab == tabOutgoing)
             {
@@ -599,10 +617,11 @@ namespace RecordKeeping
                 Filtered = true;
                 projectSelected = (Project)cbFilter.SelectedItem;
             }
-            else 
+            else
             {
                 Filtered = false;
             }
+
             ReloadData();
         }
 
@@ -610,6 +629,143 @@ namespace RecordKeeping
         {
             EmployeeManager manager = new EmployeeManager();
             manager.ShowDialog();
+        }
+
+        private void btnExcelExport_Click(object sender, EventArgs e)
+        {
+            String filename = null;
+            if (Settings.LastSelectDirectory != null)
+            {
+                saveExcelDialog.InitialDirectory = Settings.LastSaveDirectory;
+            }
+
+            if (saveExcelDialog.ShowDialog() == DialogResult.OK)
+            {
+                filename = saveExcelDialog.FileName;
+                Settings.LastSaveDirectory = Path.GetDirectoryName(saveExcelDialog.FileName);
+            }
+
+            var xlWorkbook = createXLTable();
+            FillTable(xlWorkbook);
+            
+            
+            if (filename == null)
+            {
+                filename = "dump.xlsx";
+            }
+
+            xlWorkbook.SaveAs(filename);
+        }
+
+        private XLWorkbook createXLTable()
+        {
+            var xlWorkbook = new XLWorkbook();
+            var wsInc = xlWorkbook.Worksheets.Add("Incoming");
+            var wsOut = xlWorkbook.Worksheets.Add("Outgoing");
+            wsInc.Range("A1:H1").Merge();
+            wsOut.Range("A1:H1").Merge();
+            wsInc.Cell("A1").Style.Font.Bold = true;
+            wsOut.Cell("A1").Style.Font.Bold = true;
+            wsInc.Cell("A1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            wsOut.Cell("A1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            if (cbFilter.SelectedIndex == 0)
+            {
+                wsInc.Cell("A1").Value = "Все проекты";
+                wsOut.Cell("A1").Value = "Все проекты";
+            }
+            else
+            {
+                Project project = (Project)cbFilter.SelectedItem;
+                wsInc.Cell("A1").Value = "Проект: " + project.Name;
+                wsOut.Cell("A1").Value = "Проект: " + project.Name;
+            }
+
+            wsInc.Cell("A2").Value = "Номер письма";
+            wsInc.Cell("B2").Value = "Дата регистрации";
+            wsInc.Cell("C2").Value = "Тема";
+            wsInc.Cell("D2").Value = "Ответ на письмо";
+            wsInc.Cell("E2").Value = "Ответное письмо";
+            wsInc.Cell("F2").Value = "Отправитель";
+            wsInc.Cell("G2").Value = "Дата получения";
+            wsInc.Cell("H2").Value = "Проект";
+
+            wsOut.Cell("A2").Value = "Номер письма";
+            wsOut.Cell("B2").Value = "Дата регистрации";
+            wsOut.Cell("C2").Value = "Тема";
+            wsOut.Cell("D2").Value = "Ответ на письмо";
+            wsOut.Cell("E2").Value = "Ответное письмо";
+            wsOut.Cell("F2").Value = "Получатель";
+            wsOut.Cell("G2").Value = "Дата получения";
+            wsOut.Cell("H2").Value = "Проект";
+            return xlWorkbook;
+        }
+
+        private void FillTable(XLWorkbook wb)
+        {
+            var wsInc = wb.Worksheets.Worksheet("Incoming");
+            var wsOut = wb.Worksheets.Worksheet("Outgoing");
+            
+            for (int i = 0; i < dgvIncoming.Rows.Count; i++)
+            {
+                wsInc.Cell("A" + (3 + i)).DataType = XLDataType.Text;
+                wsInc.Cell("B" + (3 + i)).Style.DateFormat.Format = "dd.MM.yyyy";
+                wsInc.Cell("C" + (3 + i)).DataType = XLDataType.Text;
+                wsInc.Cell("D" + (3 + i)).DataType = XLDataType.Text;
+                wsInc.Cell("E" + (3 + i)).DataType = XLDataType.Text;
+                wsInc.Cell("F" + (3 + i)).DataType = XLDataType.Text;
+                wsInc.Cell("G" + (3 + i)).Style.DateFormat.Format = "dd.MM.yyyy";
+                wsInc.Cell("H" + (3 + i)).DataType = XLDataType.Text;
+                wsInc.Cell("A" + (3 + i)).SetValue<String>(dgvIncoming.Rows[i].Cells[1].Value.ToString());
+                wsInc.Cell("B" + (3 + i)).Value = dgvIncoming.Rows[i].Cells[2].Value;
+                wsInc.Cell("C" + (3 + i)).SetValue<String>(dgvIncoming.Rows[i].Cells[3].Value.ToString());
+                wsInc.Cell("D" + (3 + i)).SetValue<String>(dgvIncoming.Rows[i].Cells[4].Value.ToString());
+                wsInc.Cell("E" + (3 + i)).SetValue<String>(dgvIncoming.Rows[i].Cells[5].Value.ToString());
+                wsInc.Cell("F" + (3 + i)).SetValue<String>(dgvIncoming.Rows[i].Cells[6].Value.ToString());
+                wsInc.Cell("G" + (3 + i)).Value = dgvIncoming.Rows[i].Cells[7].Value;
+                wsInc.Cell("H" + (3 + i)).SetValue<String>(dgvIncoming.Rows[i].Cells[11].Value.ToString());
+            }
+            
+            for (int i = 0; i < dgvOutgoing.Rows.Count; i++)
+            {
+                wsOut.Cell("A" + (3 + i)).DataType = XLDataType.Text;
+                wsOut.Cell("B" + (3 + i)).Style.DateFormat.Format = "dd.MM.yyyy";
+                wsOut.Cell("C" + (3 + i)).DataType = XLDataType.Text;
+                wsOut.Cell("D" + (3 + i)).DataType = XLDataType.Text;
+                wsOut.Cell("E" + (3 + i)).DataType = XLDataType.Text;
+                wsOut.Cell("F" + (3 + i)).DataType = XLDataType.Text;
+                wsOut.Cell("G" + (3 + i)).Style.DateFormat.Format = "dd.MM.yyyy";
+                wsOut.Cell("H" + (3 + i)).DataType = XLDataType.Text;
+                wsOut.Cell("A" + (3 + i)).SetValue<String>(dgvOutgoing.Rows[i].Cells[1].Value.ToString());
+                wsOut.Cell("B" + (3 + i)).Value = dgvOutgoing.Rows[i].Cells[2].Value;
+                wsOut.Cell("C" + (3 + i)).SetValue<String>(dgvOutgoing.Rows[i].Cells[3].Value.ToString());
+                wsOut.Cell("D" + (3 + i)).SetValue<String>(dgvOutgoing.Rows[i].Cells[4].Value.ToString());
+                wsOut.Cell("E" + (3 + i)).SetValue<String>(dgvOutgoing.Rows[i].Cells[5].Value.ToString());
+                wsOut.Cell("F" + (3 + i)).SetValue<String>(dgvOutgoing.Rows[i].Cells[6].Value.ToString());
+                wsOut.Cell("G" + (3 + i)).Value = dgvOutgoing.Rows[i].Cells[7].Value;
+                wsOut.Cell("H" + (3 + i)).SetValue<String>(dgvOutgoing.Rows[i].Cells[11].Value.ToString());
+            }
+            ColumnAdjust(wsInc, wsOut);
+        }
+
+        private static void ColumnAdjust(IXLWorksheet wsInc, IXLWorksheet wsOut)
+        {
+            wsInc.Column("A").AdjustToContents();
+            wsInc.Column("B").AdjustToContents();
+            wsInc.Column("C").AdjustToContents();
+            wsInc.Column("D").AdjustToContents();
+            wsInc.Column("E").AdjustToContents();
+            wsInc.Column("F").AdjustToContents();
+            wsInc.Column("G").AdjustToContents();
+            wsInc.Column("H").AdjustToContents();
+
+            wsOut.Column("A").AdjustToContents();
+            wsOut.Column("B").AdjustToContents();
+            wsOut.Column("C").AdjustToContents();
+            wsOut.Column("D").AdjustToContents();
+            wsOut.Column("E").AdjustToContents();
+            wsOut.Column("F").AdjustToContents();
+            wsOut.Column("G").AdjustToContents();
+            wsOut.Column("H").AdjustToContents();
         }
     }
 }

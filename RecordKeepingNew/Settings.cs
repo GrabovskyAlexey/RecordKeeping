@@ -11,6 +11,7 @@ namespace RecordKeeping
         public static SQLiteConnection Conncetion { get; set; }
         public static SQLiteCommand SqlCommand { get; set; }
         public static String LastSelectDirectory { get; set; }
+        public static String LastSaveDirectory { get; set; }
         private static String dbFileName = "db.sqlite";
         private static Int32 CurrentDBVersion = 3;
         private static bool NewDB = false;
@@ -253,11 +254,14 @@ namespace RecordKeeping
             XmlDocument xDoc = new XmlDocument();
             XmlDeclaration declar = xDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
             XmlElement LastDir = xDoc.CreateElement("LastSelectDirectory");
+            XmlElement LastSaveDir = xDoc.CreateElement("LastSaveDirectory");
             XmlElement settings = xDoc.CreateElement("Settings");
             LastDir.InnerText = Settings.LastSelectDirectory;
+            LastSaveDir.InnerText = Settings.LastSaveDirectory;
             xDoc.AppendChild(declar);
             xDoc.AppendChild(settings);
             settings.AppendChild(LastDir);
+            settings.AppendChild(LastSaveDir);
             xDoc.Save(Settings.SettingsFileName);
         }
     }
